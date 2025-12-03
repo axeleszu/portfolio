@@ -1,5 +1,1 @@
-import './style.css'
-
-
-
-setupCounter(document.querySelector('#counter'))
+console.log("Hello Main World!");

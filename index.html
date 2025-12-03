@@ -12,26 +12,23 @@
   <section class="hero-container">
     <div class="hero-video-wrapper">
       <video autoplay muted loop playsinline class="bg-video" poster="/img/poster.jpg">
-        <source src="" type="video/mp4">
+        <source src="#" type="video/mp4">
       </video>
       <div class="video-overlay"></div>
     </div>
-
     <nav class="top-nav">
       <div class="toggle-container">
         <span class="label">MODE:</span>
-        <button id="mode-switch" class="switch-btn" aria-label="Toggle Portfolio Mode">
+        <button type="button" id="mode-switch" class="switch-btn" aria-label="Toggle Portfolio Mode">
           <span class="switch-text">DEV_OPS</span>
         </button>
       </div>
     </nav>
-
     <div class="hero-content">
       <h1 class="glitch-text" data-text="AXEL ESCUTIA">AXEL ESCUTIA</h1>
       <h2 class="hero-subtitle">FULL STACK ENGINEER <span class="accent">||</span> MULTIMEDIA PRODUCER</h2>
     </div>
   </section>
-
   <section class="bio-strip">
     <div class="bio-content">
       <div class="profile-photo">
@@ -46,25 +43,65 @@
         </div>
       </div>
       <div class="action-block">
-        <a href="/resume.pdf" class="btn-download">Download Resume</a>
+        <a href="resume.pdf" class="btn-download">Download Resume</a>
       </div>
     </div>
   </section>
-
   <main class="bento-wrapper">
     <div class="bento-grid" id="project-grid">
 
       <article class="card col-2 row-2">
         <div data-category="dev">
-          <div class="card-content">
-            <h3>FIRA FrontEnd</h3>
-            <p class="tech-stack">Java • HTML5 • CSS3 • JavaScript</p>
-            <div class="diagram-placeholder">
-              [ Architecture Diagram: ]
+          <div data-category="dev">
+            <div class="card-header">
+              <div class="header-top">
+                <h3>FIRA Institutional Portal</h3>
+                <span class="role-badge">Lead UI/UX & Frontend</span>
+              </div>
+              <p class="subtitle">Complete Ecosystem Modernization</p>
             </div>
-            <div class="metrics">
-              <span>Daily Trans: 15k+</span>
-              <span>Uptime: 99.9%</span>
+            <div class="blueprint-visual">
+              <div class="ui-showcase-container">
+                <div class="brand-glow"></div>
+                <div class="ui-stack">
+                  <div class="ui-card card-green">
+                    <span class="card-icon">🌱</span>
+                    <span class="card-label">Producción</span>
+                  </div>
+                  <div class="ui-card card-orange">
+                    <span class="card-icon">⚙️</span>
+                    <span class="card-label">AgroEmpresas</span>
+                  </div>
+
+                  <div class="ui-card card-blue">
+                    <span class="card-icon">🏦</span>
+                    <span class="card-label">Intermediación</span>
+                  </div>
+                </div>
+              </div>
+              <div class="specs-overlay">
+                <div class="spec-item">
+                  <span class="icon">📐</span> 12 Responsive Breakpoints
+                </div>
+                <div class="spec-item">
+                  <span class="icon">👁️</span> WAI-AAA Accessible
+                </div>
+                <div class="spec-item">
+                  <span class="icon">🌓</span> Dark Mode / Reduce-Motion
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="stat-box">
+                <span class="num">3</span>
+                <span class="label">Target Audiences</span>
+              </div>
+              <div class="stat-box">
+                <span class="num">70th</span>
+                <span class="label">Anniversary Brand</span>
+              </div>
+              <button class="btn-details" onclick="document.getElementById('fira-modal').showModal()">View Case Study</button>
             </div>
           </div>
         </div>
@@ -116,9 +153,9 @@
         <div data-category="dev">
           <h3>FIRA Cifras</h3>
           <div class="chart-mini">
-            <div class="bar" style="height: 40%"></div>
-            <div class="bar" style="height: 80%"></div>
-            <div class="bar" style="height: 60%"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
           </div>
         </div>
         <div data-category="media">
@@ -139,30 +176,39 @@
         </div>
       </article>
       <article class="card row-2 mobile-card">
-        <div class="phone-mockup">
+        <div class="phone-mockup" data-category="dev">
           <div class="notch"></div>
           <div class="screen view-dev">
             <div class="app-label">App Manual Promotor</div>
             <div class="pwa-badge">Offline Mode</div>
           </div>
-          <div class="screen view-media">
-            [ Video: Fertilizacion Optima ]
-          </div>
+        </div>
+        <div class="screen" data-category="media">
+          [ Video: Fertilizacion Optima ]
         </div>
       </article>
-      <article class="card stack-card">
-        <div class="tech-grid">
-          <span>JS</span><span>PHP</span>
-          <span>SQL</span><span>GIT</span>
+      <article class="card col-3 stack-card">
+        <div data-category="dev" class="tech-grid">
+          <span>JS</span> | <span>PHP</span>|
+          <span>SQL</span> | <span>GIT</span>
+        </div>
+        <div data-category="media" class="tech-grid">
+          <span>Photoshop</span> | <span>After Effects</span> |
+          <span>Premiere</span> | <span>DaVinci Resolve</span> |
+          <span>Adobe Audition</span> | <span>Adobe Illustrator</span>
         </div>
       </article>
       <article class="card col-2 contact-card">
-        <div class="terminal-view">
-          <p class="prompt">> Initiate_Contact_Protocol()</p>
+        <div data-category="dev" class="terminal-view">
+          <p class="prompt">&gt; Initiate_Contact_Protocol()</p>
           <form class="simple-form">
-            <input type="email" placeholder="recruiter@company.com" />
-            <button>SEND</button>
+            <input type="email" placeholder="recruiter@company.com">
+            <button type="submit">SEND</button>
           </form>
+        </div>
+        <div data-category="media" class="contact-view">
+          <p>For collaborations or inquiries, reach out at:</p>
+          <a href="mailto:axeleszu@gmail.com">axeleszu@gmail.com</a>
         </div>
       </article>
     </div>
@@ -172,12 +218,110 @@
     <h2>Work in Progress</h2>
   </dialog>
 
+  <!-- FIRA CASE STUDY MODAL -->
+  <dialog id="fira-modal" class="modal-window">
+    <div class="modal-content">
+
+      <!-- Header: The "File" Look -->
+      <header class="modal-header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: FIRA_RENEWAL_v70</small>
+          <h2>FIRA Institutional Ecosystem</h2>
+          <p class="role">Lead Frontend Architect & UX Designer</p>
+        </div>
+        <button class="btn-close" onclick="document.getElementById('fira-modal').close()">×</button>
+      </header>
+
+      <div class="modal-body">
+
+        <!-- Section 1: The Challenge -->
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            Update a massive legacy government platform to align with FIRA's 70th Anniversary.
+            The goal was to transform a static repository into a <strong>dynamic promotional tool</strong>
+            while strictly adhering to WAI-AAA accessibility standards and integrating with
+            complex Java/Oracle backends.
+          </p>
+        </section>
+
+        <!-- Section 2: Technical Architecture (The "How") -->
+        <section class="case-section">
+          <h3>02 // The Engineering</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">📱</span>
+              <div class="spec-detail">
+                <strong>Extreme Responsiveness</strong>
+                <p>Designed layouts for <strong>12 different viewports</strong> (Mobile to 4K), plus print styles. Included native support for Dark Mode and Reduce-Motion preferences.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🧩</span>
+              <div class="spec-detail">
+                <strong>Modular Architecture</strong>
+                <p>Built a "Widget-first" homepage where content modules (News, Metrics, User Profile) load independently, reducing initial paint time.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">👁️</span>
+              <div class="spec-detail">
+                <strong>WAI-AAA Accessibility</strong>
+                <p>Achieved the highest standard of web accessibility, ensuring usability for visually impaired stakeholders (Screen readers, contrast ratios).</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔒</span>
+              <div class="spec-detail">
+                <strong>Security Integration</strong>
+                <p>Redesigned the frontend to interface securely with internal custom apps, delivering personalized content based on user profile.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 3: The Impact (The "Results") -->
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">3</span>
+              <span class="desc">Distinct User Profiles<br>(Producers, Agribusiness, Financial Intermediaries)</span>
+            </div>
+            <div class="stat">
+              <span class="val">Sec+</span>
+              <span class="desc">Enhanced Data<br>Privacy Protocols</span>
+            </div>
+            <div class="stat">
+              <span class="val">UX</span>
+              <span class="desc">Unified Experience<br>Across Mobile & Desktop</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Footer: Tech Stack -->
+      <footer class="modal-footer">
+        <span>STACK:</span>
+        <div class="tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3 (Grid/Flex)</span>
+          <span class="tag">JavaScript (ES6+)</span>
+          <span class="tag">Java Backend (Servlets)</span>
+          <span class="tag">SAP DB</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
 
   <script>
     function setMode(mode) {
       document.body.className = 'mode-' + mode;
       document.querySelectorAll('.mode-switch button').forEach(b => b.classList.remove('active'));
       document.getElementById('btn-' + mode).classList.add('active');
+      switchLabel.textContent = isDevMode ? 'DEV_OPS' : 'ON_AIR';
     }
     let currentMode = 'dev';
     document.getElementById('mode-switch').addEventListener('click', () => {
@@ -186,7 +330,15 @@
     });
     setMode(currentMode);
 
-    document.getElementById('work-in-progress').showModal();
+    // document.getElementById('work-in-progress').showModal();
+
+    const firaModal = document.getElementById('fira-modal');
+
+    firaModal.addEventListener('click', (event) => {
+      if (event.target === firaModal) {
+        firaModal.close();
+      }
+    });
 
   </script>
 
