@@ -188,6 +188,11 @@ h1 {
   flex-direction: column;
 }
 
+.card-icon img {
+  width: 2rem;
+  height: 2rem;
+}
+
 .col-2 {
   grid-column: span 2;
 }
@@ -636,6 +641,313 @@ dialog::backdrop {
   margin-right: 5px;
   color: #ccc;
   border-radius: 4px;
+}
+
+.github-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-header-mini {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-header-mini h3 {
+  font-size: 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.link-arrow {
+  color: #666;
+  text-decoration: none;
+}
+
+.link-arrow:hover {
+  color: var(--accent-color);
+}
+
+/* The Grid */
+.commit-graph {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  /* 10 weeks width */
+  grid-template-rows: repeat(5, 1fr);
+  /* 5 days height */
+  gap: 3px;
+  margin-bottom: 10px;
+}
+
+.pixel {
+  width: 100%;
+  aspect-ratio: 1/1;
+  /* Perfect square */
+  border-radius: 2px;
+  background-color: #161b22;
+  /* Empty (Dark Grey) */
+  transition: background-color 0.5s ease;
+}
+
+/* Contribution Levels (GitHub Green Shades) */
+.pixel.level-0 {
+  background-color: #161b22;
+}
+
+.pixel.level-1 {
+  background-color: #0e4429;
+}
+
+.pixel.level-2 {
+  background-color: #006d32;
+}
+
+.pixel.level-3 {
+  background-color: #26a641;
+}
+
+.pixel.level-4 {
+  background-color: #39d353;
+  box-shadow: 0 0 5px #39d353;
+}
+
+/* Footer Meta */
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: #8b949e;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-squares {
+  display: flex;
+  gap: 2px;
+}
+
+.legend-squares span {
+  width: 8px;
+  height: 8px;
+  display: block;
+  border-radius: 1px;
+}
+
+.l-0 {
+  background: #161b22;
+}
+
+.l-1 {
+  background: #0e4429;
+}
+
+.l-2 {
+  background: #006d32;
+}
+
+.l-3 {
+  background: #39d353;
+}
+
+/* MEDIA MODE: Audio Waves Animation */
+.audio-waves {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  margin: 20px 0;
+}
+
+.audio-waves span {
+  display: block;
+  width: 6px;
+  height: 10%;
+  background: var(--accent-color);
+  animation: wave 1s infinite ease-in-out;
+}
+
+.audio-waves span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.audio-waves span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.audio-waves span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.audio-waves span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* --- FIRA CIFRAS SVG WIDGET --- */
+
+.viz-container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.viz-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.viz-legend {
+  font-size: 0.7rem;
+  color: #888;
+  display: flex;
+  gap: 10px;
+}
+
+.viz-legend .dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.dot.saldo {
+  background: #1ba77b;
+}
+
+/* Original FIRA Teal */
+.dot.flujo {
+  background: #003170;
+}
+
+/* Original FIRA Blue */
+
+.svg-wrapper {
+  flex-grow: 1;
+  position: relative;
+  /* Ensure SVG fills the box */
+  display: flex;
+  align-items: flex-end;
+}
+
+#fira-cifras-svg {
+  width: 90%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* SVG Elements */
+rect.bar {
+  transition: height 0.5s ease-out, y 0.5s ease-out, opacity 0.2s;
+  cursor: pointer;
+}
+
+rect.bar:hover {
+  opacity: 1 !important;
+  filter: brightness(1.2);
+}
+
+/* Dim others on hover */
+.svg-wrapper:hover rect.bar {
+  opacity: 0.6;
+}
+
+/* Custom Tooltip */
+.viz-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  pointer-events: none;
+  transform: translate(-50%, -120%);
+  transition: opacity 0.2s;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.viz-tooltip.hidden {
+  opacity: 0;
+}
+
+.tt-label {
+  display: block;
+  color: #aaa;
+  margin-bottom: 2px;
+}
+
+.tt-value {
+  display: block;
+  font-weight: bold;
+  color: #fff;
+  font-family: monospace;
+}
+
+.viz-status {
+  font-size: 0.6rem;
+  color: #555;
+  text-align: right;
+  margin-top: 5px;
+  font-family: monospace;
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    height: 10%;
+  }
+
+  50% {
+    height: 100%;
+  }
+}
+
+.line-path {
+  fill: none;
+  stroke: #003170;
+  /* Legacy Blue */
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+  /* Animation Setup */
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-out forwards 0.5s;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+circle.dot-point {
+  fill: #003170;
+  stroke: #fff;
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: r 0.2s, stroke-width 0.2s;
+}
+
+circle.dot-point:hover {
+  r: 6;
+  stroke-width: 2;
 }
 
 @keyframes slideUp {

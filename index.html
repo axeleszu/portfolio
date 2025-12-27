@@ -56,7 +56,7 @@
             <div class="card-header">
               <div class="header-top">
                 <h3>FIRA Institutional Portal</h3>
-                <span class="role-badge">Lead UI/UX & Frontend</span>
+                <span class="role-badge">Lead UI/UX &amp; Frontend</span>
               </div>
               <p class="subtitle">Complete Ecosystem Modernization</p>
             </div>
@@ -65,16 +65,15 @@
                 <div class="brand-glow"></div>
                 <div class="ui-stack">
                   <div class="ui-card card-green">
-                    <span class="card-icon">🌱</span>
+                    <span class="card-icon"><img src="img/index-productores.svg" alt="SVG animation"></span>
                     <span class="card-label">Producción</span>
                   </div>
                   <div class="ui-card card-orange">
-                    <span class="card-icon">⚙️</span>
+                    <span class="card-icon"><img src="img/index-agroempresas.svg" alt="SVG animation"></span>
                     <span class="card-label">AgroEmpresas</span>
                   </div>
-
                   <div class="ui-card card-blue">
-                    <span class="card-icon">🏦</span>
+                    <span class="card-icon"><img src="img/index-if.svg" alt="SVG animation"></span>
                     <span class="card-label">Intermediación</span>
                   </div>
                 </div>
@@ -101,7 +100,7 @@
                 <span class="num">70th</span>
                 <span class="label">Anniversary Brand</span>
               </div>
-              <button class="btn-details" onclick="document.getElementById('fira-modal').showModal()">View Case Study</button>
+              <button type="button" class="btn-details" onclick="document.getElementById('fira-modal').showModal()">View Case Study</button>
             </div>
           </div>
         </div>
@@ -119,17 +118,30 @@
         </div>
       </article>
       <article class="card stats-card">
-        <div data-category="dev">
-          <h3>GitHub</h3>
-          <div class="commit-graph">
-            <div class="pixels"></div>
+        <div data-category="dev" class="github-view">
+          <div class="card-header-mini">
+            <h3><span class="icon">⚡</span> GitHub Activity</h3>
+            <a href="https://github.com/axeleszu" target="_blank" class="link-arrow">↗</a>
           </div>
-          <small>Latest commit: 2h ago</small>
+          <div class="commit-graph" id="github-grid">
+            <!-- GitHub contribution squares -->
+          </div>
+
+          <div class="meta-row">
+            <small id="last-commit-text">Loading status...</small>
+            <div class="legend">
+              <span>Less</span>
+              <div class="legend-squares">
+                <span class="l-0"></span><span class="l-1"></span><span class="l-2"></span><span class="l-3"></span>
+              </div>
+              <span>More</span>
+            </div>
+          </div>
         </div>
-        <div data-category="media">
+        <div data-category="media" class="podcast-view">
           <h3>El Podcast de FIRA</h3>
           <div class="audio-waves">
-            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
           </div>
           <small>Producer / Editor</small>
         </div>
@@ -151,12 +163,37 @@
       </article>
       <article class="card row-2 col-3 stats-card">
         <div data-category="dev">
-          <h3>FIRA Cifras</h3>
-          <div class="chart-mini">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+
+          <div class="card-header-mini">
+            <h3>FIRA Cifras API</h3>
+
+            <button class="btn-details" onclick="document.getElementById('cifras-modal').showModal()">
+              Analysis Logic
+            </button>
+            <div class="viz-legend">
+              <span class="dot saldo"></span> Saldo
+              <span class="dot flujo"></span> Flujo
+            </div>
           </div>
+
+          <div class="svg-wrapper">
+            <!-- SVG Viewbox 0 0 300 150 defines our coordinate system -->
+            <svg id="fira-cifras-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
+              <!-- Bars will be injected here by JS -->
+              <line x1="0" y1="140" x2="300" y2="140" stroke="#333" stroke-width="1"></line>
+            </svg>
+
+            <!-- Tooltip Container -->
+            <div id="viz-tooltip" class="viz-tooltip hidden">
+              <span class="tt-label">Month</span>
+              <span class="tt-value">$0.00</span>
+            </div>
+
+            <div class="viz-status">
+              <small id="api-status">Connecting to CORS Proxy...</small>
+            </div>
+          </div>
+          <script src="src/firacifras.js"></script>
         </div>
         <div data-category="media">
           <h3>VFX Breakdown</h3>
@@ -164,10 +201,59 @@
         </div>
       </article>
       <article class="card legacy-card">
-        <div data-category="dev">
-          <h3>IEM Voting</h3>
-          <p class="tiny-text">2011 International Logistics</p>
-          <div class="schematic-lines"></div>
+        <div data-category="dev" class="blueprint-view">
+          <div class="card-header-horizontal">
+            <div class="header-left">
+              <h3>IEM Vote Tracking System</h3>
+              <span class="sys-code">PROTOCOL: SILVME_ANONYMITY_V1</span>
+            </div>
+            <div class="header-right">
+              <span class="tech-tag">PHP / MySQL</span>
+              <span class="tech-tag">Hardware Integ.</span>
+              <button class="btn-details-mini" onclick="document.getElementById('iem-modal').showModal()">
+                <span class="icon">📂</span> System Specs
+              </button>
+            </div>
+          </div>
+
+          <!-- The Barcode Visual -->
+          <div class="scanner-container">
+            <div class="barcode-wrapper">
+              <!-- SVG Barcode -->
+              <svg class="barcode-svg" viewBox="0 0 300 100">
+                <g fill="#333">
+                  <rect x="10" y="10" width="5" height="80"></rect>
+                  <rect x="20" y="10" width="10" height="80"></rect>
+                  <rect x="35" y="10" width="5" height="80"></rect>
+                  <rect x="45" y="10" width="15" height="80"></rect>
+                  <rect x="65" y="10" width="5" height="80"></rect>
+                  <rect x="75" y="10" width="10" height="80"></rect>
+                  <rect x="90" y="10" width="20" height="80"></rect>
+                  <rect x="115" y="10" width="5" height="80"></rect>
+                  <rect x="125" y="10" width="10" height="80"></rect>
+                  <rect x="140" y="10" width="5" height="80"></rect>
+                  <rect x="150" y="10" width="20" height="80"></rect>
+                  <rect x="175" y="10" width="10" height="80"></rect>
+                  <rect x="190" y="10" width="5" height="80"></rect>
+                  <rect x="200" y="10" width="15" height="80"></rect>
+                  <rect x="220" y="10" width="5" height="80"></rect>
+                  <rect x="230" y="10" width="10" height="80"></rect>
+                  <rect x="245" y="10" width="20" height="80"></rect>
+                  <rect x="270" y="10" width="5" height="80"></rect>
+                </g>
+                <text x="150" y="110" text-anchor="middle" font-family="monospace" font-size="12" fill="#666">ID: 492-MX-EXT-VOTE</text>
+              </svg>
+
+              <div class="laser-beam"></div>
+            </div>
+
+            <div class="scan-log">
+              <div class="log-line">> Packet Received: 492-MX</div>
+              <div class="log-line">> Lookup: Valid Voter Reg.</div>
+              <div class="log-line">> Action: Update `status` = RECEIVED</div>
+              <div class="log-line highlight">> PRIVACY CHECK: VOTE SEPARATED</div>
+            </div>
+          </div>
         </div>
         <div data-category="media">
           <h3>CONAFE</h3>
@@ -218,34 +304,31 @@
     <h2>Work in Progress</h2>
   </dialog>
 
-  <!-- FIRA CASE STUDY MODAL -->
+  <!-- FIRA WWW MODAL -->
   <dialog id="fira-modal" class="modal-window">
     <div class="modal-content">
 
-      <!-- Header: The "File" Look -->
       <header class="modal-header">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: FIRA_RENEWAL_v70</small>
           <h2>FIRA Institutional Ecosystem</h2>
-          <p class="role">Lead Frontend Architect & UX Designer</p>
+          <p class="role">Lead Frontend Architect &amp; UX Designer</p>
         </div>
-        <button class="btn-close" onclick="document.getElementById('fira-modal').close()">×</button>
+        <button class="btn-close" type="button" onclick="document.getElementById('fira-modal').close()">×</button>
       </header>
 
       <div class="modal-body">
 
-        <!-- Section 1: The Challenge -->
         <section class="case-section">
           <h3>01 // The Challenge</h3>
           <p>
             Update a massive legacy government platform to align with FIRA's 70th Anniversary.
             The goal was to transform a static repository into a <strong>dynamic promotional tool</strong>
             while strictly adhering to WAI-AAA accessibility standards and integrating with
-            complex Java/Oracle backends.
+            complex legacy Java/Oracle backends.
           </p>
         </section>
 
-        <!-- Section 2: Technical Architecture (The "How") -->
         <section class="case-section">
           <h3>02 // The Engineering</h3>
           <ul class="specs-grid">
@@ -280,7 +363,6 @@
           </ul>
         </section>
 
-        <!-- Section 3: The Impact (The "Results") -->
         <section class="case-section">
           <h3>03 // The Impact</h3>
           <div class="impact-stats">
@@ -294,14 +376,12 @@
             </div>
             <div class="stat">
               <span class="val">UX</span>
-              <span class="desc">Unified Experience<br>Across Mobile & Desktop</span>
+              <span class="desc">Unified Experience<br>Across Mobile &amp; Desktop</span>
             </div>
           </div>
         </section>
 
       </div>
-
-      <!-- Footer: Tech Stack -->
       <footer class="modal-footer">
         <span>STACK:</span>
         <div class="tags">
@@ -316,12 +396,192 @@
     </div>
   </dialog>
 
+  <!-- FIRA CIFRAS (DATA) MODAL -->
+  <dialog id="cifras-modal" class="modal-window">
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: FIN_DATA_ENGINE_v1</small>
+          <h2>FIRA Financial Dashboard</h2>
+          <p class="role">Data Visualization &amp; Algorithmic Logic</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('cifras-modal').close()">×</button>
+      </header>
+
+      <div class="modal-body">
+
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            FIRA required a way to visualize massive amounts of historical financial data (Balance Sheets vs. Cash Flow) that lived in disconnected CSV dumps.
+            The challenge was to build a **lightweight, dependency-free engine** capable of parsing, merging, and visualizing 10+ years of monthly records instantly on the client side, without straining the legacy backend.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // The Engineering</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">🔢</span>
+              <div class="spec-detail">
+                <strong>Algorithmic Prototype</strong>
+                <p>Developed a custom <code>Number.prototype.formatMoney</code> extension to handle Mexican currency localization, large number suffixes (millions/mdp), and floating-point precision efficiently.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">⚡</span>
+              <div class="spec-detail">
+                <strong>Client-Side ETL</strong>
+                <p>Built a Vanilla JS parser that fetches raw CSVs, cleans dirty data, and performs "Year-over-Year" aggregation in milliseconds within the browser thread.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📊</span>
+              <div class="spec-detail">
+                <strong>Combo-Chart Visualization</strong>
+                <p>Engineered a custom SVG rendering system that layers Bar Charts (Balance) and Line Graphs (Flow) on a shared coordinate system, handling dynamic scaling automatically.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📉</span>
+              <div class="spec-detail">
+                <strong>Legacy Compatibility</strong>
+                <p>Written in pure JavaScript to ensure compatibility with strict government browser requirements.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🛠️</span>
+              <div class="spec-detail">
+                <strong>Regulatory Compliance &amp; UX</strong>
+                <p>Capitalized on "Datos Abiertos" transparency policies to drive engagement. Converted legal requirements for monthly data publication into a compelling visual experience.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">0ms</span>
+              <span class="desc">Backend Latency<br>(Pure Client-Side)</span>
+            </div>
+            <div class="stat">
+              <span class="val">10yr</span>
+              <span class="desc">Historical Data<br>Correlation</span>
+            </div>
+            <div class="stat">
+              <span class="val">100%</span>
+              <span class="desc">Audit Accuracy<br>vs Official Reports</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="modal-footer">
+        <span>STACK:</span>
+        <div class="tags">
+          <span class="tag">Vanilla JS</span>
+          <span class="tag">Prototype Pattern</span>
+          <span class="tag">SVG DOM Manipulation</span>
+          <span class="tag">CSV Parsing</span>
+          <span class="tag">Async/Await</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
+  <!-- IEM SYSTEM MODAL -->
+  <dialog id="iem-modal" class="modal-window">
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: MICHOACAN_VOTE_2011</small>
+          <h2>International Voting Logistics System</h2>
+          <p class="role">Web & Field Operations Specialist</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('iem-modal').close()">×</button>
+      </header>
+
+      <div class="modal-body">
+
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            Orchestrate the logistics for Michoacán's migrant voting process (USA/Europe).
+            The critical requirement was to create a <strong>Physical-to-Digital Bridge</strong> that could track
+            the return of ballot packages via mail without compromising the constitutional right to a secret ballot.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // The Engineering</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">📦</span>
+              <div class="spec-detail">
+                <strong>Barcode Architecture</strong>
+                <p>Designed a custom barcode system printed on the <em>outer</em> return envelope. This allowed us to scan and log receipt in the database while the inner ballot envelope remained sealed and anonymous.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🗄️</span>
+              <div class="spec-detail">
+                <strong>MySQL Sync</strong>
+                <p>Built the PHP/MySQL registry (SILVME) that reconciled physical scans with the digital voter roll, preventing double-voting and generating real-time participation stats.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">💿</span>
+              <div class="spec-detail">
+                <strong>Multimedia Production</strong>
+                <p>Produced the instructional DVD media kit. Managed design, production, duplication and postal logistics.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">100%</span>
+              <span class="desc">Vote Anonymity<br>Maintained</span>
+            </div>
+            <div class="stat">
+              <span class="val">Logistics</span>
+              <span class="desc">Coordinated<br>Transnational Mail</span>
+            </div>
+            <div class="stat">
+              <span class="val">Legacy</span>
+              <span class="desc">Foundation for<br>Future E-Voting</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="modal-footer">
+        <span>STACK:</span>
+        <div class="tags">
+          <span class="tag">PHP 5</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Barcode Hardware</span>
+          <span class="tag">Adobe Premiere</span>
+          <span class="tag">Logistics</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
   <script>
     function setMode(mode) {
       document.body.className = 'mode-' + mode;
-      document.querySelectorAll('.mode-switch button').forEach(b => b.classList.remove('active'));
-      document.getElementById('btn-' + mode).classList.add('active');
-      switchLabel.textContent = isDevMode ? 'DEV_OPS' : 'ON_AIR';
     }
     let currentMode = 'dev';
     document.getElementById('mode-switch').addEventListener('click', () => {
@@ -330,8 +590,6 @@
     });
     setMode(currentMode);
 
-    // document.getElementById('work-in-progress').showModal();
-
     const firaModal = document.getElementById('fira-modal');
 
     firaModal.addEventListener('click', (event) => {
@@ -339,7 +597,62 @@
         firaModal.close();
       }
     });
+    async function initGithubWidget() {
+      const grid = document.getElementById('github-grid');
+      const statusText = document.getElementById('last-commit-text');
+      const username = 'axeleszu';
 
+      for (let i = 0; i < 50; i++) {
+        const square = document.createElement('div');
+        square.classList.add('pixel');
+
+        const rand = Math.random();
+        let level = 0;
+        if (rand > 0.9) level = 4;
+        else if (rand > 0.7) level = 3;
+        else if (rand > 0.5) level = 2;
+        else if (rand > 0.3) level = 1;
+
+        square.classList.add(`level-${level}`);
+        grid.appendChild(square);
+      }
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}/events/public`);
+        if (!response.ok) throw new Error('GitHub API Error');
+
+        const events = await response.json();
+        const pushEvent = events.find(e => e.type === 'PushEvent');
+
+        if (pushEvent) {
+          const date = new Date(pushEvent.created_at);
+          const timeAgo = timeSince(date);
+          statusText.innerText = `Latest commit: ${timeAgo} ago`;
+          statusText.style.color = '#39d353';
+        } else {
+          statusText.innerText = 'No recent public commits';
+        }
+      } catch (error) {
+        statusText.innerText = 'GitHub System: Offline';
+        console.error(error);
+      }
+    }
+
+    function timeSince(date) {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = seconds / 31536000;
+      if (interval > 1) return Math.floor(interval) + "y";
+      interval = seconds / 2592000;
+      if (interval > 1) return Math.floor(interval) + "mo";
+      interval = seconds / 86400;
+      if (interval > 1) return Math.floor(interval) + "d";
+      interval = seconds / 3600;
+      if (interval > 1) return Math.floor(interval) + "h";
+      interval = seconds / 60;
+      if (interval > 1) return Math.floor(interval) + "m";
+      return Math.floor(seconds) + "s";
+    }
+
+    initGithubWidget();
   </script>
 
   <script type="module" src="src/main.js"></script>
