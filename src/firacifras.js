@@ -1,4 +1,4 @@
-// 1. Prototype Helper (Your Legacy Code)
+
 Number.prototype.formatMoney = function (c, d, t) {
     var nu = this,
         mdp = nu / 1000000 > 1 ? " mdp" : "",
@@ -12,7 +12,6 @@ Number.prototype.formatMoney = function (c, d, t) {
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "") + mdp;
 };
 
-// 2. Data Logic
 async function initFiraViz() {
     const statusEl = document.getElementById('api-status');
     const API_BASE = 'https://cors-fira.onrender.com/?url=https://www.fira.gob.mx/Datos/SPFC/';
@@ -30,18 +29,17 @@ async function initFiraViz() {
         let saldoMap = {};
         let flujoMap = {};
 
-        // 1. AGGREGATE SALDO (Sum all rows per Year-Month)
+        // AGGREGATE SALDO 
         if (saldoRes && saldoRes.ok) {
             saldoMap = aggregateByTime(await saldoRes.text());
         } else throw new Error("Saldo Unreachable");
 
-        // 2. AGGREGATE FLUJO
+        // AGGREGATE FLUJO
         if (flujoRes && flujoRes.ok) {
             flujoMap = aggregateByTime(await flujoRes.text());
         }
 
-        // 3. DETERMINE TARGET MONTH (Latest available in Saldo)
-        // Get all "Year-Month" keys
+        // DETERMINE TARGET MONTH
         const keys = Object.keys(saldoMap);
         if (keys.length === 0) throw new Error("Empty Data");
 
@@ -55,8 +53,7 @@ async function initFiraViz() {
         const latestKey = keys[keys.length - 1];
         const [latestYear, latestMonth] = latestKey.split('-').map(Number);
 
-        // 4. BUILD 5-YEAR HISTORY
-        // We want [2020-11, 2021-11, ... 2024-11]
+        // BUILD 5-YEAR HISTORY
         const historyData = [];
         for (let i = 4; i >= 0; i--) {
             const targetYear = latestYear - i;
@@ -77,9 +74,9 @@ async function initFiraViz() {
 
     } catch (err) {
         console.warn("FIRA Visualization Error:", err);
-        statusEl.innerText = "Simulacion (Datos no disponibles)";
+        statusEl.innerText = "FIRA's server no available";
 
-        // Generate Correct Simulation (Different Years)
+        // Generate Simulated Data
         const currYear = new Date().getFullYear();
         const mockData = Array.from({ length: 5 }, (_, i) => ({
             year: currYear - 4 + i,
@@ -92,7 +89,6 @@ async function initFiraViz() {
     }
 }
 
-// Helper: Aggregates CSV data by "Year-Month"
 function aggregateByTime(csvText) {
     const rows = csvText.split(/[\r\n]+/g);
     const agg = {}; // Key: "2023-11", Value: 12345.00
@@ -103,7 +99,6 @@ function aggregateByTime(csvText) {
         if (cols.length > 10) {
             const year = cols[0];
             const month = cols[1];
-            // Your legacy code sums column 10
             const val = parseFloat(cols[10]);
 
             if (year && month && !isNaN(val)) {
@@ -116,29 +111,26 @@ function aggregateByTime(csvText) {
     return agg;
 }
 
-// 3. SVG Combo Chart Logic
+// SVG Chart
 function renderComboChart(data, monthName) {
     const svg = document.getElementById('fira-cifras-svg');
     const tooltip = document.getElementById('viz-tooltip');
 
-    // Clear and set baseline
     svg.innerHTML = '<line x1="0" y1="140" x2="300" y2="140" stroke="#444" stroke-width="1"></line>';
 
     const width = 300;
     const height = 150;
     const margin = 20;
-    const barWidth = (width - (margin * 2)) / data.length - 20; // Space out bars
+    const barWidth = (width - (margin * 2)) / data.length - 20;
 
-    // Scale Max Value
     const maxVal = Math.max(
         ...data.map(d => d.saldo),
         ...data.map(d => d.flujo)
     ) * 1.1;
 
-    // --- 1. DRAW BARS (Saldo) ---
+    // DRAW BARS (Saldo)
     data.forEach((d, i) => {
         const barHeight = (d.saldo / maxVal) * (height - 30);
-        // Calculate X position center of slot
         const slotWidth = (width - margin * 2) / data.length;
         const x = margin + (i * slotWidth) + (slotWidth - barWidth) / 2;
         const y = (height - 10) - barHeight;
@@ -149,7 +141,7 @@ function renderComboChart(data, monthName) {
         rect.setAttribute("y", 150);
         rect.setAttribute("width", barWidth);
         rect.setAttribute("height", 0);
-        rect.setAttribute("fill", "#1ba77b"); // Saldo Teal
+        rect.setAttribute("fill", "#1ba77b");
         rect.setAttribute("class", "bar");
         rect.style.opacity = "0.9";
 
@@ -158,7 +150,7 @@ function renderComboChart(data, monthName) {
             rect.setAttribute("height", barHeight);
         }, 100 + (i * 50));
 
-        // Tooltip (Bar)
+        // Tooltip 
         rect.addEventListener('mousemove', (e) => showTooltip(e, d.year, d.saldo, "Saldo", "#1ba77b"));
         rect.addEventListener('mouseleave', hideTooltip);
 
@@ -176,12 +168,11 @@ function renderComboChart(data, monthName) {
         svg.appendChild(label);
     });
 
-    // --- 2. DRAW LINE (Flujo) ---
+    //  DRAW LINE
     let points = "";
 
     data.forEach((d, i) => {
         const slotWidth = (width - margin * 2) / data.length;
-        // Center the point in the slot
         const x = margin + (i * slotWidth) + (slotWidth / 2);
         const y = (height - 10) - ((d.flujo / maxVal) * (height - 30));
         points += `${x},${y} `;
@@ -192,9 +183,9 @@ function renderComboChart(data, monthName) {
         circle.setAttribute("cy", y);
         circle.setAttribute("r", 3.5);
         circle.setAttribute("class", "dot-point");
-        circle.style.opacity = "0"; // Fade in later
+        circle.style.opacity = "0";
 
-        // Tooltip (Dot)
+        // Tooltip
         circle.addEventListener('mousemove', (e) => showTooltip(e, d.year, d.flujo, "Flujo", "#003170"));
         circle.addEventListener('mouseleave', hideTooltip);
 
@@ -202,20 +193,16 @@ function renderComboChart(data, monthName) {
         svg.appendChild(circle);
     });
 
-    // Draw Polyline
     const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
     polyline.setAttribute("points", points);
     polyline.setAttribute("class", "line-path");
 
-    // Insert line before dots
     const firstCircle = svg.querySelector('circle');
     if (firstCircle) svg.insertBefore(polyline, firstCircle);
 
 
-    // --- HELPERS ---
     function showTooltip(e, year, value, type, color) {
         const rectPos = svg.getBoundingClientRect();
-        // Adjust for tooltip width relative to mouse
         const mouseX = e.clientX - rectPos.left;
         const mouseY = e.clientY - rectPos.top;
 

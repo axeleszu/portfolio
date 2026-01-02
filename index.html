@@ -49,7 +49,6 @@
   </section>
   <main class="bento-wrapper">
     <div class="bento-grid" id="project-grid">
-
       <article class="card col-2 row-2">
         <div data-category="dev">
           <div data-category="dev">
@@ -118,23 +117,25 @@
         </div>
       </article>
       <article class="card stats-card">
-        <div data-category="dev" class="github-view">
-          <div class="card-header-mini">
-            <h3><span class="icon">⚡</span> GitHub Activity</h3>
-            <a href="https://github.com/axeleszu" target="_blank" class="link-arrow">↗</a>
-          </div>
-          <div class="commit-graph" id="github-grid">
-            <!-- GitHub contribution squares -->
-          </div>
+        <div data-category="dev">
+          <div class="github-view">
+            <div class="card-header-mini">
+              <h3><span class="icon">⚡</span> GitHub Activity</h3>
+              <a href="https://github.com/axeleszu" target="_blank" class="link-arrow">↗</a>
+            </div>
+            <div class="commit-graph" id="github-grid">
+              <!-- GitHub contribution squares -->
+            </div>
 
-          <div class="meta-row">
-            <small id="last-commit-text">Loading status...</small>
-            <div class="legend">
-              <span>Less</span>
-              <div class="legend-squares">
-                <span class="l-0"></span><span class="l-1"></span><span class="l-2"></span><span class="l-3"></span>
+            <div class="meta-row">
+              <small id="last-commit-text">Loading status...</small>
+              <div class="legend">
+                <span>Less</span>
+                <div class="legend-squares">
+                  <span class="l-0"></span><span class="l-1"></span><span class="l-2"></span><span class="l-3"></span>
+                </div>
+                <span>More</span>
               </div>
-              <span>More</span>
             </div>
           </div>
         </div>
@@ -148,13 +149,42 @@
       </article>
 
       <article class="card row-2 mobile-card">
-        <div data-category="dev">
+        <div data-category="dev" class="pwa-view">
+          <h3>Viveros Smart Access PWA</h3>
+          <div class="card-header-center">
+            <span class="pwa-badge"><span class="wifi-icon"></span> IoT Integration</span>
+          </div>
           <div class="phone-mockup">
             <div class="notch"></div>
-            <div class="screen view-dev iframe-container">
-              <div class="app-label">Condominio Viveros PWA</div>
-              <div class="pwa-badge">Installable</div>
+            <div class="screen">
+              <div class="app-ui access-mode">
+                <div class="app-header">
+                  <div class="menu-btn"></div>
+                  <div class="user-avatar"></div>
+                </div>
+
+                <div class="access-card">
+                  <small>Main Gate Access</small>
+                  <div class="qr-placeholder">
+                    <!-- CSS Generated QR Pattern -->
+                    <div class="qr-pattern"></div>
+                    <div class="scan-line"></div>
+                  </div>
+                  <div class="timer">Scan the QR code</div>
+                </div>
+                <div class="action-area">
+                  <p class="status-text">Connection: Secure</p>
+                </div>
+                <div class="toast-notification">
+                  <span class="icon">🧾</span> Payment Verified
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="card-footer-center">
+            <button type="button" class="btn-details" onclick="document.getElementById('viveros-modal').showModal()">
+              IoT Specs
+            </button>
           </div>
         </div>
         <div class="screen view-media video-vertical" data-category="media">
@@ -167,7 +197,7 @@
           <div class="card-header-mini">
             <h3>FIRA Cifras API</h3>
 
-            <button class="btn-details" onclick="document.getElementById('cifras-modal').showModal()">
+            <button type="button" class="btn-details" onclick="document.getElementById('cifras-modal').showModal()">
               Analysis Logic
             </button>
             <div class="viz-legend">
@@ -177,9 +207,7 @@
           </div>
 
           <div class="svg-wrapper">
-            <!-- SVG Viewbox 0 0 300 150 defines our coordinate system -->
             <svg id="fira-cifras-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
-              <!-- Bars will be injected here by JS -->
               <line x1="0" y1="140" x2="300" y2="140" stroke="#333" stroke-width="1"></line>
             </svg>
 
@@ -210,8 +238,8 @@
             <div class="header-right">
               <span class="tech-tag">PHP / MySQL</span>
               <span class="tech-tag">Hardware Integ.</span>
-              <button class="btn-details-mini" onclick="document.getElementById('iem-modal').showModal()">
-                <span class="icon">📂</span> System Specs
+              <button type="button" class="btn-details" onclick="document.getElementById('iem-modal').showModal()">
+                System Specs
               </button>
             </div>
           </div>
@@ -248,10 +276,10 @@
             </div>
 
             <div class="scan-log">
-              <div class="log-line">> Packet Received: 492-MX</div>
-              <div class="log-line">> Lookup: Valid Voter Reg.</div>
-              <div class="log-line">> Action: Update `status` = RECEIVED</div>
-              <div class="log-line highlight">> PRIVACY CHECK: VOTE SEPARATED</div>
+              <div class="log-line">&gt; Packet Received: 492-MX</div>
+              <div class="log-line">&gt; Lookup: Valid Voter Reg.</div>
+              <div class="log-line">&gt; Action: Update `status` = RECEIVED</div>
+              <div class="log-line highlight">&gt; PRIVACY CHECK: VOTE SEPARATED</div>
             </div>
           </div>
         </div>
@@ -289,7 +317,7 @@
           <p class="prompt">&gt; Initiate_Contact_Protocol()</p>
           <form class="simple-form">
             <input type="email" placeholder="recruiter@company.com">
-            <button type="submit">SEND</button>
+            <button type="submit" class="btn-details">SEND</button>
           </form>
         </div>
         <div data-category="media" class="contact-view">
@@ -579,6 +607,94 @@
     </div>
   </dialog>
 
+  <dialog id="viveros-modal" class="modal-window">
+    <div class="modal-content">
+
+      <header class="modal-header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: IOT_ACCESS_CONTROL</small>
+          <h2>Condominio Viveros: Smart Access</h2>
+          <p class="role">Full Stack Architect (PWA + IoT)</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('viveros-modal').close()">×</button>
+      </header>
+
+      <div class="modal-body">
+
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            Managing operations for nearly 100 tenants required a unified digital ecosystem.
+            Administratively, the community needed a transparent way to handle <strong>HOA fees, meeting agreements, and official notices</strong>.
+          </p>
+          <p>
+            Technically, the challenge was to modernize physical security by eliminating the need for hardware remotes.
+            The goal was to engineer a <strong>secure IoT gateway</strong> that allows tenants to grant time-limited access to visitors via smartphone, ensuring convenience without compromising the perimeter. Keeping simplicity and ease of use was paramount.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // The Engineering</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">🔓</span>
+              <div class="spec-detail">
+                <strong>Web-to-Physical Bridge</strong>
+                <p>Built a secure handshake protocol where the PWA communicates with the Gate Controller via <strong>Webhooks/MQTT</strong>. Scanning the QR triggers a real-time signal to open the solenoid lock.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📷</span>
+              <div class="spec-detail">
+                <strong>Browser-Based Scanning</strong>
+                <p>Implemented a QR scanner directly in the browser using JS libraries, allowing visitors to authenticate and trigger the gate without installing native apps.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🧾</span>
+              <div class="spec-detail">
+                <strong>Fiscal Integration</strong>
+                <p>Tenants can view and download PDF digital receipts generated dynamically upon payment verification, creating an automated audit trail.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">Hardware</span>
+              <span class="desc">Eliminated cost<br>of physical remotes</span>
+            </div>
+            <div class="stat">
+              <span class="val">Security</span>
+              <span class="desc">Dynamic QRs<br>prevent cloning</span>
+            </div>
+            <div class="stat">
+              <span class="val">IoT</span>
+              <span class="desc">Seamless Web<br>to Real-World Action</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="modal-footer">
+        <span>STACK:</span>
+        <div class="tags">
+          <span class="tag">Firebase</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">IoT Webhooks</span>
+          <span class="tag">QR Generation</span>
+          <span class="tag">Camera API</span>
+          <span class="tag">PWA</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
   <script>
     function setMode(mode) {
       document.body.className = 'mode-' + mode;
@@ -597,6 +713,13 @@
         firaModal.close();
       }
     });
+
+    const iemModal = document.getElementById('iem-modal');
+    if (iemModal) {
+      iemModal.addEventListener('click', (e) => {
+        if (e.target === iemModal) iemModal.close();
+      });
+    }
     async function initGithubWidget() {
       const grid = document.getElementById('github-grid');
       const statusText = document.getElementById('last-commit-text');
