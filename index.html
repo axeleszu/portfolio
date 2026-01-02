@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Axel Escutia</title>
-  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="./src/style.css">
 </head>
 
 <body class="mode-dev">
@@ -32,7 +32,7 @@
   <section class="bio-strip">
     <div class="bio-content">
       <div class="profile-photo">
-        <img src="/img/AxelEscutia.png" alt="Axel Escutia Zubieta">
+        <img src="./img/AxelEscutia.png" alt="Axel Escutia Zubieta">
       </div>
       <div class="bio-text">
         <p>Integrating high-performance backend systems with production-quality visuals.</p>
@@ -51,58 +51,56 @@
     <div class="bento-grid" id="project-grid">
       <article class="card col-2 row-2">
         <div data-category="dev">
-          <div data-category="dev">
-            <div class="card-header">
-              <div class="header-top">
-                <h3>FIRA Institutional Portal</h3>
-                <span class="role-badge">Lead UI/UX &amp; Frontend</span>
-              </div>
-              <p class="subtitle">Complete Ecosystem Modernization</p>
+          <div class="card-header">
+            <div class="header-top">
+              <h3>FIRA Institutional Portal</h3>
+              <span class="role-badge">Lead UI/UX &amp; Frontend</span>
             </div>
-            <div class="blueprint-visual">
-              <div class="ui-showcase-container">
-                <div class="brand-glow"></div>
-                <div class="ui-stack">
-                  <div class="ui-card card-green">
-                    <span class="card-icon"><img src="img/index-productores.svg" alt="SVG animation"></span>
-                    <span class="card-label">Producción</span>
-                  </div>
-                  <div class="ui-card card-orange">
-                    <span class="card-icon"><img src="img/index-agroempresas.svg" alt="SVG animation"></span>
-                    <span class="card-label">AgroEmpresas</span>
-                  </div>
-                  <div class="ui-card card-blue">
-                    <span class="card-icon"><img src="img/index-if.svg" alt="SVG animation"></span>
-                    <span class="card-label">Intermediación</span>
-                  </div>
+            <p class="subtitle">Complete Ecosystem Modernization</p>
+          </div>
+          <div class="blueprint-visual">
+            <div class="ui-showcase-container">
+              <div class="brand-glow"></div>
+              <div class="ui-stack">
+                <div class="ui-card card-green">
+                  <span class="card-icon"><img src="./img/index-productores.svg" alt="SVG animation"></span>
+                  <span class="card-label">Producción</span>
                 </div>
-              </div>
-              <div class="specs-overlay">
-                <div class="spec-item">
-                  <span class="icon">📐</span> 12 Responsive Breakpoints
+                <div class="ui-card card-orange">
+                  <span class="card-icon"><img src="./img/index-agroempresas.svg" alt="SVG animation"></span>
+                  <span class="card-label">AgroEmpresas</span>
                 </div>
-                <div class="spec-item">
-                  <span class="icon">👁️</span> WAI-AAA Accessible
-                </div>
-                <div class="spec-item">
-                  <span class="icon">🌓</span> Dark Mode / Reduce-Motion
+                <div class="ui-card card-blue">
+                  <span class="card-icon"><img src="./img/index-if.svg" alt="SVG animation"></span>
+                  <span class="card-label">Intermediación</span>
                 </div>
               </div>
             </div>
-
-            <div class="card-footer">
-              <div class="stat-box">
-                <span class="num">3</span>
-                <span class="label">Target Audiences</span>
+            <div class="specs-overlay">
+              <div class="spec-item">
+                <span class="icon">📐</span> 12 Responsive Breakpoints
               </div>
-              <div class="stat-box">
-                <span class="num">70th</span>
-                <span class="label">Anniversary Brand</span>
+              <div class="spec-item">
+                <span class="icon">👁️</span> WAI-AAA Accessible
               </div>
-              <button type="button" class="btn-details" onclick="document.getElementById('fira-modal').showModal()">View Case Study</button>
+              <div class="spec-item">
+                <span class="icon">🌓</span> Dark Mode / Reduce-Motion
+              </div>
             </div>
           </div>
+          <div class="card-footer">
+            <div class="stat-box">
+              <span class="num">3</span>
+              <span class="label">Target Audiences</span>
+            </div>
+            <div class="stat-box">
+              <span class="num">70th</span>
+              <span class="label">Anniversary Brand</span>
+            </div>
+            <button type="button" class="btn-details" onclick="document.getElementById('fira-modal').showModal()">View Case Study</button>
+          </div>
         </div>
+
         <div data-category="media" class="video-card">
           <div class="video-bg-placeholder">
             [ VIDEO LOOP: Hitos FIRA 70 Aniversario ]
@@ -110,13 +108,8 @@
           <div class="overlay-title">Production Showreel</div>
         </div>
       </article>
-      <article class="card col-2" data-category="mixed">
-        <div class="card-content">
-          <h3>The Lab</h3>
-          <p>Game Dev</p>
-        </div>
-      </article>
-      <article class="card stats-card">
+
+      <article class="card stats-card ">
         <div data-category="dev">
           <div class="github-view">
             <div class="card-header-mini">
@@ -145,6 +138,12 @@
             <span></span><span></span><span></span><span></span><span></span>
           </div>
           <small>Producer / Editor</small>
+        </div>
+      </article>
+      <article class="card " data-category="mixed">
+        <div class="card-content">
+          <h3>The Lab</h3>
+          <p>Game Dev</p>
         </div>
       </article>
 
@@ -176,7 +175,7 @@
                   <p class="status-text">Connection: Secure</p>
                 </div>
                 <div class="toast-notification">
-                  <span class="icon">🧾</span> Payment Verified
+                  <span class="icon">🧾</span> Descargar Recibo
                 </div>
               </div>
             </div>
@@ -191,7 +190,117 @@
           [ Vertical Video: Agritech Nexus ]
         </div>
       </article>
-      <article class="card row-2 col-3 stats-card">
+      <article class="card row-2 mobile-card">
+        <div data-category="dev" class="pwa-view">
+          <div class="card-header-center">
+            <h3>Promotor's Toolkit</h3>
+            <span class="pwa-badge"><span class="wifi-icon slash"></span> Offline by Design</span>
+          </div>
+          <div class="transformation-container">
+            <div class="phone-mockup static-phone">
+              <div class="notch"></div>
+              <div class="screen">
+                <div class="app-ui-promotor">
+                  <div class="search-bar"><span>Search Normativa...</span></div>
+                  <div class="ui-grid">
+                    <div class="grid-item"><span>Créditos</span></div>
+                    <div class="grid-item"><span>Garantías</span></div>
+                    <div class="grid-item"><span>Tasas</span></div>
+                    <div class="grid-item"><span>Zonas</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="card-footer-center">
+            <button type="button" class="btn-details" onclick="document.getElementById('promotor-modal').showModal()">
+              Field Ops Specs
+            </button>
+          </div>
+        </div>
+        <div class="screen" data-category="media">
+          [ Video: Fertilizacion Optima ]
+        </div>
+      </article>
+      <article class="card col-2 legacy-card">
+        <div data-category="dev" class="blueprint-view">
+          <div class="card-header-horizontal">
+            <div class="header-left">
+              <h3>IEM Vote Tracking</h3>
+              <span class="sys-code">PROTOCOL: SILVME_ANONYMITY_V1</span>
+            </div>
+            <div class="header-right">
+              <span class="tech-tag">PHP / MySQL</span>
+              <span class="tech-tag">Hardware Integ.</span>
+              <button class="btn-details" onclick="document.getElementById('iem-modal').showModal()">
+                Specs
+              </button>
+            </div>
+          </div>
+
+          <div class="scanner-layout">
+            <div class="package-container">
+              <div class="shipping-label">
+                <img src="./img/logo-vota-michoacan.png" alt="Vota Michoacan" class="label-logo">
+                <div class="barcode-area">
+                  <svg class="barcode-svg" viewBox="0 0 300 100">
+                    <g fill="#000">
+                      <rect x="10" y="10" width="5" height="80"></rect>
+                      <rect x="20" y="10" width="10" height="80"></rect>
+                      <rect x="35" y="10" width="5" height="80"></rect>
+                      <rect x="45" y="10" width="15" height="80"></rect>
+                      <rect x="65" y="10" width="5" height="80"></rect>
+                      <rect x="75" y="10" width="10" height="80"></rect>
+                      <rect x="90" y="10" width="20" height="80"></rect>
+                      <rect x="115" y="10" width="5" height="80"></rect>
+                      <rect x="125" y="10" width="10" height="80"></rect>
+                      <rect x="140" y="10" width="5" height="80"></rect>
+                      <rect x="150" y="10" width="20" height="80"></rect>
+                      <rect x="175" y="10" width="10" height="80"></rect>
+                      <rect x="190" y="10" width="5" height="80"></rect>
+                      <rect x="200" y="10" width="15" height="80"></rect>
+                      <rect x="220" y="10" width="5" height="80"></rect>
+                      <rect x="230" y="10" width="10" height="80"></rect>
+                      <rect x="245" y="10" width="20" height="80"></rect>
+                      <rect x="270" y="10" width="5" height="80"></rect>
+                    </g>
+                    <text x="150" y="110" text-anchor="middle" font-family="monospace" font-size="12" fill="#000">ID: 492-MX-EXT-VOTE</text>
+                  </svg>
+                </div>
+
+                <!-- The Red Laser (Scanning the Label) -->
+                <div class="laser-beam"></div>
+              </div>
+            </div>
+
+            <!-- RIGHT: The Live Terminal (The Animation) -->
+            <div class="scan-log">
+              <div class="log-line l-1">
+                <span class="prompt">&gt;</span> Packet Scanned: <span class="val">492-MX</span>
+              </div>
+              <div class="log-line l-2">
+                <span class="prompt">&gt;</span> Lookup: <span class="success">Valid Voter Reg.</span>
+              </div>
+              <div class="log-line l-3">
+                <span class="prompt">&gt;</span> Action: <span class="val">Update `status` = RECEIVED</span>
+              </div>
+              <div class="log-line l-4 highlight">
+                <span class="prompt">&gt;</span> PRIVACY CHECK: VOTE SEPARATED
+              </div>
+              <div class="cursor">_</div>
+            </div>
+
+          </div>
+        </div>
+        <div data-category="media">
+          <h3>CONAFE</h3>
+          <p class="tiny-text">Educational Spots (Retro)</p>
+          <div class="tv-static"></div>
+        </div>
+      </article>
+      <article class="card col-2 stats-card">
         <div data-category="dev">
 
           <div class="card-header-mini">
@@ -210,8 +319,7 @@
             <svg id="fira-cifras-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
               <line x1="0" y1="140" x2="300" y2="140" stroke="#333" stroke-width="1"></line>
             </svg>
-
-            <!-- Tooltip Container -->
+            <!-- Tooltip  -->
             <div id="viz-tooltip" class="viz-tooltip hidden">
               <span class="tt-label">Month</span>
               <span class="tt-value">$0.00</span>
@@ -221,98 +329,13 @@
               <small id="api-status">Connecting to CORS Proxy...</small>
             </div>
           </div>
-          <script src="src/firacifras.js"></script>
         </div>
         <div data-category="media">
           <h3>VFX Breakdown</h3>
           <div class="green-screen-icon">Keying</div>
         </div>
       </article>
-      <article class="card legacy-card">
-        <div data-category="dev" class="blueprint-view">
-          <div class="card-header-horizontal">
-            <div class="header-left">
-              <h3>IEM Vote Tracking System</h3>
-              <span class="sys-code">PROTOCOL: SILVME_ANONYMITY_V1</span>
-            </div>
-            <div class="header-right">
-              <span class="tech-tag">PHP / MySQL</span>
-              <span class="tech-tag">Hardware Integ.</span>
-              <button type="button" class="btn-details" onclick="document.getElementById('iem-modal').showModal()">
-                System Specs
-              </button>
-            </div>
-          </div>
-
-          <!-- The Barcode Visual -->
-          <div class="scanner-container">
-            <div class="barcode-wrapper">
-              <!-- SVG Barcode -->
-              <svg class="barcode-svg" viewBox="0 0 300 100">
-                <g fill="#333">
-                  <rect x="10" y="10" width="5" height="80"></rect>
-                  <rect x="20" y="10" width="10" height="80"></rect>
-                  <rect x="35" y="10" width="5" height="80"></rect>
-                  <rect x="45" y="10" width="15" height="80"></rect>
-                  <rect x="65" y="10" width="5" height="80"></rect>
-                  <rect x="75" y="10" width="10" height="80"></rect>
-                  <rect x="90" y="10" width="20" height="80"></rect>
-                  <rect x="115" y="10" width="5" height="80"></rect>
-                  <rect x="125" y="10" width="10" height="80"></rect>
-                  <rect x="140" y="10" width="5" height="80"></rect>
-                  <rect x="150" y="10" width="20" height="80"></rect>
-                  <rect x="175" y="10" width="10" height="80"></rect>
-                  <rect x="190" y="10" width="5" height="80"></rect>
-                  <rect x="200" y="10" width="15" height="80"></rect>
-                  <rect x="220" y="10" width="5" height="80"></rect>
-                  <rect x="230" y="10" width="10" height="80"></rect>
-                  <rect x="245" y="10" width="20" height="80"></rect>
-                  <rect x="270" y="10" width="5" height="80"></rect>
-                </g>
-                <text x="150" y="110" text-anchor="middle" font-family="monospace" font-size="12" fill="#666">ID: 492-MX-EXT-VOTE</text>
-              </svg>
-
-              <div class="laser-beam"></div>
-            </div>
-
-            <div class="scan-log">
-              <div class="log-line">&gt; Packet Received: 492-MX</div>
-              <div class="log-line">&gt; Lookup: Valid Voter Reg.</div>
-              <div class="log-line">&gt; Action: Update `status` = RECEIVED</div>
-              <div class="log-line highlight">&gt; PRIVACY CHECK: VOTE SEPARATED</div>
-            </div>
-          </div>
-        </div>
-        <div data-category="media">
-          <h3>CONAFE</h3>
-          <p class="tiny-text">Educational Spots (Retro)</p>
-          <div class="tv-static"></div>
-        </div>
-      </article>
-      <article class="card row-2 mobile-card">
-        <div class="phone-mockup" data-category="dev">
-          <div class="notch"></div>
-          <div class="screen view-dev">
-            <div class="app-label">App Manual Promotor</div>
-            <div class="pwa-badge">Offline Mode</div>
-          </div>
-        </div>
-        <div class="screen" data-category="media">
-          [ Video: Fertilizacion Optima ]
-        </div>
-      </article>
-      <article class="card col-3 stack-card">
-        <div data-category="dev" class="tech-grid">
-          <span>JS</span> | <span>PHP</span>|
-          <span>SQL</span> | <span>GIT</span>
-        </div>
-        <div data-category="media" class="tech-grid">
-          <span>Photoshop</span> | <span>After Effects</span> |
-          <span>Premiere</span> | <span>DaVinci Resolve</span> |
-          <span>Adobe Audition</span> | <span>Adobe Illustrator</span>
-        </div>
-      </article>
-      <article class="card col-2 contact-card">
+      <article class="card  contact-card">
         <div data-category="dev" class="terminal-view">
           <p class="prompt">&gt; Initiate_Contact_Protocol()</p>
           <form class="simple-form">
@@ -322,7 +345,18 @@
         </div>
         <div data-category="media" class="contact-view">
           <p>For collaborations or inquiries, reach out at:</p>
-          <a href="mailto:axeleszu@gmail.com">axeleszu@gmail.com</a>
+          <a href="mailto:contact@axelescutia.com">contact@axelescutia.com</a>
+        </div>
+      </article>
+      <article class="card  stack-card">
+        <div data-category="dev" class="tech-grid">
+          <span>JS</span> | <span>PHP</span>|
+          <span>SQL</span> | <span>GIT</span>
+        </div>
+        <div data-category="media" class="tech-grid">
+          <span>Photoshop</span> | <span>After Effects</span> |
+          <span>Premiere</span> | <span>DaVinci Resolve</span> |
+          <span>Adobe Audition</span> | <span>Adobe Illustrator</span>
         </div>
       </article>
     </div>
@@ -505,9 +539,7 @@
             </div>
           </div>
         </section>
-
       </div>
-
       <footer class="modal-footer">
         <span>STACK:</span>
         <div class="tags">
@@ -518,19 +550,17 @@
           <span class="tag">Async/Await</span>
         </div>
       </footer>
-
     </div>
   </dialog>
 
   <!-- IEM SYSTEM MODAL -->
   <dialog id="iem-modal" class="modal-window">
     <div class="modal-content">
-
       <header class="modal-header">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: MICHOACAN_VOTE_2011</small>
           <h2>International Voting Logistics System</h2>
-          <p class="role">Web & Field Operations Specialist</p>
+          <p class="role">Web &amp; Field Operations Specialist</p>
         </div>
         <button class="btn-close" type="button" onclick="document.getElementById('iem-modal').close()">×</button>
       </header>
@@ -560,7 +590,7 @@
               <span class="icon">🗄️</span>
               <div class="spec-detail">
                 <strong>MySQL Sync</strong>
-                <p>Built the PHP/MySQL registry (SILVME) that reconciled physical scans with the digital voter roll, preventing double-voting and generating real-time participation stats.</p>
+                <p>Built the PHP/MySQL registry SILVME (Solicitudes de Inscripción a la Lista de Votantes Michoacanos en el Extranjero) that reconciled physical scans with the digital voter roll, preventing double-voting and generating real-time participation stats.</p>
               </div>
             </li>
             <li>
@@ -694,90 +724,94 @@
 
     </div>
   </dialog>
+  <!-- PROMOTOR PWA MODAL -->
+  <dialog id="promotor-modal" class="modal-window">
+    <div class="modal-content">
 
-  <script>
-    function setMode(mode) {
-      document.body.className = 'mode-' + mode;
-    }
-    let currentMode = 'dev';
-    document.getElementById('mode-switch').addEventListener('click', () => {
-      currentMode = currentMode === 'dev' ? 'media' : 'dev';
-      setMode(currentMode);
-    });
-    setMode(currentMode);
+      <header class="modal-header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: FIELD_TOOLKIT_PWA</small>
+          <h2>Manual del Promotor PWA</h2>
+          <p class="role">Lead PWA Developer</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('promotor-modal').close()">×</button>
+      </header>
 
-    const firaModal = document.getElementById('fira-modal');
+      <div class="modal-body">
 
-    firaModal.addEventListener('click', (event) => {
-      if (event.target === firaModal) {
-        firaModal.close();
-      }
-    });
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            FIRA's 600+ credit promoters relied on a dense rules and regulations for credit assessment during client meetings.
+            Access requieres vast experience and knowledge, making it <strong>time-consuming and error-prone</strong>.
+            The goal was to empower this mobile workforce with a high-performance tool that delivered instant, accurate information, anywhere.
+          </p>
+        </section>
 
-    const iemModal = document.getElementById('iem-modal');
-    if (iemModal) {
-      iemModal.addEventListener('click', (e) => {
-        if (e.target === iemModal) iemModal.close();
-      });
-    }
-    async function initGithubWidget() {
-      const grid = document.getElementById('github-grid');
-      const statusText = document.getElementById('last-commit-text');
-      const username = 'axeleszu';
+        <section class="case-section">
+          <h3>02 // The Engineering</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">📶</span>
+              <div class="spec-detail">
+                <strong>Offline-First Architecture</strong>
+                <p>Implemented a robust <strong>Service Worker</strong> to pre-cache the entire application shell and all normative data, guaranteeing 100% functionality without a network connection.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📚</span>
+              <div class="spec-detail">
+                <strong>Content Indexing</strong>
+                <p>Transformed complicated technical documentation into a structured, searchable knowledge base. Information was "chunked", simplified, and indexed, making complex regulations accessible in seconds.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🚀</span>
+              <div class="spec-detail">
+                <strong>Performance Optimization</strong>
+                <p>Engineered for sub-second load times on low-end mobile devices. The app is lightweight, fast, and feels like a native application once added to the home screen.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
 
-      for (let i = 0; i < 50; i++) {
-        const square = document.createElement('div');
-        square.classList.add('pixel');
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">600+</span>
+              <span class="desc">Promoters<br>Empowered</span>
+            </div>
+            <div class="stat">
+              <span class="val">100%</span>
+              <span class="desc">Offline<br>Availability</span>
+            </div>
+            <div class="stat">
+              <span class="val">Instant</span>
+              <span class="desc">Access to<br>Verified Information</span>
+            </div>
+          </div>
+        </section>
 
-        const rand = Math.random();
-        let level = 0;
-        if (rand > 0.9) level = 4;
-        else if (rand > 0.7) level = 3;
-        else if (rand > 0.5) level = 2;
-        else if (rand > 0.3) level = 1;
+      </div>
 
-        square.classList.add(`level-${level}`);
-        grid.appendChild(square);
-      }
-      try {
-        const response = await fetch(`https://api.github.com/users/${username}/events/public`);
-        if (!response.ok) throw new Error('GitHub API Error');
+      <footer class="modal-footer">
+        <span>STACK:</span>
+        <div class="tags">
+          <span class="tag">PWA</span>
+          <span class="tag">Service Workers</span>
+          <span class="tag">IndexedDB</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">Animated SVG</span>
+          <span class="tag">Vanilla JS</span>
+        </div>
+      </footer>
 
-        const events = await response.json();
-        const pushEvent = events.find(e => e.type === 'PushEvent');
+    </div>
+  </dialog>
 
-        if (pushEvent) {
-          const date = new Date(pushEvent.created_at);
-          const timeAgo = timeSince(date);
-          statusText.innerText = `Latest commit: ${timeAgo} ago`;
-          statusText.style.color = '#39d353';
-        } else {
-          statusText.innerText = 'No recent public commits';
-        }
-      } catch (error) {
-        statusText.innerText = 'GitHub System: Offline';
-        console.error(error);
-      }
-    }
-
-    function timeSince(date) {
-      const seconds = Math.floor((new Date() - date) / 1000);
-      let interval = seconds / 31536000;
-      if (interval > 1) return Math.floor(interval) + "y";
-      interval = seconds / 2592000;
-      if (interval > 1) return Math.floor(interval) + "mo";
-      interval = seconds / 86400;
-      if (interval > 1) return Math.floor(interval) + "d";
-      interval = seconds / 3600;
-      if (interval > 1) return Math.floor(interval) + "h";
-      interval = seconds / 60;
-      if (interval > 1) return Math.floor(interval) + "m";
-      return Math.floor(seconds) + "s";
-    }
-
-    initGithubWidget();
-  </script>
-
+  <script src="./src/firacifras.js"></script>
   <script type="module" src="src/main.js"></script>
 </body>
 

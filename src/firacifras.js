@@ -163,7 +163,7 @@ function renderComboChart(data, monthName) {
         label.setAttribute("text-anchor", "middle");
         label.setAttribute("fill", "#888");
         label.setAttribute("font-size", "9");
-        label.setAttribute("font-family", "Arial, sans-serif");
+        // label.setAttribute("font-family", "Arial, sans-serif");
         label.textContent = d.year;
         svg.appendChild(label);
     });
