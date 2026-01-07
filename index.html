@@ -10,7 +10,21 @@
 
 <body class="mode-dev">
   <section class="hero-container">
-    <div class="hero-video-wrapper">
+    <div class="terminal-layer" id="terminal-root" data-category="dev">
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <span class="status-dot"></span>
+          <span class="header-title">AXEL_OS_KERNEL_v2.5.0 (tty1)</span>
+        </div>
+        <div class="terminal-output" id="term-output"></div>
+        <div class="input-line hidden" id="term-input-line">
+          <span class="prompt">guest@axelescutia:~$</span>
+          <span class="typing" id="term-typing"></span><span class="cursor">█</span>
+          <input type="text" id="hidden-input" autocomplete="off" spellcheck="false">
+        </div>
+      </div>
+    </div>
+    <div class="hero-video-wrapper" data-category="media">
       <video autoplay muted loop playsinline class="bg-video" poster="/img/poster.jpg">
         <source src="#" type="video/mp4">
       </video>
@@ -32,7 +46,7 @@
   <section class="bio-strip">
     <div class="bio-content">
       <div class="profile-photo">
-        <img src="./img/AxelEscutia.png" alt="Axel Escutia Zubieta">
+        <img src="./img/AxelEscutia2.jpg" alt="Axel Escutia Zubieta">
       </div>
       <div class="bio-text">
         <p>Integrating high-performance backend systems with production-quality visuals.</p>
@@ -50,7 +64,7 @@
   <main class="bento-wrapper">
     <div class="bento-grid" id="project-grid">
       <article class="card col-2 row-2">
-        <div data-category="dev">
+        <div data-category="dev" class="portal-fira">
           <div class="card-header">
             <div class="header-top">
               <h3>FIRA Institutional Portal</h3>
@@ -112,7 +126,7 @@
       <article class="card stats-card ">
         <div data-category="dev">
           <div class="github-view">
-            <div class="card-header-mini">
+            <div class="card-header">
               <h3><span class="icon">⚡</span> GitHub Activity</h3>
               <a href="https://github.com/axeleszu" target="_blank" class="link-arrow">↗</a>
             </div>
@@ -303,7 +317,7 @@
       <article class="card col-2 stats-card">
         <div data-category="dev">
 
-          <div class="card-header-mini">
+          <div class="card-header">
             <h3>FIRA Cifras API</h3>
 
             <button type="button" class="btn-details" onclick="document.getElementById('cifras-modal').showModal()">
@@ -337,9 +351,9 @@
       </article>
       <article class="card  contact-card">
         <div data-category="dev" class="terminal-view">
-          <p class="prompt">&gt; Initiate_Contact_Protocol()</p>
+          <p class="prompt">&gt; Initiate Contact_Protocol()</p>
           <form class="simple-form">
-            <input type="email" placeholder="recruiter@company.com">
+            <input class="input-contact" type="email" placeholder="recruiter@company.com">
             <button type="submit" class="btn-details">SEND</button>
           </form>
         </div>

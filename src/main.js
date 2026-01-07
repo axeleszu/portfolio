@@ -126,9 +126,8 @@ function initContactForm() {
             lines.forEach((line, index) => {
                 setTimeout(() => {
                     logs.innerHTML += `<div>${line}</div>`;
-                    // Auto scroll to bottom
                     logs.scrollTop = logs.scrollHeight;
-                }, index * 400); // 400ms delay between lines
+                }, index * 400);
             });
 
             // Clear input
@@ -146,6 +145,11 @@ function initContactForm() {
     });
 }
 
+import { TerminalHero } from './terminal.js';
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
+    new TerminalHero();
 });
