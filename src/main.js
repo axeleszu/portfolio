@@ -1,3 +1,4 @@
+import resumeUrl from '../resume.pdf';
 function setMode(mode) {
     document.body.className = 'mode-' + mode;
     document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
@@ -84,12 +85,10 @@ function initContactForm() {
         e.preventDefault();
         const email = input.value;
 
-        // 1. Lock Interface
         input.disabled = true;
         const originalBtnText = form.querySelector('button').innerText;
         form.querySelector('button').innerText = "TRANSMITTING...";
 
-        // 2. Create a "Log" container to show the progress
         let logs = terminalView.querySelector('.terminal-logs');
         if (!logs) {
             logs = document.createElement('div');
@@ -99,7 +98,6 @@ function initContactForm() {
         logs.innerHTML = `<div>> Initializing handshake...</div>`;
 
         try {
-            // 3. Call Edge Function
             const response = await fetch(FUNCTION_URL, {
                 method: 'POST',
                 headers: {
@@ -112,9 +110,6 @@ function initContactForm() {
             const data = await response.json();
 
             if (!response.ok) throw new Error(data.error || 'Unknown Error');
-
-            // 4. Success "Trickery" Animation
-            // We print lines one by one to simulate a system processing
             const lines = [
                 `> Connecting to node: ${data.region}... OK`,
                 `> Encrypting payload... OK`,
@@ -129,14 +124,12 @@ function initContactForm() {
                     logs.scrollTop = logs.scrollHeight;
                 }, index * 400);
             });
-
-            // Clear input
             input.value = "";
 
         } catch (err) {
             logs.innerHTML += `<div style="color:red">> ERROR: ${err.message}</div>`;
         } finally {
-            // Reset button after animation
+
             setTimeout(() => {
                 input.disabled = false;
                 form.querySelector('button').innerText = originalBtnText;
@@ -150,6 +143,8 @@ import { TerminalHero } from './terminal.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('resume-link').href = resumeUrl;
     initContactForm();
     new TerminalHero();
+
 });

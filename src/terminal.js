@@ -92,7 +92,7 @@ AVAILABLE COMMANDS:
 
             case 'resume':
                 this.printLine(">> INITIATING DOWNLOAD...", 'success');
-                window.open('/resume.pdf', '_blank');
+                document.getElementById('resume-link').click();
                 break;
 
             case 'skills':
