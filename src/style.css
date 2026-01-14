@@ -1523,14 +1523,14 @@ circle.dot-point:hover {
   stroke-width: 2;
 }
 
-.terminal-view {
+.terminal-view[data-category=dev] {
   background: #0d0d0d;
   border: 1px solid #333;
   border-radius: 6px;
   padding: 15px;
   font-family: 'Courier New', monospace;
   color: #00ff41;
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   margin-bottom: 10px;
 }
