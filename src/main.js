@@ -154,65 +154,94 @@ document.addEventListener('DOMContentLoaded', () => {
 /* MEDIA Mode */
 
 function initMultimedia() {
-    loadYouTubeShowcase();
+    initializeShowcase();
 }
 
 let showcaseLoaded = false;
 
+const API_KEY = 'AIzaSyA4TZKeJawVDM-AXoVpKMw5Dj7DiQM_lcc';
+const PLAYLIST_ID = 'PL8OzJlspMutERXnUzw-KGWxFMr0eBef3Q';
+const CLIP_DURATION_SECONDS = 12;
+let videoData = [];
+let playerA, playerB;
+let activePlayerIsA = true;
+let playersReady = 0;
+let showcaseInitialized = false;
 
-async function loadYouTubeShowcase() {
-    if (showcaseLoaded) return;
-    debugger
 
-    const grid = document.getElementById('youtube-showcase-grid');
-    const API_KEY = 'AIzaSyA4TZKeJawVDM-AXoVpKMw5Dj7DiQM_lcc';
-    const PLAYLIST_ID = 'TLGGo7CNwDqOy64xNjAxMjAyNg';
+async function fetchVideoData() {
+    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=50&key=${API_KEY}`;
+    const playlistResponse = await fetch(playlistUrl);
+    const playlistData = await playlistResponse.json();
+    const videoIds = playlistData.items.map(item => item.snippet.resourceId.videoId).join(',');
 
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=6&key=${API_KEY}`;
+    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds}&key=${API_KEY}`;
+    const videosResponse = await fetch(videosUrl);
+    const videosDetails = await videosResponse.json();
 
-    try {
-        const response = await fetch(url);
+    const parseDuration = (duration) => {
+        const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+        const hours = (parseInt(match[1]) || 0);
+        const minutes = (parseInt(match[2]) || 0);
+        const seconds = (parseInt(match[3]) || 0);
+        return hours * 3600 + minutes * 60 + seconds;
+    };
 
-        const data = await response.json();
+    videoData = videosDetails.items.map(item => ({
+        id: item.id,
+        duration: parseDuration(item.contentDetails.duration)
+    }));
+}
 
-        grid.innerHTML = '';
 
-        data.items.forEach(item => {
-            const video = item.snippet;
-            const videoId = video.resourceId.videoId;
-            const thumbnailUrl = video.thumbnails.high.url;
+async function initializeShowcase() {
+    if (showcaseInitialized) return;
+    showcaseInitialized = true;
 
-            const videoElement = document.createElement('div');
-            videoElement.className = 'video-thumbnail';
-            videoElement.innerHTML = `
-                <img src="${thumbnailUrl}" alt="${video.title}">
-                <div class="play-icon">▶</div>
-            `;
+    await fetchVideoData();
+    if (videoData.length === 0) return;
 
-            videoElement.addEventListener('click', () => {
-                const modal = document.getElementById('fira-modal');
+    const playerOptions = {
+        events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange },
+        playerVars: { 'controls': 0, 'modestbranding': 1, 'rel': 0, 'showinfo': 0, 'iv_load_policy': 3 }
+    };
+    playerA = new YT.Player('playerA', playerOptions);
+    playerB = new YT.Player('playerB', playerOptions);
+}
 
-                modal.querySelector('.modal-content').innerHTML = `
-                    <header class="modal-header">
-                        <h2>${video.title}</h2>
-                        <button class="btn-close" type="button" onclick="document.getElementById('fira-modal').close()">×</button>
-                    </header>
-                    <div class="modal-body" style="padding:0;">
-                        <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0;">
-                            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${video.title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                `;
-                modal.showModal();
-            });
 
-            grid.appendChild(videoElement);
-        });
+function onPlayerReady(event) {
+    event.target.mute();
+    playersReady++;
+    if (playersReady === 2) {
+        playNextClip();
+    }
+}
 
-        showcaseLoaded = true;
+function playNextClip() {
+    const nextVideo = videoData[Math.floor(Math.random() * videoData.length)];
+    const maxStartTime = nextVideo.duration - CLIP_DURATION_SECONDS;
+    const startTime = Math.floor(Math.random() * (maxStartTime > 0 ? maxStartTime : 1));
 
-    } catch (error) {
-        grid.innerHTML = '<p style="color: #ff6b6b;">Could not load video showcase.</p>';
-        console.error("Error fetching YouTube playlist:", error);
+    const playerToLoad = activePlayerIsA ? playerB : playerA;
+    playerToLoad.loadVideoById({
+        videoId: nextVideo.id,
+        startSeconds: startTime,
+        endSeconds: startTime + CLIP_DURATION_SECONDS
+    });
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        const activePlayer = activePlayerIsA ? playerA : playerB;
+        const inactivePlayer = activePlayerIsA ? playerB : playerA;
+
+        // Crossfade
+        activePlayer.getIframe().classList.remove('visible');
+        inactivePlayer.getIframe().classList.add('visible');
+
+        activePlayerIsA = !activePlayerIsA;
+
+        setTimeout(playNextClip, CLIP_DURATION_SECONDS * 1000);
     }
 }

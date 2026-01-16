@@ -9,6 +9,7 @@
 </head>
 
 <body class="mode-dev">
+  <script src="https://www.youtube.com/iframe_api"></script>
   <section class="hero-container">
     <div class="terminal-layer" id="terminal-root" data-category="dev">
       <div class="terminal-window">
@@ -115,14 +116,16 @@
           </div>
         </div>
 
-        <div data-category="media" class="video-card">
-          <div class="video-bg-placeholder">
-            [ VIDEO LOOP: Hitos FIRA 70 Aniversario ]
-          </div>
-          <div class="overlay-title">Production Showreel</div>
-          <div id="youtube-showcase-grid" class="youtube-grid">
-            <!-- Videos will be dynamically loaded here -->
-            <p>Loading Showcase...</p>
+        <div data-category="media" class="video-card ambient-video-container">
+          <div id="playerA" class="video-player"></div>
+          <div id="playerB" class="video-player"></div>
+
+          <div class="ambient-overlay">
+            <div class="overlay-content">
+              <h2>Video Production &amp; Post</h2>
+              <p>A showcase of dynamic visual projects.</p>
+              <button type="button" class="btn-details" onclick="document.getElementById('fira-modal-video').showModal()">View Case Study</button>
+            </div>
           </div>
         </div>
       </article>
@@ -231,7 +234,6 @@
             </div>
           </div>
           <br>
-
           <div class="card-footer-center">
             <button type="button" class="btn-details" onclick="document.getElementById('promotor-modal').showModal()">
               Field Ops Specs
@@ -756,7 +758,6 @@
       </header>
 
       <div class="modal-body">
-
         <section class="case-section">
           <h3>01 // The Challenge</h3>
           <p>
@@ -825,6 +826,95 @@
           <span class="tag">Vanilla JS</span>
         </div>
       </footer>
+
+    </div>
+  </dialog>
+
+  <dialog id="fira-modal-video">
+    <header class="modal-header">
+      <div class="header-text">
+        <small class="sys-code">PROJECT_ID: FIRA_MEDIA_PIPELINE_v13</small>
+        <h2>Institutional Multimedia Production</h2>
+        <p class="role">Lead Producer & Production Manager</p>
+      </div>
+      <button class="btn-close" type="button" onclick="document.getElementById('fira-modal-video').close()">×</button>
+    </header>
+
+    <div class="modal-body">
+
+      <section class="case-section">
+        <h3>01 // The Challenge</h3>
+        <p>
+          Initially hired to document success stories for FIRA's 60th anniversary, the core challenge was to transform the institution's traditionally text-heavy communication into a <strong>dynamic and engaging visual narrative</strong>. This required creating a consistent pipeline to produce high-quality video content capable of explaining complex financial instruments, showcasing
+          on-the-ground success stories, and serving diverse marketing and educational campaigns.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h3>02 // The Process & My Role</h3>
+        <ul class="specs-grid">
+          <li>
+            <span class="icon">🎬</span>
+            <div class="spec-detail">
+              <strong>End-to-End Production</strong>
+              <p>During periods without agency support, I managed the entire production lifecycle single-handedly—from initial scriptwriting, directing, and cinematography to editing, motion graphics, and final sound mixing.</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🤝</span>
+            <div class="spec-detail">
+              <strong>Agency & Procurement Management</strong>
+              <p>Oversaw the complete administrative process for hiring production agencies, including conducting technical evaluations of candidates, defining scopes of work, and managing day-to-day operations to ensure deliverables met strict quality and brand standards.</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">✍️</span>
+            <div class="spec-detail">
+              <strong>Creative Direction & Supervision</strong>
+              <p>Acted as the central creative authority, translating technical briefs into compelling storyboards and scripts. I supervised agency production on-set and meticulously reviewed the post-production process to guide the final narrative.</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🎞️</span>
+            <div class="spec-detail">
+              <strong>Animated Financial Explainers</strong>
+              <p>Designed and produced animated videos to deconstruct complex financial and agricultural concepts, making them accessible and understandable to a broad audience of producers and financial intermediaries.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h3>03 // The Impact</h3>
+        <div class="impact-stats">
+          <div class="stat">
+            <span class="val">13yrs</span>
+            <span class="desc">Consistent Brand<br>Storytelling</span>
+          </div>
+          <div class="stat">
+            <span class="val">200+</span>
+            <span class="desc">Videos Produced<br>& Supervised</span>
+          </div>
+          <div class="stat">
+            <span class="val">Mgmt</span>
+            <span class="desc">Streamlined Agency<br>Collaboration & Procurement</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="modal-footer">
+      <span>STACK / SKILLS:</span>
+      <div class="tags">
+        <span class="tag">Adobe Premiere Pro</span>
+        <span class="tag">After Effects</span>
+        <span class="tag">DaVinci Resolve</span>
+        <span class="tag">Creative Direction</span>
+        <span class="tag">Project Management</span>
+        <span class="tag">Vendor Management</span>
+      </div>
+    </footer>
 
     </div>
   </dialog>
