@@ -2,7 +2,9 @@ import resumeUrl from '../resume.pdf';
 function setMode(mode) {
     document.body.className = 'mode-' + mode;
     document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
+    if (mode == 'media') initMultimedia();
 }
+
 let currentMode = 'dev';
 document.getElementById('mode-switch').addEventListener('click', () => {
     currentMode = currentMode === 'dev' ? 'media' : 'dev';
@@ -148,3 +150,69 @@ document.addEventListener('DOMContentLoaded', () => {
     new TerminalHero();
 
 });
+
+/* MEDIA Mode */
+
+function initMultimedia() {
+    loadYouTubeShowcase();
+}
+
+let showcaseLoaded = false;
+
+
+async function loadYouTubeShowcase() {
+    if (showcaseLoaded) return;
+    debugger
+
+    const grid = document.getElementById('youtube-showcase-grid');
+    const API_KEY = 'AIzaSyA4TZKeJawVDM-AXoVpKMw5Dj7DiQM_lcc';
+    const PLAYLIST_ID = 'TLGGo7CNwDqOy64xNjAxMjAyNg';
+
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=6&key=${API_KEY}`;
+
+    try {
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        grid.innerHTML = '';
+
+        data.items.forEach(item => {
+            const video = item.snippet;
+            const videoId = video.resourceId.videoId;
+            const thumbnailUrl = video.thumbnails.high.url;
+
+            const videoElement = document.createElement('div');
+            videoElement.className = 'video-thumbnail';
+            videoElement.innerHTML = `
+                <img src="${thumbnailUrl}" alt="${video.title}">
+                <div class="play-icon">▶</div>
+            `;
+
+            videoElement.addEventListener('click', () => {
+                const modal = document.getElementById('fira-modal');
+
+                modal.querySelector('.modal-content').innerHTML = `
+                    <header class="modal-header">
+                        <h2>${video.title}</h2>
+                        <button class="btn-close" type="button" onclick="document.getElementById('fira-modal').close()">×</button>
+                    </header>
+                    <div class="modal-body" style="padding:0;">
+                        <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0;">
+                            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${video.title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `;
+                modal.showModal();
+            });
+
+            grid.appendChild(videoElement);
+        });
+
+        showcaseLoaded = true;
+
+    } catch (error) {
+        grid.innerHTML = '<p style="color: #ff6b6b;">Could not load video showcase.</p>';
+        console.error("Error fetching YouTube playlist:", error);
+    }
+}

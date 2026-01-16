@@ -1554,6 +1554,59 @@ circle.dot-point:hover {
   margin-bottom: 4px;
 }
 
+/*MULTIMEDIA*/
+.youtube-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Creates a 3-column grid */
+  gap: 0.5rem;
+  padding: 1rem;
+  height: calc(100% - 80px);
+  /* Adjust to fit below header */
+  overflow-y: auto;
+}
+
+.video-thumbnail {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.video-thumbnail:hover img {
+  transform: scale(1.1);
+}
+
+.video-thumbnail .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-shadow: 0 0 10px black;
+}
+
+.video-thumbnail:hover .play-icon {
+  opacity: 1;
+}
+
+
 @keyframes wave {
 
   0%,
