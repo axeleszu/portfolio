@@ -167,6 +167,7 @@ let playerA, playerB;
 let activePlayerIsA = true;
 let playersReady = 0;
 let showcaseInitialized = false;
+let clipTimeoutId = null;
 
 
 async function fetchVideoData() {
@@ -236,12 +237,42 @@ function onPlayerStateChange(event) {
         const activePlayer = activePlayerIsA ? playerA : playerB;
         const inactivePlayer = activePlayerIsA ? playerB : playerA;
 
-        // Crossfade
         activePlayer.getIframe().classList.remove('visible');
         inactivePlayer.getIframe().classList.add('visible');
 
         activePlayerIsA = !activePlayerIsA;
 
-        setTimeout(playNextClip, CLIP_DURATION_SECONDS * 1000);
+        clearTimeout(clipTimeoutId);
+        clipTimeoutId = setTimeout(playNextClip, CLIP_DURATION_SECONDS * 1000);
     }
 }
+
+
+function togglePlayback() {
+    const activePlayer = activePlayerIsA ? playerA : playerB;
+    const button = document.getElementById('playback-toggle-btn');
+    const icon = button.querySelector('span');
+
+    if (activePlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+        activePlayer.pauseVideo();
+        clearTimeout(clipTimeoutId);
+
+        icon.className = 'icon-play';
+        button.setAttribute('aria-label', 'Play Video');
+
+    } else {
+        activePlayer.playVideo();
+
+        const currentTime = activePlayer.getCurrentTime();
+        const start = activePlayer.getVideoLoadedFraction() > 0 ? activePlayer.getVideoUrl().match(/start=(\d+)/)[1] : 0;
+        const timePlayed = currentTime - parseInt(start);
+        const remainingTime = (CLIP_DURATION_SECONDS - timePlayed) * 1000;
+
+        clipTimeoutId = setTimeout(playNextClip, remainingTime);
+
+        icon.className = 'icon-pause';
+        button.setAttribute('aria-label', 'Pause Video');
+    }
+}
+
+document.getElementById('playback-toggle-btn').addEventListener('click', togglePlayback);

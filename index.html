@@ -125,6 +125,9 @@
               <h2>Video Production &amp; Post</h2>
               <p>A showcase of dynamic visual projects.</p>
               <button type="button" class="btn-details" onclick="document.getElementById('fira-modal-video').showModal()">View Case Study</button>
+              <button type="button" id="playback-toggle-btn" class="playback-control" aria-label="Pause Video">
+                <span class="icon-pause"></span>
+              </button>
             </div>
           </div>
         </div>
@@ -208,7 +211,7 @@
           </div>
         </div>
         <div class="screen view-media video-vertical" data-category="media">
-          [ Vertical Video: Agritech Nexus ]
+          [ Live Production ]
         </div>
       </article>
       <article class="card row-2 mobile-card">
@@ -241,7 +244,7 @@
           </div>
         </div>
         <div class="screen" data-category="media">
-          [ Video: Fertilizacion Optima ]
+          [ Video: Infografic ]
         </div>
       </article>
       <article class="card col-2 legacy-card">
@@ -322,10 +325,8 @@
       </article>
       <article class="card col-2 stats-card">
         <div data-category="dev">
-
           <div class="card-header">
             <h3>FIRA Cifras API</h3>
-
             <button type="button" class="btn-details" onclick="document.getElementById('cifras-modal').showModal()">
               Analysis Logic
             </button>
@@ -339,7 +340,6 @@
             <svg id="fira-cifras-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
               <line x1="0" y1="140" x2="300" y2="140" stroke="#333" stroke-width="1"></line>
             </svg>
-            <!-- Tooltip  -->
             <div id="viz-tooltip" class="viz-tooltip hidden">
               <span class="tt-label">Month</span>
               <span class="tt-value">$0.00</span>
@@ -384,13 +384,33 @@
 
   <dialog id="work-in-progress">
     <h2>Work in Progress</h2>
+    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="sign-mask">
+          <rect x="0" y="0" width="100%" height="100%" fill="white" transform="rotate(-45 50 50)">
+            <animate attributeName="x" values="0;0;100" dur="4s" repeatCount="indefinite" />
+            <animate attributeName="width" values="0;100;0" dur="4s" repeatCount="indefinite" />
+          </rect>
+        </mask>
+      </defs>
+      <rect id="sign" width="50px" height="50px" x="25px" y="25px" />
+      <rect id="sign2" width="50px" height="50px" x="25px" y="25px" mask="url(#sign-mask)" />
+
+      <text id="sign-text" x="50px" y="54.5px">WIP</text>
+
+    </svg>
   </dialog>
+  <script>
+    setTimeout(() => {
+      document.getElementById('work-in-progress').showModal()
+    }, 1000);
+  </script>
 
   <!-- FIRA WWW MODAL -->
   <dialog id="fira-modal" class="modal-window">
     <div class="modal-content">
 
-      <header class="modal-header">
+      <header class="modal-header" aria-label="FIRA Institutional Ecosystem">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: FIRA_RENEWAL_v70</small>
           <h2>FIRA Institutional Ecosystem</h2>
@@ -464,7 +484,7 @@
         </section>
 
       </div>
-      <footer class="modal-footer">
+      <footer class="modal-footer" aria-label="Stack">
         <span>STACK:</span>
         <div class="tags">
           <span class="tag">HTML5</span>
@@ -482,7 +502,7 @@
   <dialog id="cifras-modal" class="modal-window">
     <div class="modal-content">
 
-      <header class="modal-header">
+      <header class="modal-header" aria-label="FIRA Financial Dashboard">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: FIN_DATA_ENGINE_v1</small>
           <h2>FIRA Financial Dashboard</h2>
@@ -560,7 +580,7 @@
           </div>
         </section>
       </div>
-      <footer class="modal-footer">
+      <footer class="modal-footer" aria-label="STACK Dashboard">
         <span>STACK:</span>
         <div class="tags">
           <span class="tag">Vanilla JS</span>
@@ -576,7 +596,7 @@
   <!-- IEM SYSTEM MODAL -->
   <dialog id="iem-modal" class="modal-window">
     <div class="modal-content">
-      <header class="modal-header">
+      <header class="modal-header" aria-label="International Voting Logistics System">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: MICHOACAN_VOTE_2011</small>
           <h2>International Voting Logistics System</h2>
@@ -643,7 +663,7 @@
 
       </div>
 
-      <footer class="modal-footer">
+      <footer class="modal-footer" aria-label="STACK Vote">
         <span>STACK:</span>
         <div class="tags">
           <span class="tag">PHP 5</span>
@@ -660,7 +680,7 @@
   <dialog id="viveros-modal" class="modal-window">
     <div class="modal-content">
 
-      <header class="modal-header">
+      <header class="modal-header" aria-label="Condominio Viveros: Smart Access">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: IOT_ACCESS_CONTROL</small>
           <h2>Condominio Viveros: Smart Access</h2>
@@ -730,7 +750,7 @@
 
       </div>
 
-      <footer class="modal-footer">
+      <footer class="modal-footer" aria-label="STACK Viveros">
         <span>STACK:</span>
         <div class="tags">
           <span class="tag">Firebase</span>
@@ -748,7 +768,7 @@
   <dialog id="promotor-modal" class="modal-window">
     <div class="modal-content">
 
-      <header class="modal-header">
+      <header class="modal-header" aria-label="Manual del Promotor PWA">
         <div class="header-text">
           <small class="sys-code">PROJECT_ID: FIELD_TOOLKIT_PWA</small>
           <h2>Manual del Promotor PWA</h2>
@@ -814,7 +834,7 @@
 
       </div>
 
-      <footer class="modal-footer">
+      <footer class="modal-footer" aria-label="STACK Promotor PWA">
         <span>STACK:</span>
         <div class="tags">
           <span class="tag">PWA</span>
@@ -831,11 +851,11 @@
   </dialog>
 
   <dialog id="fira-modal-video">
-    <header class="modal-header">
+    <header class="modal-header" aria-label="Institutional Multimedia Production">
       <div class="header-text">
-        <small class="sys-code">PROJECT_ID: FIRA_MEDIA_PIPELINE_v13</small>
+        <small class="media-code">PROJECT_ID: FIRA_MEDIA_PIPELINE_v13</small>
         <h2>Institutional Multimedia Production</h2>
-        <p class="role">Lead Producer & Production Manager</p>
+        <p class="role">Lead Producer &amp; Production Manager</p>
       </div>
       <button class="btn-close" type="button" onclick="document.getElementById('fira-modal-video').close()">×</button>
     </header>
@@ -851,7 +871,7 @@
       </section>
 
       <section class="case-section">
-        <h3>02 // The Process & My Role</h3>
+        <h3>02 // The Process &amp; My Role</h3>
         <ul class="specs-grid">
           <li>
             <span class="icon">🎬</span>
@@ -863,14 +883,14 @@
           <li>
             <span class="icon">🤝</span>
             <div class="spec-detail">
-              <strong>Agency & Procurement Management</strong>
+              <strong>Agency &amp; Procurement Management</strong>
               <p>Oversaw the complete administrative process for hiring production agencies, including conducting technical evaluations of candidates, defining scopes of work, and managing day-to-day operations to ensure deliverables met strict quality and brand standards.</p>
             </div>
           </li>
           <li>
             <span class="icon">✍️</span>
             <div class="spec-detail">
-              <strong>Creative Direction & Supervision</strong>
+              <strong>Creative Direction &amp; Supervision</strong>
               <p>Acted as the central creative authority, translating technical briefs into compelling storyboards and scripts. I supervised agency production on-set and meticulously reviewed the post-production process to guide the final narrative.</p>
             </div>
           </li>
@@ -893,18 +913,18 @@
           </div>
           <div class="stat">
             <span class="val">200+</span>
-            <span class="desc">Videos Produced<br>& Supervised</span>
+            <span class="desc">Videos Produced<br>&amp; Supervised</span>
           </div>
           <div class="stat">
             <span class="val">Mgmt</span>
-            <span class="desc">Streamlined Agency<br>Collaboration & Procurement</span>
+            <span class="desc">Streamlined Agency<br>Collaboration &amp; Procurement</span>
           </div>
         </div>
       </section>
 
     </div>
 
-    <footer class="modal-footer">
+    <footer class="modal-footer" aria-label="STACK FIRA Multimedia">
       <span>STACK / SKILLS:</span>
       <div class="tags">
         <span class="tag">Adobe Premiere Pro</span>
@@ -916,7 +936,7 @@
       </div>
     </footer>
 
-    </div>
+
   </dialog>
 
   <script type="module" src="src/firacifras.js"></script>

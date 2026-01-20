@@ -168,6 +168,14 @@ dialog::backdrop {
   margin-bottom: 5px;
 }
 
+.media-code {
+  font-family: var(--font-ui);
+  color: var(--accent-color);
+  font-size: 0.7rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
 .btn-close {
   background: transparent;
   border: none;
@@ -261,9 +269,10 @@ dialog::backdrop {
 .tags .tag {
   background: #222;
   padding: 4px 8px;
-  margin-right: 5px;
+  margin: 5px;
   color: #ccc;
   border-radius: 4px;
+  display: inline-block;
 }
 
 .hero-container {
@@ -1596,6 +1605,81 @@ circle.dot-point:hover {
 .overlay-content {
   width: 100%;
   text-align: left;
+}
+
+
+.playback-control {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.playback-control:hover {
+  background-color: rgba(0, 255, 65, 0.7);
+}
+
+
+.icon-pause::before,
+.icon-pause::after {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background-color: #fff;
+  margin: 4px 2px 0;
+}
+
+
+.icon-play {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 16px solid #fff;
+  margin-left: 4px;
+}
+
+/*WIP*/
+#sign,
+#sign2 {
+  stroke: black;
+  stroke-width: 5px;
+  rx: 5px;
+  ry: 5px;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+}
+
+#sign2 {
+  fill: yellow
+}
+
+#sign-text {
+  text-anchor: middle;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 12px;
+  fill: #000;
+}
+
+dialog#work-in-progress {
+  padding: 3rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+dialog#work-in-progress svg {
+  max-width: 50vw;
 }
 
 @keyframes wave {

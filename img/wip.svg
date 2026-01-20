@@ -1,0 +1,38 @@
+<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            #sign,
+            #sign2 {
+                stroke: black;
+                stroke-width: 5px;
+                rx: 5px;
+                ry: 5px;
+                transform: rotate(45deg);
+                transform-origin: 50% 50%;
+            }
+
+            #sign2 {
+                fill: yellow
+            }
+
+            #sign-text {
+                text-anchor: middle;
+                font-family: monospace;
+                font-weight: bold;
+                font-size: 12px;
+                fill: #000;
+            }
+        </style>
+        <mask id="sign-mask">
+            <rect x="0" y="0" width="100%" height="100%" fill="white" transform="rotate(-45 50 50)">
+                <animate attributeName="x" values="0;0;100" dur="4s" repeatCount="indefinite" />
+                <animate attributeName="width" values="0;100;0" dur="4s" repeatCount="indefinite" />
+            </rect>
+        </mask>
+    </defs>
+    <rect id="sign" width="50px" height="50px" x="25px" y="25px" />
+    <rect id="sign2" width="50px" height="50px" x="25px" y="25px" mask="url(#sign-mask)" />
+
+    <text id="sign-text" x="50px" y="54.5px">WIP</text>
+
+</svg>

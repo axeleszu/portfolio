@@ -77,7 +77,7 @@ AVAILABLE COMMANDS:
   resume    - Download PDF CV
   skills    - List tech stack
   clear     - Clear terminal
-  matrix    - ???
+  switch    - Switch to multimedia profile
         `, 'cmd-response');
                 break;
 
@@ -105,6 +105,11 @@ AVAILABLE COMMANDS:
 
             case 'sudo':
                 this.printLine("Nice try. Admin privileges denied.", 'error');
+                break;
+
+            case 'switch':
+                this.printLine(">> INITIATING SWITCH...", 'success');
+                document.getElementById('mode-switch').click();
                 break;
 
             case 'matrix':
