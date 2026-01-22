@@ -1,8 +1,13 @@
 import resumeUrl from '../resume.pdf';
+import podcastUrl from '../podcast.mp3';
+
 function setMode(mode) {
     document.body.className = 'mode-' + mode;
     document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
-    if (mode == 'media') initMultimedia();
+    if (mode == 'media') {
+        initMultimedia();
+        initPodcastPlayer();
+    }
 }
 
 let currentMode = 'dev';
@@ -153,126 +158,119 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* MEDIA Mode */
 
-function initMultimedia() {
-    initializeShowcase();
-}
+import AmbientPlayer from './mediaPlayer.js';
+const animatedPlaylist = 'PL8OzJlspMutEdqXOpEMFAvg64dTJgGtOD';
+const locationPlaylist = 'PL8OzJlspMutERXnUzw-KGWxFMr0eBef3Q';
+let isYouTubeApiReady = false;
 
-let showcaseLoaded = false;
-
-const API_KEY = 'AIzaSyA4TZKeJawVDM-AXoVpKMw5Dj7DiQM_lcc';
-const PLAYLIST_ID = 'PL8OzJlspMutERXnUzw-KGWxFMr0eBef3Q';
-const CLIP_DURATION_SECONDS = 12;
-let videoData = [];
-let playerA, playerB;
-let activePlayerIsA = true;
-let playersReady = 0;
-let showcaseInitialized = false;
-let clipTimeoutId = null;
-
-
-async function fetchVideoData() {
-    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=50&key=${API_KEY}`;
-    const playlistResponse = await fetch(playlistUrl);
-    const playlistData = await playlistResponse.json();
-    const videoIds = playlistData.items.map(item => item.snippet.resourceId.videoId).join(',');
-
-    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds}&key=${API_KEY}`;
-    const videosResponse = await fetch(videosUrl);
-    const videosDetails = await videosResponse.json();
-
-    const parseDuration = (duration) => {
-        const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-        const hours = (parseInt(match[1]) || 0);
-        const minutes = (parseInt(match[2]) || 0);
-        const seconds = (parseInt(match[3]) || 0);
-        return hours * 3600 + minutes * 60 + seconds;
-    };
-
-    videoData = videosDetails.items.map(item => ({
-        id: item.id,
-        duration: parseDuration(item.contentDetails.duration)
-    }));
-}
-
-
-async function initializeShowcase() {
-    if (showcaseInitialized) return;
-    showcaseInitialized = true;
-
-    await fetchVideoData();
-    if (videoData.length === 0) return;
-
-    const playerOptions = {
-        events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange },
-        playerVars: { 'controls': 0, 'modestbranding': 1, 'rel': 0, 'showinfo': 0, 'iv_load_policy': 3 }
-    };
-    playerA = new YT.Player('playerA', playerOptions);
-    playerB = new YT.Player('playerB', playerOptions);
-}
-
-
-function onPlayerReady(event) {
-    event.target.mute();
-    playersReady++;
-    if (playersReady === 2) {
-        playNextClip();
-    }
-}
-
-function playNextClip() {
-    const nextVideo = videoData[Math.floor(Math.random() * videoData.length)];
-    const maxStartTime = nextVideo.duration - CLIP_DURATION_SECONDS;
-    const startTime = Math.floor(Math.random() * (maxStartTime > 0 ? maxStartTime : 1));
-
-    const playerToLoad = activePlayerIsA ? playerB : playerA;
-    playerToLoad.loadVideoById({
-        videoId: nextVideo.id,
-        startSeconds: startTime,
-        endSeconds: startTime + CLIP_DURATION_SECONDS
+if (!window.cinematicPlayer) {
+    window.cinematicPlayer = new AmbientPlayer({
+        playerA_id: 'locationPlayerA',
+        playerB_id: 'locationPlayerB',
+        playlistId: locationPlaylist,
+        pauseButtonId: 'playback-toggle-btn'
     });
 }
 
-function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-        const activePlayer = activePlayerIsA ? playerA : playerB;
-        const inactivePlayer = activePlayerIsA ? playerB : playerA;
-
-        activePlayer.getIframe().classList.remove('visible');
-        inactivePlayer.getIframe().classList.add('visible');
-
-        activePlayerIsA = !activePlayerIsA;
-
-        clearTimeout(clipTimeoutId);
-        clipTimeoutId = setTimeout(playNextClip, CLIP_DURATION_SECONDS * 1000);
-    }
+if (!window.animationPlayer) {
+    window.animationPlayer = new AmbientPlayer({
+        playerA_id: 'animationPlayerA',
+        playerB_id: 'animationPlayerB',
+        playlistId: animatedPlaylist,
+        pauseButtonId: 'animated-playback-toggle-btn'
+    });
 }
 
-
-function togglePlayback() {
-    const activePlayer = activePlayerIsA ? playerA : playerB;
-    const button = document.getElementById('playback-toggle-btn');
-    const icon = button.querySelector('span');
-
-    if (activePlayer.getPlayerState() === YT.PlayerState.PLAYING) {
-        activePlayer.pauseVideo();
-        clearTimeout(clipTimeoutId);
-
-        icon.className = 'icon-play';
-        button.setAttribute('aria-label', 'Play Video');
-
-    } else {
-        activePlayer.playVideo();
-
-        const currentTime = activePlayer.getCurrentTime();
-        const start = activePlayer.getVideoLoadedFraction() > 0 ? activePlayer.getVideoUrl().match(/start=(\d+)/)[1] : 0;
-        const timePlayed = currentTime - parseInt(start);
-        const remainingTime = (CLIP_DURATION_SECONDS - timePlayed) * 1000;
-
-        clipTimeoutId = setTimeout(playNextClip, remainingTime);
-
-        icon.className = 'icon-pause';
-        button.setAttribute('aria-label', 'Pause Video');
-    }
+function initMultimedia() {
+    if (cinematicPlayer) cinematicPlayer.init();
+    if (animationPlayer) animationPlayer.init();
 }
 
-document.getElementById('playback-toggle-btn').addEventListener('click', togglePlayback);
+let podcastPlayerInitialized = false;
+
+async function initPodcastPlayer() {
+    // 1. Guard to stop if already initialized
+    if (podcastPlayerInitialized) return;
+    podcastPlayerInitialized = true;
+
+    // 2. Get references to all the player elements
+    const playerContainer = document.getElementById('podcast-player');
+    if (!playerContainer) return; // Stop if the element isn't on the page
+
+    const audioEl = playerContainer.querySelector('audio');
+    const titleEl = playerContainer.querySelector('.title');
+    const progressBar = playerContainer.querySelector('span:first-of-type');
+    const toggleBtn = document.getElementById('podcast-playback-toggle-btn');
+    const icon = toggleBtn.querySelector('span');
+
+    const rssFeedUrl = 'http://www.fira.gob.mx/Nd/xml/podcast.xml';
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+    try {
+        const response = await fetch(proxyUrl + rssFeedUrl);
+        if (!response.ok) {
+            throw new Error(`Live feed failed with status: ${response.status}`);
+        }
+        const xmlText = await response.text();
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+        const latestItem = xmlDoc.querySelector("item");
+
+        if (!latestItem) {
+            throw new Error("XML feed is empty or invalid.");
+        }
+
+        const title = latestItem.querySelector("title").textContent;
+        const audioUrl = latestItem.querySelector("enclosure").getAttribute("url");
+
+        setupPlayer(title, audioUrl);
+
+    } catch (error) {
+        // 4. If fetching fails, load your local fallback MP3
+        console.warn("Live feed failed, loading fallback episode. Error:", error.message);
+
+        const fallbackTitle = "Perspectivas para el sector agroalimentario 2025";
+        // Put your fallback MP3 in the `public` folder of your Vite project
+        const fallbackAudioUrl = podcastUrl;
+
+        setupPlayer(fallbackTitle, fallbackAudioUrl);
+    }
+
+    function setupPlayer(title, audioUrl) {
+        titleEl.textContent = title;
+        audioEl.src = audioUrl;
+
+
+        toggleBtn.addEventListener('click', () => {
+            if (audioEl.paused) {
+                audioEl.play();
+            } else {
+                audioEl.pause();
+            }
+        });
+
+        audioEl.addEventListener('play', () => {
+            icon.className = 'icon-pause';
+            toggleBtn.setAttribute('aria-label', 'Pause podcast');
+        });
+
+        audioEl.addEventListener('pause', () => {
+            icon.className = 'icon-play';
+            toggleBtn.setAttribute('aria-label', 'Play podcast');
+        });
+
+        audioEl.addEventListener('ended', () => {
+            icon.className = 'icon-play';
+            progressBar.style.width = '0%';
+        });
+
+
+        audioEl.addEventListener('timeupdate', () => {
+            if (audioEl.duration) {
+                const progressPercent = (audioEl.currentTime / audioEl.duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+            }
+        });
+    }
+}

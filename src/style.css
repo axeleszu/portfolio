@@ -1566,9 +1566,11 @@ circle.dot-point:hover {
 /*MULTIMEDIA*/
 .ambient-video-container {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
   overflow: hidden;
+  background-color: #000;
+  margin: -20px;
   background-color: #000;
 }
 
@@ -1581,10 +1583,19 @@ circle.dot-point:hover {
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
+  min-width: 100%;
+  min-height: 100%;
+  pointer-events: none;
 }
 
 .video-player.visible {
   opacity: 1;
+  transform: scale(1.5);
+}
+
+#animationPlayerA.visible,
+#animationPlayerB.visible {
+  transform: scale(3);
 }
 
 .ambient-overlay {
@@ -1625,7 +1636,7 @@ circle.dot-point:hover {
 }
 
 .playback-control:hover {
-  background-color: rgba(0, 255, 65, 0.7);
+  background-color: rgba(255, 51, 0, 0.7);
 }
 
 
@@ -1648,6 +1659,41 @@ circle.dot-point:hover {
   border-left: 16px solid #fff;
   margin-left: 4px;
 }
+
+/*Podcast*/
+
+.audio-player {
+  position: relative;
+  padding: 1rem;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.audio-player>span:first-of-type {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background-color: var(--accent-color);
+  transition: width 0.1s linear;
+}
+
+.audio-player .title {
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.audio-player audio {
+  display: none;
+}
+
 
 /*WIP*/
 #sign,

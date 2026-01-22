@@ -9,7 +9,6 @@
 </head>
 
 <body class="mode-dev">
-  <script src="https://www.youtube.com/iframe_api"></script>
   <section class="hero-container">
     <div class="terminal-layer" id="terminal-root" data-category="dev">
       <div class="terminal-window">
@@ -117,13 +116,13 @@
         </div>
 
         <div data-category="media" class="video-card ambient-video-container">
-          <div id="playerA" class="video-player"></div>
-          <div id="playerB" class="video-player"></div>
+          <div id="locationPlayerA" class="video-player"></div>
+          <div id="locationPlayerB" class="video-player"></div>
 
           <div class="ambient-overlay">
             <div class="overlay-content">
-              <h2>Video Production &amp; Post</h2>
-              <p>A showcase of dynamic visual projects.</p>
+              <h2>Cinematic &amp; Brand Storytelling</h2>
+              <p>Directing, producing, and editing narrative-driven content.</p>
               <button type="button" class="btn-details" onclick="document.getElementById('fira-modal-video').showModal()">View Case Study</button>
               <button type="button" id="playback-toggle-btn" class="playback-control" aria-label="Pause Video">
                 <span class="icon-pause"></span>
@@ -158,10 +157,22 @@
         </div>
         <div data-category="media" class="podcast-view">
           <h3>El Podcast de FIRA</h3>
+          <small>Producer / Editor</small>
           <div class="audio-waves">
             <span></span><span></span><span></span><span></span><span></span>
           </div>
-          <small>Producer / Editor</small>
+          <button type="button" id="podcast-playback-toggle-btn" class="playback-control" aria-label="Play podcast">
+            <span class="icon-play"></span>
+          </button>
+          <div id="podcast-player" class="audio-player">
+            <audio></audio>
+            <span></span>
+            <small class="title"></small>
+
+          </div>
+          <button type="button" class="btn-details" onclick="document.getElementById('podcast-modal').showModal()">
+            View Pipeline
+          </button>
         </div>
       </article>
       <article class="card " data-category="mixed">
@@ -244,7 +255,20 @@
           </div>
         </div>
         <div class="screen" data-category="media">
-          [ Video: Infografic ]
+          <div class="ambient-video-container">
+            <div id="animationPlayerA" class="video-player"></div>
+            <div id="animationPlayerB" class="video-player"></div>
+            <div class="ambient-overlay">
+              <div class="overlay-content">
+                <h2>Motion Graphics Showcase</h2>
+                <p>A reel of animated explainers and VFX.</p>
+                <button type="button" class="btn-details" onclick="document.getElementById('motion-graphics-modal').showModal()">View Process</button>
+                <button type="button" id="animated-playback-toggle-btn" class="playback-control" aria-label="Pause Video">
+                  <span class="icon-pause"></span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
       <article class="card col-2 legacy-card">
@@ -853,75 +877,38 @@
   <dialog id="fira-modal-video">
     <header class="modal-header" aria-label="Institutional Multimedia Production">
       <div class="header-text">
-        <small class="media-code">PROJECT_ID: FIRA_MEDIA_PIPELINE_v13</small>
-        <h2>Institutional Multimedia Production</h2>
-        <p class="role">Lead Producer &amp; Production Manager</p>
+        <small class="media-code">PROJECT_TYPE: BRAND_NARRATIVE</small>
+        <h2>Cinematic &amp; Documentary Production</h2>
+        <p class="role">Director, Producer &amp; Editor</p>
       </div>
       <button class="btn-close" type="button" onclick="document.getElementById('fira-modal-video').close()">×</button>
     </header>
 
     <div class="modal-body">
-
       <section class="case-section">
         <h3>01 // The Challenge</h3>
-        <p>
-          Initially hired to document success stories for FIRA's 60th anniversary, the core challenge was to transform the institution's traditionally text-heavy communication into a <strong>dynamic and engaging visual narrative</strong>. This required creating a consistent pipeline to produce high-quality video content capable of explaining complex financial instruments, showcasing
-          on-the-ground success stories, and serving diverse marketing and educational campaigns.
-        </p>
+        <p>To capture the human impact of FIRA's financial programs and celebrate key institutional milestones. The goal was to move beyond corporate messaging and create <strong>emotionally resonant stories</strong> that connect with both stakeholders and the general public.</p>
       </section>
-
       <section class="case-section">
-        <h3>02 // The Process &amp; My Role</h3>
+        <h3>02 // My Role & Process</h3>
         <ul class="specs-grid">
-          <li>
-            <span class="icon">🎬</span>
-            <div class="spec-detail">
-              <strong>End-to-End Production</strong>
-              <p>During periods without agency support, I managed the entire production lifecycle single-handedly—from initial scriptwriting, directing, and cinematography to editing, motion graphics, and final sound mixing.</p>
+          <li><span class="icon">🎬</span>
+            <div class="spec-detail"><strong>Directing &amp; Cinematography</strong>
+              <p>Managed on-site filming, directed interview subjects to elicit authentic responses, and oversaw all camera and lighting setups to achieve a cinematic quality.</p>
             </div>
           </li>
-          <li>
-            <span class="icon">🤝</span>
-            <div class="spec-detail">
-              <strong>Agency &amp; Procurement Management</strong>
-              <p>Oversaw the complete administrative process for hiring production agencies, including conducting technical evaluations of candidates, defining scopes of work, and managing day-to-day operations to ensure deliverables met strict quality and brand standards.</p>
+          <li><span class="icon">✍️</span>
+            <div class="spec-detail"><strong>Storyboarding &amp; Scriptwriting</strong>
+              <p>Developed narratives from initial concepts, scripting interviews and voiceovers to build a compelling story arc for each project.</p>
             </div>
           </li>
-          <li>
-            <span class="icon">✍️</span>
-            <div class="spec-detail">
-              <strong>Creative Direction &amp; Supervision</strong>
-              <p>Acted as the central creative authority, translating technical briefs into compelling storyboards and scripts. I supervised agency production on-set and meticulously reviewed the post-production process to guide the final narrative.</p>
-            </div>
-          </li>
-          <li>
-            <span class="icon">🎞️</span>
-            <div class="spec-detail">
-              <strong>Animated Financial Explainers</strong>
-              <p>Designed and produced animated videos to deconstruct complex financial and agricultural concepts, making them accessible and understandable to a broad audience of producers and financial intermediaries.</p>
+          <li><span class="icon">🎞️</span>
+            <div class="spec-detail"><strong>Post-Production</strong>
+              <p>Performed editing, color grading in Adobe Premiere, sound mixing, and final mastering to deliver a polished, broadcast-quality final product.</p>
             </div>
           </li>
         </ul>
       </section>
-
-      <section class="case-section">
-        <h3>03 // The Impact</h3>
-        <div class="impact-stats">
-          <div class="stat">
-            <span class="val">13yrs</span>
-            <span class="desc">Consistent Brand<br>Storytelling</span>
-          </div>
-          <div class="stat">
-            <span class="val">200+</span>
-            <span class="desc">Videos Produced<br>&amp; Supervised</span>
-          </div>
-          <div class="stat">
-            <span class="val">Mgmt</span>
-            <span class="desc">Streamlined Agency<br>Collaboration &amp; Procurement</span>
-          </div>
-        </div>
-      </section>
-
     </div>
 
     <footer class="modal-footer" aria-label="STACK FIRA Multimedia">
@@ -932,11 +919,146 @@
         <span class="tag">DaVinci Resolve</span>
         <span class="tag">Creative Direction</span>
         <span class="tag">Project Management</span>
-        <span class="tag">Vendor Management</span>
+        <span class="tag">Cinematography</span>
       </div>
     </footer>
+  </dialog>
 
+  <!-- ANIMATIONS -->
+  <dialog id="motion-graphics-modal" class="modal-window">
+    <div class="modal-content">
+      <header class="modal-header" aria-label="Motion Graphics & Explainers">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_TYPE: DATA_VISUALIZATION</small>
+          <h2>Motion Graphics &amp; Technical Explainers</h2>
+          <p class="role">Motion Graphics Artist &amp; Technical Designer</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('motion-graphics-modal').close()">×</button>
+      </header>
+      <div class="modal-body">
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>To deconstruct dense, complex financial and agricultural topics into clear, concise, and visually engaging animated videos. The primary goal was to <strong>improve comprehension and retention</strong> for audiences unfamiliar with the technical jargon.</p>
+        </section>
+        <section class="case-section">
+          <h3>02 // My Role &amp; Process</h3>
+          <ul class="specs-grid">
+            <li><span class="icon">📈</span>
+              <div class="spec-detail"><strong>Data Visualization</strong>
+                <p>Translated raw data, flowcharts, and financial models into clear kinetic typography and animated graphics that simplify the core message.</p>
+              </div>
+            </li>
+            <li><span class="icon">✨</span>
+              <div class="spec-detail"><strong>2D/3D Animation in After Effects</strong>
+                <p>Designed and animated all visual assets, creating custom graphics, characters, and transitions from scratch to match FIRA's brand identity.</p>
+              </div>
+            </li>
+            <li><span class="icon">🧩</span>
+              <div class="spec-detail"><strong>VFX &amp; Compositing</strong>
+                <p>Integrated motion graphics with live-action footage, performing tasks like screen replacement, keying, and creating visual effects to enhance the final video.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <footer class="modal-footer" aria-label="Skills motion graphics">
+        <span>STACK / SKILLS:</span>
+        <div class="tags"><span class="tag">Adobe After Effects</span><span class="tag">Adobe Illustrator</span><span class="tag">Data Visualization</span><span class="tag">Kinetic Typography</span><span class="tag">VFX</span></div>
+      </footer>
+    </div>
+  </dialog>
+  <dialog id="podcast-modal" class="modal-window">
+    <div class="modal-content">
+      <header class="modal-header" aria-label="Podcast id">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: PODCAST_SYNDICATION_PIPELINE</small>
+          <h2>Podcast Syndication &amp; Growth Strategy</h2>
+          <p class="role">Lead Producer &amp; Technical Architect</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('podcast-modal').close()">×</button>
+      </header>
 
+      <div class="modal-body">
+
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            FIRA's existing podcast had a limited reach due to an inconsistent, manual publishing workflow, was published only internaly with direct links to audio files. It lacked a scalable distribution strategy to reach a wider audience on major platforms. The goal was to <strong>re-architect the entire distribution pipeline</strong> to enable mass syndication and implement a
+            consistent, high-frequency weekly release schedule.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // The Engineering & Process</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">⚙️</span>
+              <div class="spec-detail">
+                <strong>Custom RSS Feed Architecture</strong>
+                <p>Engineered the podcast's core XML (RSS) feed, defining a custom XSD to ensure universal compatibility. This technical foundation became the "single source of truth" for automated syndication across all platforms. The XML file also included meta data for audio transcripts </p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🗓️</span>
+              <div class="spec-detail">
+                <strong> Publishing Cadence</strong>
+                <p>Streamlined the end-to-end production workflow, which enabled the launch of a consistent weekly episode schedule for the first time. This significantly increased audience engagement and predictability.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🌐</span>
+              <div class="spec-detail">
+                <strong>Automated Multi-Platform Syndication</strong>
+                <p>The new RSS pipeline allowed a single file update to automatically propagate new episodes to all subscribed platforms, including Spotify, Apple Podcasts, and Google Podcasts, eliminating manual uploads.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🎙️</span>
+              <div class="spec-detail">
+                <strong>Production &amp; Agency Management</strong>
+                <p>Managed all aspects of audio production, from content editing, musicalization to final mastering.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">Weekly</span>
+              <span class="desc">Cadence Implemented<br>for Peak Engagement</span>
+            </div>
+            <div class="stat">
+              <span class="val">Auto</span>
+              <span class="desc">Syndication to<br>All Major Platforms</span>
+            </div>
+            <div class="stat">
+              <span class="val">XML</span>
+              <span class="desc">Single Source<br>of Truth</span>
+            </div>
+            <div class="stat">
+              <span class="val">WAI-AA</span>
+              <span class="desc">Accessibility</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="modal-footer" aria-label="Podcast skills">
+        <span>STACK / SKILLS:</span>
+        <div class="tags">
+          <span class="tag">XML</span>
+          <span class="tag">RSS Feeds</span>
+          <span class="tag">XSD</span>
+          <span class="tag">Adobe Audition</span>
+          <span class="tag">Publishing Workflows</span>
+          <span class="tag">Vendor Management</span>
+        </div>
+      </footer>
+
+    </div>
   </dialog>
 
   <script type="module" src="src/firacifras.js"></script>
