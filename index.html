@@ -9,6 +9,14 @@
 </head>
 
 <body class="mode-dev">
+  <nav class="top-nav">
+    <div class="toggle-container">
+      <span class="label">MODE:</span>
+      <button type="button" id="mode-switch" class="switch-btn" aria-label="Toggle Portfolio Mode">
+        <span class="switch-text">DEV_OPS</span>
+      </button>
+    </div>
+  </nav>
   <section class="hero-container">
     <div class="terminal-layer" id="terminal-root" data-category="dev">
       <div class="terminal-window">
@@ -30,14 +38,7 @@
       </video>
       <div class="video-overlay"></div>
     </div>
-    <nav class="top-nav">
-      <div class="toggle-container">
-        <span class="label">MODE:</span>
-        <button type="button" id="mode-switch" class="switch-btn" aria-label="Toggle Portfolio Mode">
-          <span class="switch-text">DEV_OPS</span>
-        </button>
-      </div>
-    </nav>
+
     <div class="hero-content">
       <h1 class="glitch-text" data-text="AXEL ESCUTIA">AXEL ESCUTIA</h1>
       <h2 class="hero-subtitle">FULL STACK ENGINEER <span class="accent">||</span> MULTIMEDIA PRODUCER</h2>
@@ -394,13 +395,13 @@
       </article>
       <article class="card  stack-card">
         <div data-category="dev" class="tech-grid">
-          <span>JS</span> | <span>PHP</span>|
-          <span>SQL</span> | <span>GIT</span>
+          <span>JS</span> <span class="separator">|</span> <span>PHP</span><span class="separator">|</span>
+          <span>SQL</span> <span class="separator">|</span> <span>GIT</span>
         </div>
-        <div data-category="media" class="tech-grid">
-          <span>Photoshop</span> | <span>After Effects</span> |
-          <span>Premiere</span> | <span>DaVinci Resolve</span> |
-          <span>Adobe Audition</span> | <span>Adobe Illustrator</span>
+        <div data-category="media" class="media-grid">
+          <span>Photoshop</span> <span class="separator">|</span> <span>After Effects</span> <span class="separator">|</span>
+          <span>Premiere</span> <span class="separator">|</span> <span>DaVinci Resolve</span> <span class="separator">|</span>
+          <span>Adobe Audition</span> <span class="separator">|</span> <span>Adobe Illustrator</span>
         </div>
       </article>
     </div>
@@ -630,7 +631,6 @@
       </header>
 
       <div class="modal-body">
-
         <section class="case-section">
           <h3>01 // The Challenge</h3>
           <p>
