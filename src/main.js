@@ -204,7 +204,7 @@ async function initPodcastPlayer() {
     const icon = toggleBtn.querySelector('span');
 
     const rssFeedUrl = 'http://www.fira.gob.mx/Nd/xml/podcast.xml';
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const proxyUrl = 'https://cors-fira.onrender.com/?url=';
 
     try {
         const response = await fetch(proxyUrl + rssFeedUrl);
@@ -227,13 +227,9 @@ async function initPodcastPlayer() {
         setupPlayer(title, audioUrl);
 
     } catch (error) {
-        // 4. If fetching fails, load your local fallback MP3
         console.warn("Live feed failed, loading fallback episode. Error:", error.message);
-
         const fallbackTitle = "Perspectivas para el sector agroalimentario 2025";
-        // Put your fallback MP3 in the `public` folder of your Vite project
         const fallbackAudioUrl = podcastUrl;
-
         setupPlayer(fallbackTitle, fallbackAudioUrl);
     }
 
