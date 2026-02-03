@@ -274,3 +274,8 @@ async function initPodcastPlayer() {
         });
     }
 }
+
+/* Analytics */
+const GA_ID = "G-H0M7LHEESB"
+import { setupAnalytics } from './analytics.js';
+setupAnalytics(GA_ID);
