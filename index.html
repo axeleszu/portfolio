@@ -17,7 +17,7 @@
   "url": "https://www.axelescutia.com",
   "description": "A hybrid professional with over a decade of experience integrating high-performance backend systems with production-quality visuals. Expert in architecting robust technical solutions and managing the full creative pipeline, from code to final cut.",
   "image": "https://www.axelescutia.com/img/AxelEscutia2.jpg", 
-  "email": "mailto:axeleszu@gmail.com",
+  "email": "mailto:contact@axelescutia.com",
   "nationality": "Mexican",
   "sameAs": [
     "https://www.linkedin.com/in/axel-escutia/",
@@ -55,6 +55,12 @@
       "alternateName": "en"
     }
   ],
+  "subjectOf": {
+    "@type": "WebPage",
+    "name": "Live Resume of Axel Escutia",
+    "description": "A continuously updated resume in Markdown format, detailing the skills and experience of Axel Escutia.",
+    "url": "https://github.com/axeleszu/portfolio/blob/main/README.md"
+  },
     "skills": [
       "JavaScript",
       "PHP",
@@ -76,7 +82,7 @@
   <nav class="top-nav">
     <div class="toggle-container">
       <span class="label">MODE:</span>
-      <button type="button" id="mode-switch" class="switch-btn" aria-label="Toggle Portfolio Mode">
+      <button type="button" id="mode-switch" class="switch-btn" role="switch" aria-checked="false" aria-label="Toggle Portfolio Mode">
         <span class="switch-text">DEV_OPS</span>
       </button>
     </div>
@@ -88,7 +94,7 @@
           <span class="status-dot"></span>
           <span class="header-title">AXEL_OS_KERNEL_v2.5.0 (tty1)</span>
         </div>
-        <div class="terminal-output" id="term-output"></div>
+        <div class="terminal-output" id="term-output" role="log" aria-live="polite"></div>
         <div class="input-line hidden" id="term-input-line">
           <span class="prompt">guest@axelescutia:~$</span>
           <span class="typing" id="term-typing"></span><span class="cursor">█</span>
@@ -116,7 +122,7 @@
       <div class="bio-text">
         <p>Integrating high-performance backend systems with production-quality visuals.</p>
         <div class="contact-links">
-          <a href="mailto:axeleszu@gmail.com" class="link-item">axeleszu@gmail.com</a>
+          <a href="mailto:contact@axelescutia.com" class="link-item">contact@axelescutia.com</a>
           <span class="separator">•</span>
           <a href="https://www.linkedin.com/in/axel-escutia/" class="link-item">LinkedIn</a>
         </div>
@@ -129,12 +135,12 @@
   <main class="bento-wrapper">
     <div class="bento-grid" id="project-grid">
       <article class="card col-2 row-2">
-        <div data-category="dev" class="portal-fira">
+        <section data-category="dev" class="portal-fira">
           <div class="card-header">
-            <div class="header-top">
+            <header class="header-top">
               <h3>FIRA Institutional Portal</h3>
               <span class="role-badge">Lead UI/UX &amp; Frontend</span>
-            </div>
+            </header>
             <p class="subtitle">Complete Ecosystem Modernization</p>
           </div>
           <div class="blueprint-visual">
@@ -178,32 +184,34 @@
             </div>
             <button type="button" class="btn-details" onclick="document.getElementById('fira-modal').showModal()">View Case Study</button>
           </div>
-        </div>
+        </section>
 
-        <div data-category="media" class="video-card ambient-video-container">
+        <section data-category="media" class="video-card ambient-video-container">
           <div id="locationPlayerA" class="video-player"></div>
           <div id="locationPlayerB" class="video-player"></div>
 
           <div class="ambient-overlay">
             <div class="overlay-content">
-              <h2>Cinematic &amp; Brand Storytelling</h2>
-              <p>Directing, producing, and editing narrative-driven content.</p>
+              <header>
+                <h2>Cinematic &amp; Brand Storytelling</h2>
+                <p>Directing, producing, and editing narrative-driven content.</p>
+              </header>
               <button type="button" class="btn-details" onclick="document.getElementById('fira-modal-video').showModal()">View Case Study</button>
               <button type="button" id="playback-toggle-btn" class="playback-control" aria-label="Pause Video">
                 <span class="icon-pause"></span>
               </button>
             </div>
           </div>
-        </div>
+        </section>
       </article>
 
       <article class="card stats-card ">
-        <div data-category="dev">
+        <section data-category="dev">
           <div class="github-view">
-            <div class="card-header">
+            <header class="card-header">
               <h3><span class="icon">⚡</span> GitHub Activity</h3>
               <a href="https://github.com/axeleszu" target="_blank" class="link-arrow">↗</a>
-            </div>
+            </header>
             <div class="commit-graph" id="github-grid">
               <!-- GitHub contribution squares -->
             </div>
@@ -219,10 +227,12 @@
               </div>
             </div>
           </div>
-        </div>
-        <div data-category="media" class="podcast-view">
-          <h3>El Podcast de FIRA</h3>
-          <small>Producer / Editor</small>
+        </section>
+        <section data-category="media" class="podcast-view">
+          <header class="card-header">
+            <h3>El Podcast de FIRA</h3>
+            <small>Producer / Editor</small>
+          </header>
           <div class="audio-waves">
             <span></span><span></span><span></span><span></span><span></span>
           </div>
@@ -238,7 +248,7 @@
           <button type="button" class="btn-details" onclick="document.getElementById('podcast-modal').showModal()">
             View Pipeline
           </button>
-        </div>
+        </section>
       </article>
       <article class="card " data-category="mixed">
         <div class="card-content">
@@ -248,11 +258,13 @@
       </article>
 
       <article class="card row-2 mobile-card">
-        <div data-category="dev" class="pwa-view">
-          <h3>Viveros Smart Access PWA</h3>
-          <div class="card-header-center">
-            <span class="pwa-badge"><span class="wifi-icon"></span> IoT Integration</span>
-          </div>
+        <section data-category="dev" class="pwa-view">
+          <header>
+            <h3>Viveros Smart Access PWA</h3>
+            <div class="card-header-center">
+              <span class="pwa-badge"><span class="wifi-icon"></span> IoT Integration</span>
+            </div>
+          </header>
           <div class="phone-mockup">
             <div class="notch"></div>
             <div class="screen">
@@ -280,22 +292,43 @@
               </div>
             </div>
           </div>
-          <div class="card-footer-center">
+          <footer class="card-footer-center">
             <button type="button" class="btn-details" onclick="document.getElementById('viveros-modal').showModal()">
               IoT Specs
             </button>
+          </footer>
+        </section>
+        <section class="screen view-media video-vertical" data-category="media">
+          <div class="ai-video-container">
+            <div id="aiPlayerA" class="video-player"></div>
+            <div id="aiPlayerB" class="video-player"></div>
+            <div class="ambient-overlay">
+              <div class="overlay-content">
+                <header>
+                  <h3>Generative AI Multimedia</h3>
+                  <p>Next-Gen Visual Storytelling</p>
+                </header>
+                <div class="ai-visual-icon">
+                  <div class="neural-node main"></div>
+                  <div class="neural-connection c1"></div>
+                  <div class="neural-connection c2"></div>
+                  <div class="neural-connection c3"></div>
+                </div>
+                <button type="button" class="btn-details" onclick="document.getElementById('ai-modal').showModal()">View Process</button>
+                <button type="button" id="ai-playback-toggle-btn" class="playback-control" aria-label="Pause Video">
+                  <span class="icon-pause"></span>
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="screen view-media video-vertical" data-category="media">
-          [ Live Production ]
-        </div>
+        </section>
       </article>
       <article class="card row-2 mobile-card">
-        <div data-category="dev" class="pwa-view">
-          <div class="card-header-center">
+        <section data-category="dev" class="pwa-view">
+          <header class="card-header-center">
             <h3>Promotor's Toolkit</h3>
             <span class="pwa-badge"><span class="wifi-icon slash"></span> Offline by Design</span>
-          </div>
+          </header>
           <div class="transformation-container">
             <div class="phone-mockup static-phone">
               <div class="notch"></div>
@@ -318,15 +351,17 @@
               Field Ops Specs
             </button>
           </div>
-        </div>
-        <div class="screen" data-category="media">
+        </section>
+        <section class="screen" data-category="media">
           <div class="ambient-video-container">
             <div id="animationPlayerA" class="video-player"></div>
             <div id="animationPlayerB" class="video-player"></div>
             <div class="ambient-overlay">
               <div class="overlay-content">
-                <h2>Motion Graphics Showcase</h2>
-                <p>A reel of animated explainers and VFX.</p>
+                <header>
+                  <h2>Motion Graphics Showcase</h2>
+                  <p>A reel of animated explainers and VFX.</p>
+                </header>
                 <button type="button" class="btn-details" onclick="document.getElementById('motion-graphics-modal').showModal()">View Process</button>
                 <button type="button" id="animated-playback-toggle-btn" class="playback-control" aria-label="Pause Video">
                   <span class="icon-pause"></span>
@@ -334,11 +369,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </article>
       <article class="card col-2 legacy-card">
-        <div data-category="dev" class="blueprint-view">
-          <div class="card-header-horizontal">
+        <section data-category="dev" class="blueprint-view">
+          <header class="card-header-horizontal">
             <div class="header-left">
               <h3>IEM Vote Tracking</h3>
               <span class="sys-code">PROTOCOL: SILVME_ANONYMITY_V1</span>
@@ -350,7 +385,7 @@
                 Specs
               </button>
             </div>
-          </div>
+          </header>
 
           <div class="scanner-layout">
             <div class="package-container">
@@ -405,20 +440,49 @@
             </div>
 
           </div>
-        </div>
-        <div data-category="media">
-          <h3>Photography</h3>
-          <p class="tiny-text">Photo slide</p>
-          <div class="photo-slide">
-            <div class="slide-item">
-              <img src="./img/slide-1.jpg" alt="Slide 1">
+        </section>
+        <section data-category="media" class="photography-view">
+          <header class="card-header">
+            <div class="header-top">
+              <h3>Visual Assets &amp; Photography</h3>
+              <span class="tech-tag">RAW / 4K</span>
             </div>
+            <p class="tiny-text">Architecture / Field Documentation / Post-Processing</p>
+          </header>
+
+          <div class="lighttable-visual">
+            <div class="photo-hero">
+              <img src="./img/photo1.jpg" alt="Featured Photography" id="main-photo">
+              <!-- Camera Metadata Overlay -->
+              <div class="exif-data">
+                <span>ISO 100</span>
+                <span>f/2.8</span>
+                <span>1/200s</span>
+                <span class="accent-text">35mm</span>
+              </div>
+            </div>
+
+            <!-- The Film Strip (Thumbnails) -->
+            <div class="film-strip">
+              <div class="thumb active"><img src="./img/thumb1.jpg"></div>
+              <div class="thumb"><img src="./img/thumb2.jpg"></div>
+              <div class="thumb"><img src="./img/thumb3.jpg"></div>
+              <div class="thumb"><img src="./img/thumb4.jpg"></div>
+            </div>
+
           </div>
-        </div>
+
+          <footer class="card-footer">
+            <button type="button" class="btn-details" onclick="document.getElementById('photography-modal').showModal()">
+              View Case Study
+            </button>
+          </footer>
+        </section>
+
       </article>
       <article class="card col-2 stats-card">
-        <div data-category="dev">
-          <div class="card-header">
+        <section data-category="dev">
+          <header class="card-header">
             <h3>FIRA Cifras API</h3>
             <button type="button" class="btn-details" onclick="document.getElementById('cifras-modal').showModal()">
               Analysis Logic
@@ -427,7 +491,7 @@
               <span class="dot saldo"></span> Saldo
               <span class="dot flujo"></span> Flujo
             </div>
-          </div>
+          </header>
 
           <div class="svg-wrapper">
             <svg id="fira-cifras-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
@@ -442,35 +506,78 @@
               <small id="api-status">Connecting to CORS Proxy...</small>
             </div>
           </div>
-        </div>
-        <div data-category="media">
-          <h3>VFX Breakdown</h3>
-          <div class="green-screen-icon">Keying</div>
-        </div>
+        </section>
+        <section data-category="media" class="live-ops-view">
+          <header class="card-header">
+            <div class="header-top">
+              <h3>Live Broadcast Ops</h3>
+              <span class="live-indicator"><span class="dot"></span> LIVE</span>
+            </div>
+            <p class="tiny-text">Multi-Cam / Nationwide Logistics / RTMP</p>
+          </header>
+
+          <div class="broadcast-visual">
+
+            <!-- CAM 01: Reality (The Auditorium) -->
+            <div class="view-pane cam-1">
+              <div class="audio-meter"><span></span><span></span><span></span></div>
+              <span>CAM 01 - AUDITORIUM</span>
+            </div>
+
+            <!-- CAM 02: Technical (Color Bars) -->
+            <div class="view-pane color-bars">
+              <span>SIGNAL CHECK</span>
+            </div>
+
+            <!-- PREVIEW: Preparation (Lower Thirds) -->
+            <div class="view-pane preview-pane">
+              <div class="lower-third">
+                <div class="bar"></div>
+                <div class="text-line"></div>
+              </div>
+              <span>PREVIEW</span>
+            </div>
+
+            <!-- PROGRAM: The Final Stream -->
+            <div class="view-pane program-pane">
+              <div class="fira-logo-overlay">FIRA LIVE</div>
+              <div class="rec-indicator">● REC</div>
+              <span>PROGRAM (YouTube Live)</span>
+            </div>
+
+          </div>
+
+          <footer class="card-footer">
+            <button type="button" class="btn-details" onclick="document.getElementById('live-ops-modal').showModal()">
+              Deployment Specs
+            </button>
+          </footer>
+
+        </section>
       </article>
       <article class="card  contact-card">
-        <div data-category="dev" class="terminal-view">
+        <section data-category="dev" class="terminal-view">
           <p class="prompt">&gt; Initiate Contact_Protocol()</p>
           <form class="simple-form">
             <input class="input-contact" type="email" placeholder="recruiter@company.com">
             <button type="submit" class="btn-details">SEND</button>
           </form>
-        </div>
-        <div data-category="media" class="contact-view">
+        </section>
+        <section data-category="media" class="contact-view">
           <p>For collaborations or inquiries, reach out at:</p>
           <a href="mailto:contact@axelescutia.com">contact@axelescutia.com</a>
-        </div>
+        </section>
       </article>
-      <article class="card  stack-card">
-        <div data-category="dev" class="tech-grid">
+      <article class="card stack-card">
+        <section data-category="dev" class="tech-grid">
           <span>JS</span> <span class="separator">|</span> <span>PHP</span><span class="separator">|</span>
           <span>SQL</span> <span class="separator">|</span> <span>GIT</span>
-        </div>
-        <div data-category="media" class="media-grid">
+        </section>
+        <section data-category="media" class="media-grid">
           <span>Photoshop</span> <span class="separator">|</span> <span>After Effects</span> <span class="separator">|</span>
           <span>Premiere</span> <span class="separator">|</span> <span>DaVinci Resolve</span> <span class="separator">|</span>
           <span>Adobe Audition</span> <span class="separator">|</span> <span>Adobe Illustrator</span>
-        </div>
+        </section>
       </article>
     </div>
   </main>
@@ -1057,7 +1164,7 @@
         </section>
 
         <section class="case-section">
-          <h3>02 // The Engineering & Process</h3>
+          <h3>02 // The Engineering &amp; Process</h3>
           <ul class="specs-grid">
             <li>
               <span class="icon">⚙️</span>
@@ -1123,6 +1230,255 @@
           <span class="tag">Adobe Audition</span>
           <span class="tag">Publishing Workflows</span>
           <span class="tag">Vendor Management</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+  <!-- AI -->
+  <dialog id="ai-modal" class="modal-window" aria-labelledby="ai-modal-title">
+    <div class="modal-content">
+
+      <header class="modal-header" aria-label="AI video header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: NEURAL_SYNTHESIS_v1</small>
+          <h2 id="ai-modal-title">Generative AI Video Pipeline</h2>
+          <p class="role">AI Creative Technologist &amp; Specialist</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('ai-modal').close()" aria-label="Close modal">×</button>
+      </header>
+
+      <div class="modal-body">
+
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            Traditional institutional video production is often limited by physical constraints, budgets, and long turnaround times. The challenge was to integrate <strong>Generative AI</strong> into a professional workflow to create high-quality assets—including realistic human avatars, stylized caricatures, and neural voiceovers—while maintaining institutional standards and brand
+            consistency.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // The Engineering &amp; Workflow</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">🚀</span>
+              <div class="spec-detail">
+                <strong>Tool Adaptability &amp; R&amp;D</strong>
+                <p>Proved extreme agility by mastering a rapidly evolving ecosystem. I transitioned from simple prompts to complex local deployments, ensuring the best tool is used for each specific institutional need.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🧠</span>
+              <div class="spec-detail">
+                <strong>Advanced Node-Based Workflows</strong>
+                <p>Implemented <strong>ComfyUI</strong> and <strong>Google Colab</strong> environments to run state-of-the-art diffusion models. This allows for precise control over character consistency, movement, and temporal stability in AI-generated clips.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🎭</span>
+              <div class="spec-detail">
+                <strong>Multi-Format Synthesis</strong>
+                <p>Developed a versatile production pipeline capable of generating <strong>Neural Voices (TTS)</strong>, photorealistic human characters for training videos, and 2D caricatures for engaging social media content.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">Flex</span>
+              <span class="desc">Agile adoption of<br>emerging AI tools</span>
+            </div>
+            <div class="stat">
+              <span class="val">Zero</span>
+              <span class="desc">Physical production<br>costs for avatars</span>
+            </div>
+            <div class="stat">
+              <span class="val">Hybrid</span>
+              <span class="desc">Perfect blend of<br>Code &amp; Creativity</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="modal-footer" aria-label="STACK AI">
+        <span>STACK / TOOLS:</span>
+        <div class="tags">
+          <span class="tag">ComfyUI</span>
+          <span class="tag">Stable Diffusion</span>
+          <span class="tag">Google Colab</span>
+          <span class="tag">Wan 2.1</span>
+          <span class="tag">Flux 2.0</span>
+          <span class="tag">Gemini TTS</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
+  <!-- LIVE -->
+  <dialog id="live-ops-modal" class="modal-window" aria-labelledby="live-modal-title">
+    <div class="modal-content">
+
+      <header class="modal-header" aria-label="live ops header">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: LIVE_BROADCAST_ENGINEERING</small>
+          <h2 id="live-modal-title">Nationwide Live Event Streaming</h2>
+          <p class="role">Lead Broadcast Engineer &amp; Field Producer</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('live-ops-modal').close()">×</button>
+      </header>
+
+      <div class="modal-body">
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            Managing live institutional broadcasts across Mexico requires extreme <strong>tactical adaptability</strong>. From high-end auditoriums in Mexico City to remote field locations with limited connectivity, the goal was to deliver zero-failure, high-fidelity streams to multiple audiences across 100+ national offices.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // The Engineering &amp; Operations</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">📡</span>
+              <div class="spec-detail">
+                <strong>Hybrid Production Management</strong>
+                <p>Capable of leading a full camera crew and technical staff or operating as a "One-Man Band." I handle everything from physical rigging and lighting to audio console integration and multi-cam switching.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🔌</span>
+              <div class="spec-detail">
+                <strong>Technical Liaison</strong>
+                <p>Acting as the bridge between the Creative Media department and specialized on-site technicians. I translate creative vision into technical requirements for audio providers, power specialists, and network engineers.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">💻</span>
+              <div class="spec-detail">
+                <strong>Multi-Platform Syndication</strong>
+                <p>Engineered secure internal streams via <strong>MS Teams</strong> for institutional privacy, while simultaneously broadcasting to <strong>Facebook Live and YouTube</strong> for public outreach, ensuring synchronized delivery across all protocols.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">Nationwide</span>
+              <span class="desc">100% Coverage of<br>FIRA Regional Offices</span>
+            </div>
+            <div class="stat">
+              <span class="val">Zero</span>
+              <span class="desc">Stream Failures over<br>10+ Annual High-Stakes Events</span>
+            </div>
+            <div class="stat">
+              <span class="val">Quality</span>
+              <span class="desc">Broadcast-Grade Audio &amp;<br>Video Standards</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="modal-footer" aria-label="Live ops stack">
+        <span>STACK / TOOLS:</span>
+        <div class="tags">
+          <span class="tag">OBS Studio</span>
+          <span class="tag">vMix</span>
+          <span class="tag">RTMP/HLS Protocols</span>
+          <span class="tag">MS Teams Broadcast</span>
+          <span class="tag">Audio Routing</span>
+          <span class="tag">Facebook Live</span>
+          <span class="tag">YouTube Live</span>
+        </div>
+      </footer>
+
+    </div>
+  </dialog>
+
+  <!--Photo-->
+  <dialog id="photography-modal" class="modal-window" aria-labelledby="photo-modal-title">
+    <div class="modal-content">
+
+      <header class="modal-header" aria-label="Photography & Visual Curation">
+        <div class="header-text">
+          <small class="sys-code">PROJECT_ID: VISUAL_DOCUMENTATION_ARCHIVE</small>
+          <h2 id="photo-modal-title">Institutional Photography &amp; Visual Curation</h2>
+          <p class="role">Lead Photographer &amp; Digital Asset Manager</p>
+        </div>
+        <button class="btn-close" type="button" onclick="document.getElementById('photography-modal').close()">×</button>
+      </header>
+
+      <div class="modal-body">
+        <section class="case-section">
+          <h3>01 // The Challenge</h3>
+          <p>
+            Creating a unified visual identity for FIRA through high-quality photography. The objective was to document <strong>agricultural success stories, industrial infrastructure, and corporate events</strong> across Mexico, producing a professional image bank for annual reports, social media, and national press.
+          </p>
+        </section>
+
+        <section class="case-section">
+          <h3>02 // Expertise &amp; Workflow</h3>
+          <ul class="specs-grid">
+            <li>
+              <span class="icon">📸</span>
+              <div class="spec-detail">
+                <strong>On-Site Field Documentation</strong>
+                <p>Specialized in travel and field photography. Capturing the authentic essence of agricultural production while maintaining a polished, institutional aesthetic in diverse environmental conditions.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🖥️</span>
+              <div class="spec-detail">
+                <strong>Advanced Post-Processing</strong>
+                <p>Mastery of the RAW development pipeline. Expert in color correction, retouching, and compositing using <strong>Lightroom and Photoshop</strong> to ensure consistent color grading across all institutional channels.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📂</span>
+              <div class="spec-detail">
+                <strong>Asset Lifecycle Management</strong>
+                <p>Beyond capturing the image, I manage the metadata, categorization, and archiving of thousands of high-resolution assets, ensuring they are optimized for both print and digital syndication.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h3>03 // The Impact</h3>
+          <div class="impact-stats">
+            <div class="stat">
+              <span class="val">13yrs</span>
+              <span class="desc">Historical Visual<br>Archive Documented</span>
+            </div>
+            <div class="stat">
+              <span class="val">High-Res</span>
+              <span class="desc">Asset Bank for<br>National Campaigns</span>
+            </div>
+            <div class="stat">
+              <span class="val">100+</span>
+              <span class="desc">Field Locations<br>Photographed</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="modal-footer" aria-label="Photography skills">
+        <span>SKILLS / GEAR:</span>
+        <div class="tags">
+          <span class="tag">Digital SLR</span>
+          <span class="tag">RAW Workflow</span>
+          <span class="tag">Adobe Lightroom</span>
+          <span class="tag">Adobe Photoshop</span>
+          <span class="tag">Color Theory</span>
+          <span class="tag">Asset Management</span>
         </div>
       </footer>
 

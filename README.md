@@ -1,7 +1,7 @@
 # AXEL ESCUTIA ZUBIETA
 
 Full Stack Developer & Multimedia Specialist
-Morelia, Mexico | axeleszu@gmail.com | https://www.linkedin.com/in/axel-escutia/
+Morelia, Mexico | contact@axelescutia.com | https://www.linkedin.com/in/axel-escutia/
 
 # PROFESSIONAL SUMMARY
 Multimedia Specialist and Full Stack Developer with 12+ years of experience integrating visual communication with modern web technologies. Skilled in end-to-end web development (HTML5, CSS3, JS, PHP, Java) and advanced multimedia production for high-visibility government and institutional projects. Proven ability to deliver robust digital platforms, optimize user experiences, and lead technical–creative workflows. Bilingual (English/Spanish).

@@ -1,17 +1,26 @@
 import resumeUrl from '../resume.pdf';
 import podcastUrl from '../podcast.mp3';
+const switchBtn = document.getElementById('mode-switch');
 
 function setMode(mode) {
     document.body.className = 'mode-' + mode;
     document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
     if (mode == 'media') {
+        switchBtn.setAttribute('aria-checked', 'true');
         initMultimedia();
         initPodcastPlayer();
+    }
+    if (mode === 'dev') {
+        switchBtn.setAttribute('aria-checked', 'false');
+        const audioEl = document.querySelector('#podcast-player audio');
+        if (audioEl && !audioEl.paused) {
+            audioEl.pause();
+        }
     }
 }
 
 let currentMode = 'dev';
-document.getElementById('mode-switch').addEventListener('click', () => {
+switchBtn.addEventListener('click', () => {
     currentMode = currentMode === 'dev' ? 'media' : 'dev';
     setMode(currentMode);
 });
@@ -161,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 import AmbientPlayer from './mediaPlayer.js';
 const animatedPlaylist = 'PL8OzJlspMutEdqXOpEMFAvg64dTJgGtOD';
 const locationPlaylist = 'PL8OzJlspMutERXnUzw-KGWxFMr0eBef3Q';
+const aiPlaylist = 'PL8OzJlspMutFle3U1yW2VrLEWL7M9vhCo'
 let isYouTubeApiReady = false;
 
 if (!window.cinematicPlayer) {
@@ -180,10 +190,19 @@ if (!window.animationPlayer) {
         pauseButtonId: 'animated-playback-toggle-btn'
     });
 }
+if (!window.aiPlayer) {
+    window.aiPlayer = new AmbientPlayer({
+        playerA_id: 'aiPlayerA',
+        playerB_id: 'aiPlayerB',
+        playlistId: aiPlaylist,
+        pauseButtonId: 'ai-playback-toggle-btn'
+    });
+}
 
 function initMultimedia() {
     if (cinematicPlayer) cinematicPlayer.init();
     if (animationPlayer) animationPlayer.init();
+    if (aiPlayer) aiPlayer.init();
 }
 
 let podcastPlayerInitialized = false;

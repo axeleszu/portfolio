@@ -70,15 +70,19 @@ export class TerminalHero {
         switch (cleanCmd) {
             case 'help':
                 this.printLine(`
-AVAILABLE COMMANDS:
--------------------
-  about     - Brief professional summary
-  contact   - Show contact info
-  resume    - Download PDF CV
-  skills    - List tech stack
-  clear     - Clear terminal
-  switch    - Switch to multimedia profile
-        `, 'cmd-response');
+                    AVAILABLE COMMANDS:
+                    -------------------
+                    about     - Brief professional summary
+                    contact   - Show contact info
+                    resume    - Download PDF CV
+                    skills    - List tech stack
+                    clear     - Clear terminal
+                    switch    - Switch to multimedia profile
+                            `, 'cmd-response');
+                break;
+
+            case 'ls':
+                this.printLine("about.sh  contact.sh  resume.sh  skills.sh  switch.sh", 'cmd-response');
                 break;
 
             case 'about':
@@ -86,13 +90,14 @@ AVAILABLE COMMANDS:
                 break;
 
             case 'contact':
-                this.printLine("Email: axeleszu@gmail.com\nLinkedIn: linkedin.com/in/axel-escutia", 'cmd-response');
+                this.printLine("Email: contact@axelescutia.com\nLinkedIn: linkedin.com/in/axel-escutia", 'cmd-response');
                 document.querySelector('.contact-card').scrollIntoView({ behavior: 'smooth' });
                 break;
 
             case 'resume':
                 this.printLine(">> INITIATING DOWNLOAD...", 'success');
                 document.getElementById('resume-link').click();
+                this.printLine(">> For live version, visit: https://github.com/axeleszu/portfolio", 'cmd-response');
                 break;
 
             case 'skills':
