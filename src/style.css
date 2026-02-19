@@ -2015,6 +2015,7 @@ circle.dot-point:hover {
   overflow: hidden;
   background: #000;
   border-radius: 2px;
+  flex: 5 0 200px;
 }
 
 .photo-hero img {
@@ -2050,6 +2051,7 @@ circle.dot-point:hover {
   flex-wrap: wrap;
   flex-direction: column;
   gap: 2px;
+  flex: 2 2 auto;
 }
 
 .thumb {
@@ -2059,6 +2061,7 @@ circle.dot-point:hover {
   opacity: 0.5;
   transition: all 0.2s ease;
   border: 1px solid transparent;
+  height: 2.5rem;
 }
 
 .thumb:hover {
@@ -2074,6 +2077,12 @@ circle.dot-point:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.shop-ui {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /*WIP*/

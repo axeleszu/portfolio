@@ -1,0 +1,49 @@
+<svg width="180" height="100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            #r.curve {
+                fill: red;
+                stroke-width: 0px;
+                opacity: 0.3;
+            }
+
+            #g.curve {
+                fill: green;
+                stroke-width: 0px;
+                opacity: 0.3;
+            }
+
+            #b.curve {
+                fill: blue;
+                stroke-width: 0px;
+                opacity: 0.3;
+            }
+
+            .curve {
+                transition: all 1s ease;
+            }
+        </style>
+    </defs>
+    <path id='r' d="M 0,100 Q25,70 50,70 Q75,70 100,100" class="curve">
+        <animate attributeName="d" dur="4s" repeatCount="indefinite" values="
+        M 0,100 Q10,50 25,80 Q40,20 100,100;
+        M 0,100 Q45,50 60,80 Q75,20 100,100;
+        M 0,100 Q20,50 35,80 Q50,20 100,100;
+        M 0,100 Q10,50 25,80 Q40,20 100,100" />
+    </path>
+    <path id='g' d="M 0,100 Q15,70 50,70 Q80,70 100,100" class="curve">
+        <animate attributeName="d" dur="3s" repeatCount="indefinite" values="
+        M 0,100 Q35,50 50,80 Q65,20 100,100;
+        M 0,100 Q15,50 30,80 Q45,20 100,100;
+        M 0,100 Q55,50 70,80 Q85,20 100,100;
+        M 0,100 Q35,50 50,80 Q65,20 100,100" />
+    </path>
+    <path id='b' d="M 0,100 Q10,70 50,70 Q85,70 100,100" class="curve">
+        <animate attributeName="d" dur="4s" repeatCount="indefinite" values="
+        M 0,100 Q60,50 75,80 Q90,20 100,100;
+        M 0,100 Q25,50 40,80 Q55,20 100,100;
+        M 0,100 Q40,50 55,80 Q70,20 100,100;
+        M 0,100 Q60,50 75,80 Q90,20 100,100" />
+    </path>
+
+</svg>
