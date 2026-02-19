@@ -2085,6 +2085,24 @@ circle.dot-point:hover {
   flex-direction: column;
 }
 
+.shop-ui p {
+  background-color: #222;
+  border-radius: 4px;
+  margin: 2px;
+  padding: 3px;
+  font-size: 0.7rem;
+  display: block;
+}
+
+.shop-ui p span{
+  display:block;
+  float:right;
+  background-color:#111;
+  padding: 2px 5px;
+  margin:-2px 0;
+   border-radius: 4px;    
+}
+
 /*WIP*/
 #sign,
 #sign2 {
