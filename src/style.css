@@ -1878,7 +1878,9 @@ circle.dot-point:hover {
     opacity: 1;
   }
 }
-
+.cam-1-view{
+  overflow: hidden;
+}
 .cam-1 {
   background-image: url('../img/fira-auditorium.jpg');
   background-size: cover;
@@ -1886,6 +1888,11 @@ circle.dot-point:hover {
   animation: zoomInOut 10s ease-in-out infinite;
   transform-origin: top left;
   overflow: hidden;
+  width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 4px;
 }
 
 @keyframes zoomInOut {
@@ -2015,7 +2022,7 @@ circle.dot-point:hover {
   overflow: hidden;
   background: #000;
   border-radius: 2px;
-  flex: 5 0 200px;
+  flex: 8;
 }
 
 .photo-hero img {
@@ -2051,7 +2058,7 @@ circle.dot-point:hover {
   flex-wrap: wrap;
   flex-direction: column;
   gap: 2px;
-  flex: 2 2 auto;
+  flex: 2;
 }
 
 .thumb {
@@ -2061,7 +2068,8 @@ circle.dot-point:hover {
   opacity: 0.5;
   transition: all 0.2s ease;
   border: 1px solid transparent;
-  height: 2.5rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 .thumb:hover {
@@ -2080,9 +2088,13 @@ circle.dot-point:hover {
 }
 
 .shop-ui {
-  flex: 1 1 auto;
+  flex: 4;
   display: flex;
   flex-direction: column;
+}
+.shop-ui img{
+  height: 35%;
+    width: 100%;
 }
 
 .shop-ui p {
@@ -2102,7 +2114,47 @@ circle.dot-point:hover {
   margin:-2px 0;
    border-radius: 4px;    
 }
-
+.carousel {
+  aspect-ratio: 3/2;
+  width:100%;
+  overflow:hidden;
+  text-align:center;
+  position:relative;
+}
+.carousel .slider{
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+.carousel .slider .item{
+  display:none;
+}
+.carousel .slider .item.active{
+  display:block;
+}
+.carousel .item img{
+  width: 100%;
+    object-fit: contain;
+}
+.carousel .control{
+  position:absolute;
+  bottom:calc(50% - 2rem);
+  width:100%;
+}
+.carousel .control button{
+  font-size:4rem;
+  color:red;
+  z-index:2;
+  background-color:transparent;
+  border:0;
+  padding:20px;
+}
+.carousel .control button.prev{
+  float:left;
+}
+.carousel .control button.next{
+  float:right;
+}
 /*WIP*/
 #sign,
 #sign2 {

@@ -9,6 +9,7 @@ function setMode(mode) {
         switchBtn.setAttribute('aria-checked', 'true');
         initMultimedia();
         initPodcastPlayer();
+        initPhotoSlider();
     }
     if (mode === 'dev') {
         switchBtn.setAttribute('aria-checked', 'false');
@@ -203,6 +204,7 @@ function initMultimedia() {
     if (cinematicPlayer) cinematicPlayer.init();
     if (animationPlayer) animationPlayer.init();
     if (aiPlayer) aiPlayer.init();
+    thumbChange();
 }
 
 let podcastPlayerInitialized = false;
@@ -288,6 +290,71 @@ async function initPodcastPlayer() {
             }
         });
     }
+}
+
+function thumbChange() {
+    const thumbs = document.querySelectorAll('.film-strip .thumb');
+    thumbs.forEach(thumb => {
+        thumb.addEventListener('click', (e) => {
+            thumbs.forEach(t => {
+                t.classList.remove('active');
+            });
+            const activeThumb = e.currentTarget;
+            const activeThumbImage = activeThumb.querySelector('img').src;
+            let imgName = activeThumbImage.split('/')[activeThumbImage.split('/').length - 1].split('.')[0];
+            document.getElementById('photoName').innerText = imgName + '.cr2';
+            document.getElementById('main-photo').src = activeThumbImage;
+            activeThumb.classList.add('active');
+        });
+    });
+}
+
+function initPhotoSlider() {
+    const carousel = document.getElementById('carousel-photo');
+    if (!carousel) return; 
+
+    const slider = carousel.querySelector('.slider');
+    if (!slider) return; 
+
+
+    for (let i = 1; i < 20; i++) {
+        let item = document.createElement('div');
+        let img = document.createElement('img');
+        
+        if (i === 1) { 
+        item.classList.add('active');
+        }
+        
+        item.classList.add('item')
+
+        img.src = i < 10 ? `./photo/photo_0${i}.jpg` : `./photo/photo_${i}.jpg`; 
+         
+        item.appendChild(img);
+        slider.appendChild(item);
+    }
+
+
+    const items = slider.querySelectorAll('.item');
+    if (items.length === 0) return; 
+
+    const next = carousel.querySelector('.next');
+    const prev = carousel.querySelector('.prev');
+    
+    let active = 0; 
+
+
+    
+    next.addEventListener('click', () => {
+        items[active].classList.remove('active');
+        active = (active + 1) % items.length;
+        items[active].classList.add('active');
+    });
+
+    prev.addEventListener('click', () => {
+        items[active].classList.remove('active');
+        active = (active - 1 + items.length) % items.length;
+        items[active].classList.add('active');
+    });
 }
 
 /* Analytics */
