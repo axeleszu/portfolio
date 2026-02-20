@@ -311,50 +311,29 @@ function thumbChange() {
 
 function initPhotoSlider() {
     const carousel = document.getElementById('carousel-photo');
-<<<<<<< HEAD
+
     if (!carousel) return;
 
     const slider = carousel.querySelector('.slider');
     if (!slider) return;
-=======
-    if (!carousel) return; 
-
-    const slider = carousel.querySelector('.slider');
-    if (!slider) return; 
->>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
 
 
     for (let i = 1; i < 20; i++) {
         let item = document.createElement('div');
         let img = document.createElement('img');
-<<<<<<< HEAD
 
         if (i === 1) {
             item.classList.add('active');
         }
 
         item.classList.add('item')
-
         img.src = i < 10 ? `./photo/photo_0${i}.jpg` : `./photo/photo_${i}.jpg`;
-
-=======
-        
-        if (i === 1) { 
-        item.classList.add('active');
-        }
-        
-        item.classList.add('item')
-
-        img.src = i < 10 ? `./photo/photo_0${i}.jpg` : `./photo/photo_${i}.jpg`; 
-         
->>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
         item.appendChild(img);
         slider.appendChild(item);
     }
 
 
     const items = slider.querySelectorAll('.item');
-<<<<<<< HEAD
     if (items.length === 0) return;
 
     const next = carousel.querySelector('.next');
@@ -362,19 +341,6 @@ function initPhotoSlider() {
 
     let active = 0;
 
-
-
-=======
-    if (items.length === 0) return; 
-
-    const next = carousel.querySelector('.next');
-    const prev = carousel.querySelector('.prev');
-    
-    let active = 0; 
-
-
-    
->>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
     next.addEventListener('click', () => {
         items[active].classList.remove('active');
         active = (active + 1) % items.length;
