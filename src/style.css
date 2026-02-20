@@ -1878,11 +1878,17 @@ circle.dot-point:hover {
     opacity: 1;
   }
 }
+<<<<<<< HEAD
 
 .cam-1-view {
   overflow: hidden;
 }
 
+=======
+.cam-1-view{
+  overflow: hidden;
+}
+>>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
 .cam-1 {
   background-image: url('../img/fira-auditorium.jpg');
   background-size: cover;
@@ -1891,10 +1897,17 @@ circle.dot-point:hover {
   transform-origin: top left;
   overflow: hidden;
   width: 100%;
+<<<<<<< HEAD
   height: 100%;
   display: flex;
   align-items: flex-end;
   padding: 4px;
+=======
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 4px;
+>>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
 }
 
 @keyframes zoomInOut {
@@ -2094,12 +2107,19 @@ circle.dot-point:hover {
   display: flex;
   flex-direction: column;
 }
+.shop-ui img{
+  height: 35%;
+    width: 100%;
+}
 
+<<<<<<< HEAD
 .shop-ui img {
   height: 35%;
   width: 100%;
 }
 
+=======
+>>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
 .shop-ui p {
   background-color: #222;
   border-radius: 4px;
@@ -2109,6 +2129,7 @@ circle.dot-point:hover {
   display: block;
 }
 
+<<<<<<< HEAD
 .shop-ui p span {
   display: block;
   float: right;
@@ -2168,6 +2189,57 @@ circle.dot-point:hover {
   float: right;
 }
 
+=======
+.shop-ui p span{
+  display:block;
+  float:right;
+  background-color:#111;
+  padding: 2px 5px;
+  margin:-2px 0;
+   border-radius: 4px;    
+}
+.carousel {
+  aspect-ratio: 3/2;
+  width:100%;
+  overflow:hidden;
+  text-align:center;
+  position:relative;
+}
+.carousel .slider{
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+.carousel .slider .item{
+  display:none;
+}
+.carousel .slider .item.active{
+  display:block;
+}
+.carousel .item img{
+  width: 100%;
+    object-fit: contain;
+}
+.carousel .control{
+  position:absolute;
+  bottom:calc(50% - 2rem);
+  width:100%;
+}
+.carousel .control button{
+  font-size:4rem;
+  color:red;
+  z-index:2;
+  background-color:transparent;
+  border:0;
+  padding:20px;
+}
+.carousel .control button.prev{
+  float:left;
+}
+.carousel .control button.next{
+  float:right;
+}
+>>>>>>> 4af37749d7dd494e442a65a0e30b61c94becb368
 /*WIP*/
 #sign,
 #sign2 {
