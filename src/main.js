@@ -327,7 +327,7 @@ function initPhotoSlider() {
         }
 
         item.classList.add('item')
-        img.src = i < 10 ? `./photo/photo_0${i}.jpg` : `./photo/photo_${i}.jpg`;
+        img.src = i < 10 ? `/photo/photo_0${i}.jpg` : `./photo/photo_${i}.jpg`;
         item.appendChild(img);
         slider.appendChild(item);
     }
