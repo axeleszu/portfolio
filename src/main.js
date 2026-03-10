@@ -35,7 +35,7 @@ document.querySelectorAll('dialog').forEach(dialog => {
     });
 });
 
-document.getElementById('theLab').addEventListener(() => {
+document.getElementById('theLab').addEventListener('click', () => {
     console.log('The lab!!')
     document.querySelector('main.bento-wrapper').classList.add('lab')
 })
