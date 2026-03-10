@@ -103,7 +103,7 @@
       </div>
     </div>
     <div class="hero-video-wrapper" data-category="media">
-      <video autoplay muted loop playsinline class="bg-video" poster="/img/poster.jpg">
+      <video muted loop playsinline class="bg-video" poster="/img/poster.jpg">
         <source src="#" type="video/mp4">
       </video>
       <div class="video-overlay"></div>
@@ -251,8 +251,8 @@
           </button>
         </section>
       </article>
-      <article class="card " data-category="mixed">
-        <div class="card-content" id="theLab">
+      <article class="card " data-category="mixed" id="theLab">
+        <div class="card-content">
           <h3>The Lab</h3>
           <p>Game Dev</p>
         </div>
@@ -594,41 +594,53 @@
       </article>
     </div>
     <div class="bento-grid" id="lab-grid">
-
       <!-- LOVE2D PHYSICS -->
       <article class="card col-2 row-2 lab-card love2d">
-        <div class="lab-header">
-          <h3>Skill Sandbox</h3>
-          <span class="lab-badge">Love2D</span>
-        </div>
-        <div class="lab-canvas" id="love2d-canvas-container">
-          <canvas id="love-canvas"></canvas>
-          <img src="img/wip.svg" alt="Work in Progress">
-        </div>
-        <div class="lab-footer">
-          <p>Grab and toss skills</p>
+        <section>
+          <div class="lab-header">
+            <h3>Skill Sandbox</h3>
+            <span class="lab-badge">Love2D</span>
+          </div>
+          <div class="lab-canvas" id="love2d-canvas-container">
+            <canvas id="love-canvas"></canvas>
+            <img src="img/wip.svg" alt="Work in Progress">
+          </div>
+          <div class="lab-footer">
+            <p>Grab and toss skills</p>
+          </div>
+        </section>
+      </article>
+
+      <article class="card lab-card col-2" id="return2work">
+        <div>
+          <section>
+            <div class="lab-header">
+              <h3>Return to Workplace</h3>
+            </div>
+          </section>
         </div>
       </article>
 
+      <!-- UNITY MICRO -->
+      <article class="card col-2 row-2  lab-card unity">
+        <section>
+          <div class="lab-header">
+            <h3>City Micro</h3>
+            <span class="lab-badge">Unity WebGL</span>
+          </div>
+          <div class="lab-canvas" id="unity-container">
+            <iframe id="unity-iframe" data-src="img/wip.svg" title="Unity"></iframe>
+          </div>
+          <div class="lab-footer">
+            <p>Mini driving game</p>
+          </div>
+        </section>
+      </article>
       <!-- INFO -->
       <article class="card col-2 lab-card info">
         <h3>About</h3>
         <p>Interactive experiments</p>
         <button class="btn-details" onclick="document.getElementById('lab-modal').showModal()" type="button">Details</button>
-      </article>
-
-      <!-- UNITY MICRO -->
-      <article class="card col-2 row-2  lab-card unity">
-        <div class="lab-header">
-          <h3>City 50 Micro</h3>
-          <span class="lab-badge">Unity WebGL</span>
-        </div>
-        <div class="lab-canvas" id="unity-container">
-          <iframe id="unity-iframe" data-src="img/wip.svg" title="Unity" width="100%" height="100%" style="      border: 0;      min-height: 50vh;  "></iframe>
-        </div>
-        <div class="lab-footer">
-          <p>Mini driving game</p>
-        </div>
       </article>
 
     </div>

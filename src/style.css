@@ -1,15 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 :root {
   --bg-color: #050505;
   --text-primary: #ffffff;
   --accent-color: #00ff41;
   --font-hero: 'Courier New', monospace;
   --font-ui: 'Helvetica Neue', sans-serif;
+  --font-lab: "Pixelify Sans", sans-serif;
   --strip-bg: #111;
 }
 
 body.mode-media {
   --accent-color: #ff3300;
   --font-hero: 'Impact', sans-serif;
+}
+
+body.mode-lab {
+  --accent-color: #fb9c54;
+  --font-hero: 'Pixelify Sans', sans-serif;
+  --font-ui: 'Pixelify Sans', sans-serif;
 }
 
 * {
@@ -2309,17 +2318,30 @@ body.mode-media .media-grid .separator {
   background: none;
 }
 
-#lab-gird {
+#lab-grid {
   display: none;
 }
 
-.lab #project-grid {
-  display: none;
+.mode-lab #project-grid {
+  display: none !important;
 }
 
-.lab #lab-grid {
+.mode-lab #lab-grid {
   display: grid !important;
 }
+
+#unity-iframe {
+  width: 100%;
+  border: 0;
+  min-height: 50vh;
+}
+
+#return2work,
+#theLab {
+  cursor: pointer;
+}
+
+
 
 @keyframes wave {
 

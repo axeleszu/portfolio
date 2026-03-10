@@ -4,6 +4,10 @@ const switchBtn = document.getElementById('mode-switch');
 
 function setMode(mode) {
     document.body.className = 'mode-' + mode;
+    if (mode === 'lab') {
+        document.getElementById('mode-switch').textContent = 'LAB';
+        return;
+    }
     document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
     if (mode == 'media') {
         switchBtn.setAttribute('aria-checked', 'true');
@@ -36,9 +40,15 @@ document.querySelectorAll('dialog').forEach(dialog => {
 });
 
 document.getElementById('theLab').addEventListener('click', () => {
-    console.log('The lab!!')
-    document.querySelector('main.bento-wrapper').classList.add('lab')
+    currentMode = 'lab';
+    setMode(currentMode);
 })
+
+document.getElementById('return2work').addEventListener('click', () => {
+    currentMode = 'dev';
+    setMode(currentMode);
+});
+
 async function initGithubWidget() {
     const grid = document.getElementById('github-grid');
     const statusText = document.getElementById('last-commit-text');
