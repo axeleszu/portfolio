@@ -252,7 +252,7 @@
         </section>
       </article>
       <article class="card " data-category="mixed">
-        <div class="card-content">
+        <div class="card-content" id="theLab">
           <h3>The Lab</h3>
           <p>Game Dev</p>
         </div>
@@ -466,10 +466,10 @@
             </div>
             <!-- The Film Strip (Thumbnails) -->
             <div class="film-strip">
-              <div class="thumb active"><img src="./photo/photo_01.jpg"></div>
-              <div class="thumb"><img src="./photo/photo_02.jpg"></div>
-              <div class="thumb"><img src="./photo/photo_03.jpg"></div>
-              <div class="thumb"><img src="./photo/photo_04.jpg"></div>
+              <div class="thumb active"><img src="./photo/photo_01.jpg" alt="Photo 1"></div>
+              <div class="thumb"><img src="./photo/photo_02.jpg" alt="Photo 2"></div>
+              <div class="thumb"><img src="./photo/photo_03.jpg" alt="Photo 3"></div>
+              <div class="thumb"><img src="./photo/photo_04.jpg" alt="Photo 4"></div>
             </div>
             <div class="shop-ui">
               <img src="./img/rgb.svg" alt="RGB Color Spectrum" class="rgb-spectrum">
@@ -593,9 +593,48 @@
         </section>
       </article>
     </div>
+    <div class="bento-grid" id="lab-grid">
+      <article>
+        <!-- LOVE2D PHYSICS -->
+        <article class="card col-2 row-2 lab-card love2d">
+          <div class="lab-header">
+            <h3>Skill Sandbox</h3>
+            <span class="lab-badge">Love2D</span>
+          </div>
+          <div class="lab-canvas" id="love2d-canvas-container">
+            <canvas id="love-canvas"></canvas>
+            <img src="img/wip.svg" alt="Work in Progress">
+          </div>
+          <div class="lab-footer">
+            <p>Grab and toss skills</p>
+          </div>
+        </article>
+
+        <!-- UNITY MICRO -->
+        <article class="card row-2 lab-card unity">
+          <div class="lab-header">
+            <h3>City 50 Micro</h3>
+            <span class="lab-badge">Unity WebGL</span>
+          </div>
+          <div class="lab-canvas" id="unity-container">
+            <iframe id="unity-iframe" data-src="img/wip.svg" title="Unity"></iframe>
+          </div>
+          <div class="lab-footer">
+            <p>Mini driving game</p>
+          </div>
+        </article>
+
+        <!-- INFO -->
+        <article class="card lab-card info">
+          <h3>About</h3>
+          <p>Interactive experiments</p>
+          <button class="btn-details" onclick="document.getElementById('lab-modal').showModal()" type="button">Details</button>
+        </article>
+      </article>
+    </div>
   </main>
 
- 
+
 
 
   <!-- FIRA WWW MODAL -->
@@ -1476,8 +1515,8 @@
       <div class="carousel" id="carousel-photo">
         <div class="slider"></div>
         <div class="control">
-          <button class="next">&gt;</button>
-          <button class="prev">&lt;</button>
+          <button class="next" type="button">&gt;</button>
+          <button class="prev" type="button">&lt;</button>
         </div>
       </div>
 
@@ -1554,6 +1593,19 @@
         </div>
       </footer>
 
+    </div>
+  </dialog>
+
+  <!--MODAL LAB-->
+  <dialog id="lab-modal" class="modal-window">
+    <div class="modal-content">
+      <header class="modal-header" aria-label="The Lab header">
+        <h2>The Lab</h2>
+        <button class="btn-close" onclick="document.getElementById('lab-modal').close()" type="button">×</button>
+      </header>
+      <div class="modal-body">
+        <p>Built with Love2D and Unity WebGL</p>
+      </div>
     </div>
   </dialog>
 

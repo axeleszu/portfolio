@@ -34,6 +34,11 @@ document.querySelectorAll('dialog').forEach(dialog => {
         }
     });
 });
+
+document.getElementById('theLab').addEventListener(() => {
+    console.log('The lab!!')
+    document.querySelector('main.bento-wrapper').classList.add('lab')
+})
 async function initGithubWidget() {
     const grid = document.getElementById('github-grid');
     const statusText = document.getElementById('last-commit-text');
@@ -210,13 +215,11 @@ function initMultimedia() {
 let podcastPlayerInitialized = false;
 
 async function initPodcastPlayer() {
-    // 1. Guard to stop if already initialized
     if (podcastPlayerInitialized) return;
     podcastPlayerInitialized = true;
 
-    // 2. Get references to all the player elements
     const playerContainer = document.getElementById('podcast-player');
-    if (!playerContainer) return; // Stop if the element isn't on the page
+    if (!playerContainer) return;
 
     const audioEl = playerContainer.querySelector('audio');
     const titleEl = playerContainer.querySelector('.title');

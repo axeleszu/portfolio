@@ -2309,6 +2309,18 @@ body.mode-media .media-grid .separator {
   background: none;
 }
 
+#lab-gird {
+  display: none;
+}
+
+.lab #project-grid {
+  display: none;
+}
+
+.lab #lab-grid {
+  display: grid !important;
+}
+
 @keyframes wave {
 
   0%,
