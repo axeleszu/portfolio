@@ -374,6 +374,100 @@ function initPhotoSlider() {
     });
 }
 
+function setTheLab() {
+    const canvas = document.getElementById('theLabCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const dpr = window.devicePixelRatio || 1;
+
+    const UNIT = canvas.width / 100;
+    const SPEED = 1;
+    const BALL_NUM = 60;
+
+    const colors = [
+        "#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#00FFFF",
+        "#FF00FF", "#F05924", "#FAB03A", "#006636", "#29ABE0",
+        "#662B8F", "#C49C6B", "#734A24", "#FF911C", "#FFFFFF"
+    ];
+
+    let balls = [];
+
+
+    class Ball {
+        constructor() {
+            this.firstTime = true;
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = 0;
+            if (this.firstTime) {
+                this.y = Math.random() * canvas.height;
+                this.firstTime = false;
+            }
+            this.radius = 2.5 * UNIT;
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.vy = Math.random() * UNIT + SPEED;
+            this.isActive = true;
+        }
+
+        update() {
+            this.y += this.vy;
+            if (this.y > canvas.height) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            // Only draw if visible
+            if (this.isActive) {
+
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                ctx.lineWidth = 5;
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                ctx.fill()
+            }
+        }
+        destroy() {
+            this.isActive = false;
+        }
+    }
+
+    for (let i = 0; i < BALL_NUM; i++) {
+        balls.push(new Ball());
+    }
+
+    function animate() {
+        ctx.save();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        balls.forEach(p => {
+            p.update();
+            p.draw();
+
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    function resizeLabCanvas() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        const size = Math.min(rect.width, rect.height);
+
+        canvas.width = size * dpr;
+        canvas.height = size * dpr;
+        ctx.scale(dpr, dpr);
+
+        canvas.style.width = size + 'px';
+        canvas.style.height = size + 'px';
+        console.log(size)
+    }
+    resizeLabCanvas();
+    window.addEventListener('resize', resizeLabCanvas);
+}
+setTheLab();
+
 /* Analytics */
 const GA_ID = "G-H0M7LHEESB"
 import { setupAnalytics } from './analytics.js';

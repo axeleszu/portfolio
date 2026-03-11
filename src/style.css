@@ -2322,12 +2322,36 @@ body.mode-media .media-grid .separator {
   display: none;
 }
 
+
 .mode-lab #project-grid {
   display: none !important;
 }
 
 .mode-lab #lab-grid {
   display: grid !important;
+}
+
+#theLab {
+  position: relative;
+}
+
+#theLabCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#theLabCanvas:hover {
+  opacity: 1;
+}
+
+#theLab div {
+  z-index: 1;
 }
 
 #love2d-canvas-container,
