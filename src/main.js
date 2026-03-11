@@ -6,6 +6,13 @@ function setMode(mode) {
     document.body.className = 'mode-' + mode;
     if (mode === 'lab') {
         document.getElementById('mode-switch').textContent = 'LAB';
+        let labframes = document.querySelectorAll('#lab-grid iframe');
+        labframes.forEach(frame => {
+            if (!frame.src) {
+                frame.src = frame.dataset.src;
+            }
+        });
+
         return;
     }
     document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';

@@ -2330,10 +2330,27 @@ body.mode-media .media-grid .separator {
   display: grid !important;
 }
 
-#unity-iframe {
+#love2d-canvas-container,
+#unity-container {
   width: 100%;
+  height: 100%;
   border: 0;
   min-height: 50vh;
+  position: relative;
+  overflow: hidden;
+}
+
+#unity-iframe,
+#love2d-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  pointer-events: auto;
+  z-index: 10;
 }
 
 #return2work,
