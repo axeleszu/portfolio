@@ -1,16 +1,7 @@
 {
-    "cleanUrls": true,
     "rewrites": [
         {
-            "source": "/media",
-            "destination": "/index.html"
-        },
-        {
-            "source": "/lab",
-            "destination": "/index.html"
-        },
-        {
-            "source": "/dev",
+            "source": "/(dev|media|lab)",
             "destination": "/index.html"
         },
         {

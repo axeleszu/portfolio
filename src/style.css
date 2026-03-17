@@ -388,6 +388,7 @@ dialog {
   width: 90%;
   max-width: 800px;
   max-height: 90vh;
+  min-height: 80vh;
   margin: auto;
   box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
   animation: slideUp 0.3s ease-out;

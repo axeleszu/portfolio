@@ -1,17 +1,28 @@
 import resumeUrl from '../resume.pdf';
 import podcastUrl from '../podcast.mp3';
+import { TerminalHero } from './terminal.js';
+import AmbientPlayer from './mediaPlayer.js';
+import { setupAnalytics } from './analytics.js';
 
-const routes = {
-    'dev': 'dev',
-    'media': 'media',
-    'lab': 'lab'
+
+const GA_ID = "G-H0M7LHEESB";
+const validModes = ['dev', 'media', 'lab'];
+const playlists = {
+    animated: 'PL8OzJlspMutEdqXOpEMFAvg64dTJgGtOD',
+    location: 'PL8OzJlspMutERXnUzw-KGWxFMr0eBef3Q',
+    ai: 'PL8OzJlspMutFle3U1yW2VrLEWL7M9vhCo'
 };
 
+let currentMode = 'dev';
+let podcastPlayerInitialized = false;
+let githubInitialized = false;
+
+
 function handleRouting() {
-    const path = window.location.pathname.replace('/', '').toLowerCase();
-    const targetMode = routes[path] || 'dev';
+    const path = window.location.pathname.split('/').filter(Boolean)[0];
+    const targetMode = validModes.includes(path) ? path : 'dev';
     currentMode = targetMode;
-    setMode(targetMode);
+    updateUI(targetMode);
 }
 
 function updateURL(mode) {
@@ -21,7 +32,41 @@ function updateURL(mode) {
     }
 }
 
-const switchBtn = document.getElementById('mode-switch');
+function setMode(mode) {
+    currentMode = mode;
+    updateUI(mode);
+    updateURL(mode);
+}
+
+
+
+function updateUI(mode) {
+    const switchBtn = document.getElementById('mode-switch');
+    if (!switchBtn) return;
+
+    document.body.className = 'mode-' + mode;
+    if (mode === 'dev') initGithubWidget();
+
+    if (mode === 'lab') {
+        switchBtn.textContent = 'LAB';
+        document.querySelectorAll('#lab-grid iframe').forEach(frame => {
+            if (!frame.src) frame.src = frame.dataset.src;
+        });
+        return;
+    }
+
+    switchBtn.textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
+    switchBtn.setAttribute('aria-checked', mode === 'media' ? 'true' : 'false');
+
+    if (mode === 'media') {
+        initMultimedia();
+        initPodcastPlayer();
+        initPhotoSlider();
+    } else {
+        const audioEl = document.querySelector('#podcast-player audio');
+        if (audioEl && !audioEl.paused) audioEl.pause();
+    }
+}
 
 function setMenu() {
     const hamburger = document.getElementById('hamburger');
@@ -36,239 +81,19 @@ function setMenu() {
     menuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-
             const targetId = link.getAttribute('data-modal-target');
-            const targetModal = document.getElementById(targetId);
-
             hamburger.classList.remove('is-active');
             navMenu.classList.remove('is-active');
-
-            if (targetModal) {
-                targetModal.showModal();
-            } else {
-                console.error(`Modal con id "${targetId}" no encontrado.`);
-            }
+            document.getElementById(targetId)?.showModal();
         });
     });
 }
-
-function setMode(mode) {
-    document.body.className = 'mode-' + mode;
-    if (mode === 'lab') {
-        document.getElementById('mode-switch').textContent = 'LAB';
-        let labframes = document.querySelectorAll('#lab-grid iframe');
-        labframes.forEach(frame => {
-            if (!frame.src) {
-                frame.src = frame.dataset.src;
-            }
-        });
-
-        return;
-    }
-    document.getElementById('mode-switch').textContent = mode === 'dev' ? 'DEV_OPS' : 'MULTIMEDIA';
-    if (mode == 'media') {
-        switchBtn.setAttribute('aria-checked', 'true');
-        initMultimedia();
-        initPodcastPlayer();
-        initPhotoSlider();
-    }
-    if (mode === 'dev') {
-        switchBtn.setAttribute('aria-checked', 'false');
-        const audioEl = document.querySelector('#podcast-player audio');
-        if (audioEl && !audioEl.paused) {
-            audioEl.pause();
-        }
-    }
-}
-
-const originalSetMode = setMode;
-setMode = function (mode) {
-    originalSetMode(mode);
-    updateURL(mode);
-};
-
-window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.mode) {
-        currentMode = event.state.mode;
-        originalSetMode(currentMode);
-    } else {
-        handleRouting();
-    }
-});
-
-let currentMode = 'dev';
-switchBtn.addEventListener('click', () => {
-    currentMode = currentMode === 'dev' ? 'media' : 'dev';
-    setMode(currentMode);
-});
-
-
-document.querySelectorAll('dialog').forEach(dialog => {
-    dialog.addEventListener('click', (event) => {
-        if (event.target === dialog) {
-            dialog.close();
-        }
-    });
-});
-
-document.getElementById('theLab').addEventListener('click', () => {
-    currentMode = 'lab';
-    setMode(currentMode);
-})
-
-document.getElementById('return2work').addEventListener('click', () => {
-    currentMode = 'dev';
-    setMode(currentMode);
-});
-
-async function initGithubWidget() {
-    const grid = document.getElementById('github-grid');
-    const statusText = document.getElementById('last-commit-text');
-    const username = 'axeleszu';
-
-    for (let i = 0; i < 50; i++) {
-        const square = document.createElement('div');
-        square.classList.add('pixel');
-
-        const rand = Math.random();
-        let level = 0;
-        if (rand > 0.9) level = 4;
-        else if (rand > 0.7) level = 3;
-        else if (rand > 0.5) level = 2;
-        else if (rand > 0.3) level = 1;
-
-        square.classList.add(`level-${level}`);
-        grid.appendChild(square);
-    }
-    try {
-        const response = await fetch(`https://api.github.com/users/${username}/events/public`);
-        if (!response.ok) throw new Error('GitHub API Error');
-
-        const events = await response.json();
-        const pushEvent = events.find(e => e.type === 'PushEvent');
-
-        if (pushEvent) {
-            const date = new Date(pushEvent.created_at);
-            const timeAgo = timeSince(date);
-            statusText.innerText = `Latest commit: ${timeAgo} ago`;
-            statusText.style.color = '#39d353';
-        } else {
-            statusText.innerText = 'No recent public commits';
-        }
-    } catch (error) {
-        statusText.innerText = 'GitHub System: Offline';
-        console.error(error);
-    }
-}
-
-function timeSince(date) {
-    const seconds = Math.floor((new Date() - date) / 1000);
-    let interval = seconds / 31536000;
-    if (interval > 1) return Math.floor(interval) + "y";
-    interval = seconds / 2592000;
-    if (interval > 1) return Math.floor(interval) + "mo";
-    interval = seconds / 86400;
-    if (interval > 1) return Math.floor(interval) + "d";
-    interval = seconds / 3600;
-    if (interval > 1) return Math.floor(interval) + "h";
-    interval = seconds / 60;
-    if (interval > 1) return Math.floor(interval) + "m";
-    return Math.floor(seconds) + "s";
-}
-
-function initContactForm() {
-    const form = document.querySelector('.simple-form');
-    const input = form.querySelector('input');
-    const terminalView = document.querySelector('.terminal-view');
-
-    const FUNCTION_URL = "https://zruucshwqlbsndqpgatz.supabase.co/functions/v1/contact-protocol";
-    const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpydXVjc2h3cWxic25kcXBnYXR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczODUyNjQsImV4cCI6MjA4Mjk2MTI2NH0.NpOQn0mBGIrL6AvuAS4GMbX5Mdtds8DGExHS9eybqVs";
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = input.value;
-
-        input.disabled = true;
-        const originalBtnText = form.querySelector('button').innerText;
-        form.querySelector('button').innerText = "TRANSMITTING...";
-
-        let logs = terminalView.querySelector('.terminal-logs');
-        if (!logs) {
-            logs = document.createElement('div');
-            logs.className = 'terminal-logs';
-            terminalView.appendChild(logs);
-        }
-        logs.innerHTML = `<div>> Initializing handshake...</div>`;
-
-        try {
-            const response = await fetch(FUNCTION_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${ANON_KEY}`
-                },
-                body: JSON.stringify({ email })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) throw new Error(data.error || 'Unknown Error');
-            const lines = [
-                `> Connecting to node: ${data.region}... OK`,
-                `> Encrypting payload... OK`,
-                `> Latency: ${data.latency}`,
-                `> Status: ${data.protocol}`,
-                `> <span style="color:#00ff41">SUCCESS: ${data.message}</span>`
-            ];
-
-            lines.forEach((line, index) => {
-                setTimeout(() => {
-                    logs.innerHTML += `<div>${line}</div>`;
-                    logs.scrollTop = logs.scrollHeight;
-                }, index * 400);
-            });
-            input.value = "";
-
-        } catch (err) {
-            logs.innerHTML += `<div style="color:red">> ERROR: ${err.message}</div>`;
-        } finally {
-
-            setTimeout(() => {
-                input.disabled = false;
-                form.querySelector('button').innerText = originalBtnText;
-            }, 3000);
-        }
-    });
-}
-
-import { TerminalHero } from './terminal.js';
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('resume-link').href = resumeUrl;
-    initContactForm();
-    new TerminalHero();
-    handleRouting();
-    initGithubWidget();
-    setMode(currentMode);
-    setMenu();
-    setTheLab();
-});
-
-/* MEDIA Mode */
-
-import AmbientPlayer from './mediaPlayer.js';
-const animatedPlaylist = 'PL8OzJlspMutEdqXOpEMFAvg64dTJgGtOD';
-const locationPlaylist = 'PL8OzJlspMutERXnUzw-KGWxFMr0eBef3Q';
-const aiPlaylist = 'PL8OzJlspMutFle3U1yW2VrLEWL7M9vhCo'
-let isYouTubeApiReady = false;
 
 if (!window.cinematicPlayer) {
     window.cinematicPlayer = new AmbientPlayer({
         playerA_id: 'locationPlayerA',
         playerB_id: 'locationPlayerB',
-        playlistId: locationPlaylist,
+        playlistId: playlists.location,
         pauseButtonId: 'playback-toggle-btn'
     });
 }
@@ -277,7 +102,7 @@ if (!window.animationPlayer) {
     window.animationPlayer = new AmbientPlayer({
         playerA_id: 'animationPlayerA',
         playerB_id: 'animationPlayerB',
-        playlistId: animatedPlaylist,
+        playlistId: playlists.animated,
         pauseButtonId: 'animated-playback-toggle-btn'
     });
 }
@@ -285,19 +110,18 @@ if (!window.aiPlayer) {
     window.aiPlayer = new AmbientPlayer({
         playerA_id: 'aiPlayerA',
         playerB_id: 'aiPlayerB',
-        playlistId: aiPlaylist,
+        playlistId: playlists.ai,
         pauseButtonId: 'ai-playback-toggle-btn'
     });
 }
 
 function initMultimedia() {
-    if (cinematicPlayer) cinematicPlayer.init();
-    if (animationPlayer) animationPlayer.init();
-    if (aiPlayer) aiPlayer.init();
+    if (window.cinematicPlayer) window.cinematicPlayer.init();
+    if (window.animationPlayer) window.animationPlayer.init();
+    if (window.aiPlayer) window.aiPlayer.init();
     thumbChange();
 }
 
-let podcastPlayerInitialized = false;
 
 async function initPodcastPlayer() {
     if (podcastPlayerInitialized) return;
@@ -310,6 +134,7 @@ async function initPodcastPlayer() {
     const titleEl = playerContainer.querySelector('.title');
     const progressBar = playerContainer.querySelector('span:first-of-type');
     const toggleBtn = document.getElementById('podcast-playback-toggle-btn');
+    if (!toggleBtn) return;
     const icon = toggleBtn.querySelector('span');
 
     const rssFeedUrl = 'http://www.fira.gob.mx/Nd/xml/podcast.xml';
@@ -379,23 +204,22 @@ async function initPodcastPlayer() {
         });
     }
 }
-
 function thumbChange() {
     const thumbs = document.querySelectorAll('.film-strip .thumb');
+
     thumbs.forEach(thumb => {
+        if (thumb.dataset.bound) return;
+        thumb.dataset.bound = true;
         thumb.addEventListener('click', (e) => {
-            thumbs.forEach(t => {
-                t.classList.remove('active');
-            });
-            const activeThumb = e.currentTarget;
-            const activeThumbImage = activeThumb.querySelector('img').src;
-            let imgName = activeThumbImage.split('/')[activeThumbImage.split('/').length - 1].split('.')[0];
-            document.getElementById('photoName').innerText = imgName + '.cr2';
-            document.getElementById('main-photo').src = activeThumbImage;
-            activeThumb.classList.add('active');
+            thumbs.forEach(t => t.classList.remove('active'));
+            const img = e.currentTarget.querySelector('img');
+            document.getElementById('main-photo').src = img.src;
+            document.getElementById('photoName').innerText = img.src.split('/').pop().split('.')[0] + '.cr2';
+            e.currentTarget.classList.add('active');
         });
     });
 }
+
 
 function initPhotoSlider() {
     const carousel = document.getElementById('carousel-photo');
@@ -405,7 +229,7 @@ function initPhotoSlider() {
     const slider = carousel.querySelector('.slider');
     if (!slider) return;
 
-
+    if (slider.children.length > 0) return;
     for (let i = 1; i < 20; i++) {
         let item = document.createElement('div');
         let img = document.createElement('img');
@@ -441,6 +265,118 @@ function initPhotoSlider() {
         items[active].classList.add('active');
     });
 }
+
+
+
+async function initGithubWidget() {
+    if (githubInitialized) return;
+    githubInitialized = true;
+    const grid = document.getElementById('github-grid');
+    const statusText = document.getElementById('last-commit-text');
+    const username = 'axeleszu';
+
+    for (let i = 0; i < 50; i++) {
+        const square = document.createElement('div');
+        square.classList.add('pixel');
+
+        const rand = Math.random();
+        let level = 0;
+        if (rand > 0.9) level = 4;
+        else if (rand > 0.7) level = 3;
+        else if (rand > 0.5) level = 2;
+        else if (rand > 0.3) level = 1;
+
+        square.classList.add(`level-${level}`);
+        grid.appendChild(square);
+    }
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/events/public`);
+        if (!response.ok) throw new Error('GitHub API Error');
+
+        const events = await response.json();
+        const pushEvent = events.find(e => e.type === 'PushEvent');
+
+        if (pushEvent) {
+            const date = new Date(pushEvent.created_at);
+            const timeAgo = timeSince(date);
+            statusText.innerText = `Latest commit: ${timeAgo} ago`;
+            statusText.style.color = '#39d353';
+        } else {
+            statusText.innerText = 'No recent public commits';
+        }
+    } catch (error) {
+        statusText.innerText = 'GitHub System: Offline';
+        console.error(error);
+    }
+}
+
+
+function initContactForm() {
+    const form = document.querySelector('.simple-form');
+    if (!form) return;
+    const input = form.querySelector('input');
+    const terminalView = document.querySelector('.terminal-view');
+
+    const FUNCTION_URL = "https://zruucshwqlbsndqpgatz.supabase.co/functions/v1/contact-protocol";
+    const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpydXVjc2h3cWxic25kcXBnYXR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczODUyNjQsImV4cCI6MjA4Mjk2MTI2NH0.NpOQn0mBGIrL6AvuAS4GMbX5Mdtds8DGExHS9eybqVs";
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = input.value;
+
+        input.disabled = true;
+        const originalBtnText = form.querySelector('button').innerText;
+        form.querySelector('button').innerText = "TRANSMITTING...";
+
+        let logs = terminalView.querySelector('.terminal-logs');
+        if (!logs) {
+            logs = document.createElement('div');
+            logs.className = 'terminal-logs';
+            terminalView.appendChild(logs);
+        }
+        logs.innerHTML = `<div>> Initializing handshake...</div>`;
+
+        try {
+            const response = await fetch(FUNCTION_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ANON_KEY}`
+                },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.error || 'Unknown Error');
+            const lines = [
+                `> Connecting to node: ${data.region}... OK`,
+                `> Encrypting payload... OK`,
+                `> Latency: ${data.latency}`,
+                `> Status: ${data.protocol}`,
+                `> <span style="color:#00ff41">SUCCESS: ${data.message}</span>`
+            ];
+
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    logs.innerHTML += `<div>${line}</div>`;
+                    logs.scrollTop = logs.scrollHeight;
+                }, index * 400);
+            });
+            input.value = "";
+
+        } catch (err) {
+            logs.innerHTML += `<div style="color:red">> ERROR: ${err.message}</div>`;
+        } finally {
+
+            setTimeout(() => {
+                input.disabled = false;
+                form.querySelector('button').innerText = originalBtnText;
+            }, 3000);
+        }
+    });
+}
+
 
 function setTheLab() {
     const canvas = document.getElementById('theLabCanvas');
@@ -508,7 +444,7 @@ function setTheLab() {
     }
 
     function animate() {
-        ctx.save();
+        // ctx.save();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         balls.forEach(p => {
             p.update();
@@ -526,6 +462,7 @@ function setTheLab() {
 
         canvas.width = width * dpr;
         canvas.height = height * dpr;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
 
         canvas.style.width = width + 'px';
@@ -536,8 +473,45 @@ function setTheLab() {
     window.addEventListener('resize', resizeLabCanvas);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const switchBtn = document.getElementById('mode-switch');
+    document.getElementById('resume-link').href = resumeUrl;
 
-/* Analytics */
-const GA_ID = "G-H0M7LHEESB"
-import { setupAnalytics } from './analytics.js';
-setupAnalytics(GA_ID);
+    setMenu();
+    initContactForm();
+    new TerminalHero();
+
+    handleRouting();
+
+    setTheLab();
+    setupAnalytics(GA_ID);
+
+    document.querySelectorAll('dialog').forEach(dialog => {
+        dialog.onclick = (e) => e.target === dialog && dialog.close();
+    });
+    switchBtn.addEventListener('click', () => setMode(currentMode === 'dev' ? 'media' : 'dev'));
+    document.getElementById('theLab').addEventListener('click', () => setMode('lab'));
+    document.getElementById('return2work').addEventListener('click', () => setMode('dev'));
+});
+
+
+window.addEventListener('popstate', handleRouting);
+
+
+function timeSince(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval = seconds / 31536000;
+    if (interval > 1) return Math.floor(interval) + "y";
+    interval = seconds / 2592000;
+    if (interval > 1) return Math.floor(interval) + "mo";
+    interval = seconds / 86400;
+    if (interval > 1) return Math.floor(interval) + "d";
+    interval = seconds / 3600;
+    if (interval > 1) return Math.floor(interval) + "h";
+    interval = seconds / 60;
+    if (interval > 1) return Math.floor(interval) + "m";
+    return Math.floor(seconds) + "s";
+}
+
+
+
