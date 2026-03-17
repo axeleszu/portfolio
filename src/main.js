@@ -513,5 +513,12 @@ function timeSince(date) {
     return Math.floor(seconds) + "s";
 }
 
-
-
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(function (registration) {
+            console.log('ServiceWorker: ', registration.scope);
+        }, function (err) {
+            console.log('ServiceWorker error: ', err);
+        });
+    });
+}

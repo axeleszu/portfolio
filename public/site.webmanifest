@@ -1,0 +1,21 @@
+{
+    "name": "Axel Escutia",
+    "short_name": "Axel",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0A0A0A",
+    "theme_color": "#0A0A0A",
+    "description": "Frontend Engineer specializing in interactive systems, multimedia applications, and high-performance web platforms.",
+    "icons": [
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        }
+    ]
+}
