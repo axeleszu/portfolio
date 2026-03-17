@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /dev
+Allow: /media
+Allow: /lab
+
+Sitemap: https://www.axelescutia.com/sitemap.xml

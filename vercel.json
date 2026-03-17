@@ -1,0 +1,21 @@
+{
+    "cleanUrls": true,
+    "rewrites": [
+        {
+            "source": "/media",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/lab",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/dev",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

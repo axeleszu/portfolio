@@ -1,6 +1,56 @@
 import resumeUrl from '../resume.pdf';
 import podcastUrl from '../podcast.mp3';
+
+const routes = {
+    'dev': 'dev',
+    'media': 'media',
+    'lab': 'lab'
+};
+
+function handleRouting() {
+    const path = window.location.pathname.replace('/', '').toLowerCase();
+    const targetMode = routes[path] || 'dev';
+    currentMode = targetMode;
+    setMode(targetMode);
+}
+
+function updateURL(mode) {
+    const newPath = mode === 'dev' ? '/' : `/${mode}`;
+    if (window.location.pathname !== newPath) {
+        window.history.pushState({ mode }, '', newPath);
+    }
+}
+
 const switchBtn = document.getElementById('mode-switch');
+
+function setMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const menuLinks = document.querySelectorAll('[data-modal-target]');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('is-active');
+        navMenu.classList.toggle('is-active');
+    });
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const targetId = link.getAttribute('data-modal-target');
+            const targetModal = document.getElementById(targetId);
+
+            hamburger.classList.remove('is-active');
+            navMenu.classList.remove('is-active');
+
+            if (targetModal) {
+                targetModal.showModal();
+            } else {
+                console.error(`Modal con id "${targetId}" no encontrado.`);
+            }
+        });
+    });
+}
 
 function setMode(mode) {
     document.body.className = 'mode-' + mode;
@@ -31,12 +81,27 @@ function setMode(mode) {
     }
 }
 
+const originalSetMode = setMode;
+setMode = function (mode) {
+    originalSetMode(mode);
+    updateURL(mode);
+};
+
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.mode) {
+        currentMode = event.state.mode;
+        originalSetMode(currentMode);
+    } else {
+        handleRouting();
+    }
+});
+
 let currentMode = 'dev';
 switchBtn.addEventListener('click', () => {
     currentMode = currentMode === 'dev' ? 'media' : 'dev';
     setMode(currentMode);
 });
-setMode(currentMode);
+
 
 document.querySelectorAll('dialog').forEach(dialog => {
     dialog.addEventListener('click', (event) => {
@@ -111,7 +176,6 @@ function timeSince(date) {
     return Math.floor(seconds) + "s";
 }
 
-initGithubWidget();
 function initContactForm() {
     const form = document.querySelector('.simple-form');
     const input = form.querySelector('input');
@@ -185,7 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('resume-link').href = resumeUrl;
     initContactForm();
     new TerminalHero();
-
+    handleRouting();
+    initGithubWidget();
+    setMode(currentMode);
+    setMenu();
+    setTheLab();
 });
 
 /* MEDIA Mode */
@@ -453,20 +521,21 @@ function setTheLab() {
 
     function resizeLabCanvas() {
         const rect = canvas.parentElement.getBoundingClientRect();
-        const size = Math.min(rect.width, rect.height);
+        const width = rect.width;
+        const height = rect.height;
 
-        canvas.width = size * dpr;
-        canvas.height = size * dpr;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
 
-        canvas.style.width = size + 'px';
-        canvas.style.height = size + 'px';
-        console.log(size)
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
     }
     resizeLabCanvas();
     window.addEventListener('resize', resizeLabCanvas);
 }
-setTheLab();
+
 
 /* Analytics */
 const GA_ID = "G-H0M7LHEESB"
