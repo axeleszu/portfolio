@@ -20,16 +20,13 @@ export class TerminalHero {
     }
 
     init() {
-        // Start Boot Sequence
         this.runBootSequence();
 
-        // Focus Listener
         this.root.addEventListener('click', () => {
             this.hiddenInput.focus();
             this.root.classList.add('active');
         });
 
-        // Input Listener
         this.hiddenInput.addEventListener('input', (e) => {
             this.typingDisplay.innerText = e.target.value;
         });
@@ -41,6 +38,20 @@ export class TerminalHero {
                 this.typingDisplay.innerText = '';
             }
         });
+        const hints = [
+            ">> System stability: 99.7%...",
+            ">> Anomaly detection: ACTIVE",
+            ">> Patience is a virtue...",
+        ];
+
+        // Show one hint at 7 minutes 
+        setTimeout(() => {
+            this.printLine(hints[Math.floor(Math.random() * hints.length)], 'info');
+        }, 7 * 60 * 1000);
+        // Trigger matrix at 10 minutes
+        setTimeout(() => {
+            this.triggerMatrix();
+        }, 10, 60 * 1000);
     }
 
     async runBootSequence() {
@@ -77,12 +88,14 @@ export class TerminalHero {
                     resume    - Download PDF CV
                     skills    - List tech stack
                     clear     - Clear terminal
+                    pong      - Play pong
+                    theLab    - Switch to game dev profile
                     switch    - Switch to multimedia profile
                             `, 'cmd-response');
                 break;
 
             case 'ls':
-                this.printLine("about.sh  contact.sh  resume.sh  skills.sh  switch.sh", 'cmd-response');
+                this.printLine("about.sh  contact.sh  resume.sh  skills.sh  switch.sh  theLab.sh  pong.sh", 'cmd-response');
                 break;
 
             case 'about':
@@ -117,6 +130,26 @@ export class TerminalHero {
                 document.getElementById('mode-switch').click();
                 break;
 
+            case 'pong':
+            case 'theLab':
+                this.printLine(">> INITIATING SWITCH...", 'success');
+                document.getElementById('theLab').click();
+                break;
+
+            case 'neofetch': // Easter egg
+                this.printLine(`
+                ██████████████████  guest@axelescutia
+                ███████████▓▓▓████  ------------------
+                ████████▓██▓▓▓████  OS: PortfolioOS 1.2
+                ███████▓▓▓████████  Host: axelescutia.com
+                █████▓▓▓▓▓▓▓██████  Kernel: TerminalHero v2.0
+                ████▓▓▓▓▓▓▓▓▓▓████  Uptime: ${Math.floor(Math.random() * 24)}h ${Math.floor(Math.random() * 60)}m
+                ███▓▓▓▓▓▓▓▓▓▓▓▓███  Packages: 42 (js, css, creativity)
+                ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█  Shell: term.js
+                ██████████████████  Resolution: ${window.innerWidth}x${window.innerHeight}
+                                `, 'cmd-response');
+                break;
+
             case 'matrix':
                 this.triggerMatrix();
                 break;
@@ -129,15 +162,16 @@ export class TerminalHero {
     }
 
     triggerMatrix() {
-        const canvas = document.getElementById('matrix-canvas');
+        const canvas = document.createElement('canvas');
+        document.body.appendChild(canvas);
+        canvas.id = 'matrix-canvas';
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        canvas.classList.add('active');
 
         const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         const alphabet = katakana + latin;
 
         const fontSize = 16;
@@ -165,11 +199,17 @@ export class TerminalHero {
         };
 
         const interval = setInterval(draw, 30);
+        window.addEventListener('keydown', onKey);
 
-        setTimeout(() => {
-            clearInterval(interval);
-            canvas.classList.remove('active');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }, 5000);
+        const onKey = (e) => {
+            if (e.key === 'Escape') {
+                clearInterval(interval);
+                window.removeEventListener('keydown', onKey);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                canvas.remove();
+                this.printLine(">> MATRIX TERMINATED", 'info');
+            }
+        };
+
     }
 }
