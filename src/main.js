@@ -4,6 +4,7 @@ import { TerminalHero } from './terminal.js';
 import { SignalScope } from './signalscope.js';
 import AmbientPlayer from './mediaPlayer.js';
 import { setupAnalytics } from './analytics.js';
+import { PongHero } from './pong.js';
 
 
 const GA_ID = "G-H0M7LHEESB";
@@ -53,6 +54,7 @@ function updateUI(mode) {
         document.querySelectorAll('#lab-grid iframe').forEach(frame => {
             if (!frame.src) frame.src = frame.dataset.src;
         });
+        const game = new PongHero('pongCanvas');
         return;
     }
 

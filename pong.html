@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pong test</title>
+    <style>
+        :root {
+            --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: transparent;
+            overflow: hidden;
+            background-color: #000;
+            position: relative;
+        }
+
+        #pongCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 0px none;
+            background-color: transparent;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block;
+            outline: none;
+            z-index: 1;
+        }
+
+        #score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            font-size: 2rem;
+            pointer-events: none;
+            font-family: var(--font-ui);
+            z-index: 2;
+        }
+
+        #touchControls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 2rem;
+            pointer-events: none;
+            font-family: var(--font-ui);
+            display: none;
+            flex-direction: column;
+            z-index: 3;
+            pointer-events: auto;
+        }
+
+        #touchControls button {
+            background-color: transparent;
+            pointer-events: auto;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 3;
+            position: relative;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        @media (hover: none) {
+            #touchControls {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="pongCanvas" tabindex="0"></canvas>
+    <div id="score"></div>
+    <div id="touchControls">
+        <button aria-label="move up" type="button" id="paddleUP">▲</button>
+        <button aria-label="move down" type="button" id="paddleDOWN">▼</button>
+    </div>
+    <script type="module">
+        import { PongHero } from './src/pong.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = new PongHero('pongCanvas');
+        });
+    </script>
+</body>
+
+</html>
