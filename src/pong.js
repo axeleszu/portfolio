@@ -170,6 +170,11 @@ export class PongHero {
     }
 
     destroy() {
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+        }
+        this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.paddle_1 = this.paddle_2 = this.ball = null;
     }
 }
 

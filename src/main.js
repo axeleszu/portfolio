@@ -18,6 +18,7 @@ const playlists = {
 let currentMode = 'dev';
 let podcastPlayerInitialized = false;
 let githubInitialized = false;
+let pongGame = null;
 
 
 function handleRouting() {
@@ -54,7 +55,10 @@ function updateUI(mode) {
         document.querySelectorAll('#lab-grid iframe').forEach(frame => {
             if (!frame.src) frame.src = frame.dataset.src;
         });
-        const game = new PongHero('pongCanvas');
+        if (pongGame && typeof pongGame.destroy === 'function') {
+            pongGame.destroy();
+        }
+        pongGame = new PongHero('pongCanvas');
         return;
     }
 
@@ -68,6 +72,11 @@ function updateUI(mode) {
     } else {
         const audioEl = document.querySelector('#podcast-player audio');
         if (audioEl && !audioEl.paused) audioEl.pause();
+    }
+
+    if (mode != 'lab') {
+        if (pongGame && typeof pongGame.destroy === 'function') pongGame.destroy();
+        pongGame = null;
     }
 }
 
