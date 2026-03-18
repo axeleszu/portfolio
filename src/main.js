@@ -1,6 +1,7 @@
 import resumeUrl from '../resume.pdf';
 import podcastUrl from '../podcast.mp3';
 import { TerminalHero } from './terminal.js';
+import { SignalScope } from './signalscope.js';
 import AmbientPlayer from './mediaPlayer.js';
 import { setupAnalytics } from './analytics.js';
 
@@ -138,7 +139,7 @@ async function initPodcastPlayer() {
     const icon = toggleBtn.querySelector('span');
 
     const rssFeedUrl = 'http://www.fira.gob.mx/Nd/xml/podcast.xml';
-    const proxyUrl = 'https://cors-fira.onrender.com/?url=';
+    const proxyUrl = 'https://cors-fira.firabancodemexico.workers.dev/?url=';
 
     try {
         const response = await fetch(proxyUrl + rssFeedUrl);
@@ -480,6 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setMenu();
     initContactForm();
     new TerminalHero();
+    new SignalScope();
 
     handleRouting();
 

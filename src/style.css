@@ -365,6 +365,7 @@ body {
 .input-contact {
   padding: 6px 12px;
   max-width: 100%;
+  margin: 10px 0;
 }
 
 .btn-download {
@@ -428,6 +429,7 @@ dialog::backdrop {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%) !important;
   white-space: nowrap;
   border: 0;
 }
@@ -613,14 +615,7 @@ body.mode-media .hero-container [data-category="media"] {
   opacity: 0.4;
 }
 
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), var(--bg-color));
-}
+
 
 
 .hero-content {
@@ -738,7 +733,333 @@ body.mode-media .hero-container [data-category="media"] {
   color: #00d3ff;
 }
 
+/*HERO Multimedia*/
+.signal-scope-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 80vh;
+  padding: 2rem;
+  z-index: 1;
+  pointer-events: none;
+}
 
+.signal-scope-svg {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.signal-scope-wrapper:hover .signal-scope-svg {
+  opacity: 0.5;
+}
+
+.scope-frame {
+  transition: stroke 0.3s ease;
+}
+
+.signal-scope-wrapper:hover .scope-frame {
+  stroke: rgba(255, 255, 255, 0.25);
+}
+
+.layer-wave,
+.layer-spectrum,
+.layer-stereo,
+.layer-filter {
+  transition: opacity 0.4s ease;
+}
+
+.waveform-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: waveFlow 3s linear infinite;
+}
+
+@keyframes waveFlow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.spec-bar {
+  animation: spectrumPulse 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+@keyframes spectrumPulse {
+
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+}
+
+.layer-stereo line[stroke-dasharray] {
+  animation: dashMove 2s linear infinite;
+}
+
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+
+.layer-filter .node {
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+.layer-filter .node:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.layer-filter .node:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes nodePulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    r: 10;
+  }
+
+  50% {
+    opacity: 0.8;
+    r: 12;
+  }
+}
+
+.scope-controls {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.scope-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-hero);
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.scope-toggle:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.scope-toggle[aria-pressed="true"] {
+  background: rgba(255, 51, 0, 0.15);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(255, 51, 0, 0.3);
+}
+
+.scope-toggle .toggle-icon {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.scope-status {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.8rem;
+  font-family: var(--font-hero);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.status-separator {
+  opacity: 0.3;
+}
+
+.status-ok {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.status-text {
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .signal-scope-wrapper {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .signal-scope-svg {
+    max-height: 200px;
+  }
+
+  .scope-controls {
+    bottom: 50px;
+    gap: 0.3rem;
+  }
+
+  .scope-toggle {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.6rem;
+  }
+
+  .scope-toggle .toggle-icon {
+    display: none;
+
+  }
+
+  .scope-status {
+    font-size: 0.6rem;
+    gap: 0.5rem;
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signal-scope-svg {
+    max-height: 160px;
+  }
+
+  .scope-controls {
+    bottom: 40px;
+  }
+
+  .scope-toggle {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .scope-status {
+    flex-wrap: wrap;
+    justify-content: center;
+    bottom: 10px;
+  }
+}
+
+body.mode-media .scope-toggle[aria-pressed="true"] {
+  background: rgba(255, 51, 0, 0.15);
+  box-shadow: 0 0 10px rgba(255, 51, 0, 0.3);
+}
+
+body.mode-dev .scope-toggle[aria-pressed="true"] {
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+body.mode-lab .scope-toggle[aria-pressed="true"] {
+  background: rgba(251, 156, 84, 0.15);
+  box-shadow: 0 0 10px rgba(251, 156, 84, 0.3);
+}
+
+.layer-stereo,
+.layer-spectrum-stereo {
+  transition: opacity 0.4s ease;
+}
+
+.waveform-path-l,
+.waveform-path-r {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: waveFlow 3s linear infinite;
+}
+
+.waveform-path-r {
+  animation-delay: 0.5s;
+
+}
+
+@keyframes waveFlow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.channel-label {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.layer-stereo[opacity="0.8"] .channel-label {
+  opacity: 1;
+}
+
+.spectrum-left,
+.spectrum-right {
+  transition: opacity 0.4s ease;
+}
+
+.spec-bar-stereo {
+  animation: spectrumPulse 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes spectrumPulse {
+
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+}
+
+.layer-stereo line[stroke-dasharray],
+.layer-spectrum-stereo line[stroke-dasharray] {
+  animation: dashMove 2s linear infinite;
+}
+
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+
+.track-label {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.layer-wave[opacity="0.8"] .track-label {
+  opacity: 1;
+}
+
+.layer-stereo[opacity="0.8"]~.layer-wave .track-label {
+  opacity: 0;
+}
 
 h1 {
   font-size: 5rem;
@@ -2427,6 +2748,10 @@ dialog#work-in-progress svg {
   min-height: 100px;
 }
 
+.stack-card section {
+  flex: 1;
+}
+
 .tech-grid {
   display: flex;
   flex-wrap: wrap;
@@ -2467,7 +2792,6 @@ body.mode-dev .tech-grid span:last-child::after {
   animation: blink 1s steps(1, end) infinite;
 }
 
-
 @keyframes blink {
 
   0%,
@@ -2485,6 +2809,25 @@ body.mode-media .stack-card [data-category="dev"] {
   display: none;
 }
 
+.profile-summary {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex: 5;
+}
+
+.summary-text {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+}
+
+
+.stack-card:hover .summary-text {
+  color: rgba(255, 255, 255, 0.8);
+}
 
 body.mode-media .media-grid {
   font-family: var(--font-body, sans-serif);
