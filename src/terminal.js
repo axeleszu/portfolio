@@ -49,9 +49,9 @@ export class TerminalHero {
             this.printLine(hints[Math.floor(Math.random() * hints.length)], 'info');
         }, 7 * 60 * 1000);
         // Trigger matrix at 10 minutes
-        setTimeout(() => {
-            this.triggerMatrix();
-        }, 10, 60 * 1000);
+        /*     setTimeout(() => {
+                 this.triggerMatrix();
+             }, 10, 60 * 10000);*/
     }
 
     async runBootSequence() {
